@@ -1,0 +1,443 @@
+/* =========================================================
+   Jella Mae Calupit — Portfolio interactions
+   ========================================================= */
+
+/* ---------- Edit your projects here ---------- */
+const PROJECTS = [
+  {
+    title: "Velour Store",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "dev",
+    label: "E-commerce Website",
+    mock: "shop",
+    year: "2026",
+    role: "Design & Front-end Development",
+    desc: "A fashion e-commerce storefront with product filtering, a cart drawer and smooth page transitions. I designed the UI in Figma and built it as a responsive React app.",
+    tags: ["React", "CSS Modules", "Figma", "REST API"],
+    live: "#",
+    code: "#",
+  },
+  {
+    title: "Pulse Dashboard",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "dev",
+    label: "Analytics Web App",
+    mock: "dash",
+    year: "2026",
+    role: "Full-stack Development",
+    desc: "A data dashboard that turns raw numbers into clear, animated charts, with dark-mode-first UI, reusable components and live data from a Node.js API.",
+    tags: ["JavaScript", "Node.js", "Chart.js", "MySQL"],
+    live: "#",
+    code: "#",
+  },
+  {
+    title: "Loopin",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "design",
+    label: "Mobile App UI/UX",
+    mock: "phone",
+    year: "2025",
+    role: "UI/UX Design",
+    desc: "A music streaming app concept, taken from user interviews and flows to a polished high-fidelity prototype with micro-interactions.",
+    tags: ["Figma", "Prototyping", "UX Research", "Design System"],
+    live: "#",
+    code: "#",
+  },
+  {
+    title: "Kape & Co.",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "design",
+    label: "Branding & Identity",
+    mock: "brand",
+    year: "2025",
+    role: "Brand & Visual Design",
+    desc: "A visual identity for a local coffee shop: logo, color palette, typography and social media templates, all built around a warm, cozy feel.",
+    tags: ["Branding", "Logo Design", "Canva", "Photoshop"],
+    live: "#",
+    code: "#",
+  },
+  {
+    title: "TaskFlow",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "dev",
+    label: "Productivity Web App",
+    mock: "app",
+    year: "2025",
+    role: "Front-end Development",
+    desc: "A drag-and-drop kanban board that saves to local storage, with keyboard shortcuts and an interface that feels quick and calm.",
+    tags: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+    live: "#",
+    code: "#",
+  },
+  {
+    title: "Atlas Travel",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "design",
+    label: "Landing Page Design",
+    mock: "travel",
+    year: "2024",
+    role: "UI Design & Development",
+    desc: "A landing page for a travel booking brand with bold visuals and a clear booking flow, designed in Figma and coded responsively with Bootstrap.",
+    tags: ["Figma", "Bootstrap", "Responsive", "UI Design"],
+    live: "#",
+    code: "#",
+  },
+];
+
+const MOCKS = {
+  shop: `<div class="hero-txt"><span class="ln ln--t"></span><span class="ln ln--t" style="width:65%"></span><span class="ln" style="width:80%"></span><span class="ln" style="width:60%"></span><span class="btn-s"></span></div>
+         <div class="product"></div>
+         <div class="row"><span></span><span></span><span></span></div>`,
+  dash: `<div class="side"><span class="ln ln--m" style="width:60%"></span><span class="ln"></span><span class="ln"></span><span class="ln" style="width:70%"></span><span class="ln"></span></div>
+         <div class="main"><div class="kpis"><span></span><span></span><span></span></div>
+         <div class="chart"><span style="--h:40%"></span><span style="--h:65%"></span><span style="--h:50%"></span><span style="--h:85%"></span><span style="--h:60%"></span><span style="--h:95%"></span><span style="--h:70%"></span></div></div>`,
+  phone: `<div class="phone"><div class="art"></div><span class="ln ln--t" style="height:6px"></span><span class="ln" style="width:60%"></span><span class="ln"></span><span class="ln" style="width:80%"></span><span class="play"></span></div>
+          <div class="phone"><span class="ln ln--m" style="width:50%"></span><span class="ln"></span><span class="ln" style="width:70%"></span><div class="art" style="margin-top:6px"></div><span class="ln"></span><span class="ln" style="width:50%"></span></div>`,
+  brand: `<div class="word">Kape<small>& CO.</small></div>
+          <div class="sw"><span style="background:#7a1424"></span><span style="background:#3a0a12"></span><span style="background:#0b0a0a"></span><span style="background:#c9a98a"></span></div>`,
+  app: `<div class="col"><span class="ln"></span><div class="task m drag"><span class="ln"></span><span class="ln"></span></div><div class="task"><span class="ln"></span><span class="ln"></span></div></div>
+        <div class="col"><span class="ln"></span><div class="task"><span class="ln"></span><span class="ln"></span></div></div>
+        <div class="col"><span class="ln"></span><div class="task m"><span class="ln"></span><span class="ln"></span></div><div class="task"><span class="ln"></span><span class="ln"></span></div><div class="task"><span class="ln"></span><span class="ln"></span></div></div>`,
+  travel: `<div class="sun"></div><div class="hills"></div>
+           <div class="head"><span class="ln ln--t"></span><span class="ln ln--t" style="width:70%"></span><span class="ln" style="width:85%"></span></div>
+           <div class="search"></div>`,
+};
+
+const mockHTML = (type) =>
+  `<div class="mock mock--${type}"><div class="mock__bar"><i></i><i></i><i></i><b></b></div><div class="mock__body">${MOCKS[type]}</div></div>`;
+
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- Intro: curtain slides up, hero fades in, then PORTFOLIO sweeps ---------- */
+function intro() {
+  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+  if ($(".hero__bigword")) setTimeout(sweepWord, reducedMotion ? 0 : 900);
+
+  // the paper plane animates inside its SVG; for reduced motion, freeze it with the trail fully drawn
+  const plane = $(".contact__plane svg");
+  if (plane && reducedMotion) { plane.setCurrentTime(3); plane.pauseAnimations(); }
+}
+
+/* ---------- PORTFOLIO: dark sweep on intro and whenever you land on Home ---------- */
+function sweepWord() {
+  const word = $(".hero__bigword");
+  word.classList.remove("is-sweeping");
+  void word.offsetWidth; // restart the animation
+  word.classList.add("is-sweeping");
+}
+
+function homeSweep() {
+  const word = $(".hero__bigword");
+  if (!word) return; // not on the home page
+  word.addEventListener("animationend", () => word.classList.remove("is-sweeping"));
+
+  let wasAway = false;
+  new IntersectionObserver(([en]) => {
+    if (en.intersectionRatio < 0.25) wasAway = true;
+    else if (wasAway && document.body.classList.contains("is-loaded")) {
+      wasAway = false;
+      sweepWord();
+    }
+  }, { threshold: 0.25 }).observe($("#home"));
+
+  // clicking Home / the logo while already at the top still plays it
+  $$('a[href="#home"]').forEach((a) => a.addEventListener("click", () => {
+    if ($("#home").getBoundingClientRect().top > -100) sweepWord();
+  }));
+}
+
+/* ---------- Local time ---------- */
+function clock() {
+  const el = $("#localTime");
+  if (!el) return;
+  const fmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Manila" });
+  const update = () => (el.textContent = fmt.format(new Date()) + " PHT");
+  update();
+  setInterval(update, 30000);
+}
+
+/* ---------- Nav: scroll state, active link, mobile menu ---------- */
+function nav() {
+  const navEl = $("#nav");
+  const menu = $("#navLinks");
+  const progress = $(".scroll-progress");
+  const toTop = $("#toTop");
+  let lastY = scrollY;
+
+  addEventListener("scroll", () => {
+    const y = scrollY;
+    navEl.classList.toggle("is-scrolled", y > 40);
+    navEl.classList.toggle("is-hidden", y > lastY && y > 400 && !menu.classList.contains("is-open"));
+    lastY = y;
+
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    // back-to-top arrow: only at the very bottom, and only after scrolling a long way (over 1.5 screens)
+    toTop.classList.toggle("is-visible", y >= max - 40 && y > innerHeight * 1.5);
+  }, { passive: true });
+
+  const links = $$(".nav__link");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        links.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === "#" + en.target.id));
+      }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  // only same-page links (#about…) get scroll highlighting; projects.html marks its link in the HTML
+  links.map((l) => l.getAttribute("href"))
+    .filter((h) => h.startsWith("#"))
+    .forEach((h) => { const s = document.getElementById(h.slice(1)); if (s) io.observe(s); });
+
+  const burger = $("#burger");
+  const toggle = (open) => {
+    menu.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+  burger.addEventListener("click", () => toggle(!menu.classList.contains("is-open")));
+  links.forEach((l) => l.addEventListener("click", () => toggle(false)));
+
+  $("#toTop").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+/* ---------- About: "what I do" coverflow slider ---------- */
+// title: "First|Second" puts the first part beside the icon and the second part on the row below
+const SERVICES = [
+  ["Web|Development", "Responsive web applications with features like user roles, dashboards and data management.",
+    '<path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/>'],
+  ["Mobile|Development", "Cross-platform mobile apps with smooth navigation and a consistent experience on every device.",
+    '<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>'],
+  ["Frontend", "Interactive, responsive interfaces that look great and adapt to any screen size.",
+    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>'],
+  ["Backend", "Server-side logic, user authentication and database management that keep applications running.",
+    '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/>'],
+  ["UI / UX|Design", "Wireframes and interface designs focused on clear and intuitive user flows.",
+    '<circle cx="12" cy="5" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/><path d="M10.2 5.8C6.5 7.5 4.5 11.5 4.5 16M13.8 5.8c3.7 1.7 5.7 5.7 5.7 10.2"/>'],
+  ["System|Analysis", "Breaking down requirements and mapping out workflows before development begins.",
+    '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM8.5 11h7M8.5 15h4.5"/>'],
+  ["Testing", "Testing and debugging features throughout development, then deploying working builds online.",
+    '<path d="m8 2 1.9 1.9M14.1 3.9 16 2M9 7.1v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6Zm0 0v-9M6.5 9C4.6 8.8 3 7.1 3 5M6 13H2M3 21c0-2.1 1.7-3.9 3.8-4M21 5c0 2.1-1.6 3.8-3.5 4M22 13h-4M17.2 17c2.1.1 3.8 1.9 3.8 4"/>'],
+];
+
+function slider() {
+  const track = $("#sliderTrack");
+  if (!track) return;
+  const dotsBox = $("#sliderDots");
+  const n = SERVICES.length;
+  let active = 0;
+  let timer;
+
+  track.innerHTML = SERVICES.map(([title, text, icon], i) => {
+    const [first, second] = title.split("|");
+    return `
+    <article class="slide" data-i="${i}">
+      <h3 class="slide__title">
+        <span class="slide__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></span>
+        <span>${first}</span>${second ? ` <span class="slide__title-2">${second}</span>` : ""}
+      </h3>
+      <p class="slide__text">${text}</p>
+      <span class="slide__num">${String(i + 1).padStart(2, "0")}</span>
+    </article>`;
+  }).join("");
+  dotsBox.innerHTML = SERVICES.map((s, i) => `<button class="slider__dot" data-i="${i}" aria-label="Show ${s[0].replace("|", " ")}"></button>`).join("");
+
+  const slides = $$(".slide", track);
+  const dots = $$(".slider__dot", dotsBox);
+
+  // place every card by its distance from the active one: center card in front, neighbours behind and dimmed
+  const render = () => {
+    slides.forEach((s, i) => {
+      let d = (i - active + n) % n;
+      if (d > n / 2) d -= n;
+      const far = Math.abs(d);
+      s.style.transform = `translateX(${d * 58}%) scale(${far === 0 ? 1 : far === 1 ? 0.84 : 0.7})`;
+      s.style.opacity = far === 0 ? 1 : far === 1 ? 0.45 : 0;
+      s.style.filter = far === 0 ? "none" : "blur(2px)";
+      s.style.zIndex = 10 - far;
+      s.classList.toggle("is-active", far === 0);
+      s.setAttribute("aria-hidden", far !== 0);
+    });
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === active));
+  };
+
+  const go = (i) => { active = (i + n) % n; render(); };
+  const play = () => { if (!reducedMotion) timer = setInterval(() => go(active + 1), 15000); };
+  const stop = () => clearInterval(timer);
+
+  slides.forEach((s) => s.addEventListener("click", () => { stop(); go(+s.dataset.i); play(); }));
+  dots.forEach((d) => d.addEventListener("click", () => { stop(); go(+d.dataset.i); play(); }));
+  $("#slider").addEventListener("mouseenter", stop);
+  $("#slider").addEventListener("mouseleave", play);
+
+  render();
+  play();
+}
+
+/* ---------- Tech stack (grouped by category): logo + name ---------- */
+// Logo sources: "dev:folder/file" = devicon, "si:slug" = Simple Icons in brand colours,
+// { badge, color } = lettered badge for tools neither library has.
+const ICON_URL = {
+  dev: (p) => `https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/${p}.svg`,
+  si: (p) => `https://cdn.simpleicons.org/${p}`,
+};
+const TECH = [
+  ["Project Management", [
+    ["ClickUp", "si:clickup"],
+    ["Trello", "dev:trello/trello-original"],
+  ]],
+  ["Design", [
+    ["Balsamiq", { badge: "B", color: "#CC0000" }],
+    ["draw.io", "si:diagramsdotnet"],
+    ["Figma", "dev:figma/figma-original"],
+  ]],
+  ["Frontend", [
+    ["HTML5", "dev:html5/html5-original"],
+    ["CSS3", "dev:css3/css3-original"],
+    ["JavaScript", "dev:javascript/javascript-original"],
+    ["TypeScript", "dev:typescript/typescript-original"],
+    ["React", "dev:react/react-original"],
+    ["Tailwind CSS", "dev:tailwindcss/tailwindcss-original"],
+  ]],
+  ["Backend", [
+    ["PHP", "dev:php/php-original"],
+    ["Laravel", "dev:laravel/laravel-original"],
+    ["MySQL", "dev:mysql/mysql-original"],
+  ]],
+  ["Mobile App", [
+    ["React Native", "dev:react/react-original"],
+    ["Expo", "si:expo/white"],
+  ]],
+  ["Testing", [
+    ["Postman", "dev:postman/postman-original"],
+    ["Playwright", "dev:playwright/playwright-original"],
+  ]],
+];
+
+const techLogo = (src) => {
+  if (typeof src === "object") return `<span class="tech__badge" style="--c:${src.color}">${src.badge}</span>`;
+  const [lib, path] = src.split(":");
+  return `<img class="tech__icon" src="${ICON_URL[lib](path)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />`;
+};
+
+function tech() {
+  const box = $("#techList");
+  if (!box) return;
+  const group = ([name, items]) => `
+    <div class="stack__group">
+      <h3 class="info__label">${name}</h3>
+      <ul class="tech">${items.map(([tool, src]) => `<li class="tech__item">${techLogo(src)}<span>${tool}</span></li>`).join("")}</ul>
+    </div>`;
+  // first half of TECH in the left column, second half in the right
+  const half = Math.ceil(TECH.length / 2);
+  box.innerHTML = [TECH.slice(0, half), TECH.slice(half)]
+    .map((col) => `<div class="stack__col">${col.map(group).join("")}</div>`).join("");
+}
+
+/* ---------- Scroll reveals ---------- */
+function reveals() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("is-in");
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12 });
+  $$("[data-reveal]").forEach((el) => io.observe(el));
+}
+
+/* ---------- Projects: render, filter, modal ---------- */
+function projects() {
+  const grid = $("#projects");
+  if (!grid) return;
+
+  // Home shows the first data-featured featured projects; projects.html shows everything
+  const limit = +grid.dataset.featured || 0;
+  const list = PROJECTS.map((p, i) => ({ p, i }))
+    .filter(({ p }) => !limit || p.featured)
+    .slice(0, limit || undefined);
+
+  // picture · "Title | Type" · two-line description ending in "… Read more" · tech used
+  grid.innerHTML = list.map(({ p, i }) => `
+    <article class="project" data-cat="${p.cat}">
+      <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
+        <div class="project__media">${mockHTML(p.mock)}</div>
+        <div class="project__info">
+          <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
+          <p class="project__desc">${p.desc}<span class="project__more">… <u>Read more</u></span></p>
+          <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
+        </div>
+      </button>
+    </article>`).join("");
+
+  // filter tabs exist only on projects.html
+  const applyFilter = (f) => {
+    $$(".project").forEach((card) => {
+      const show = f === "all" || card.dataset.cat === f;
+      card.classList.toggle("is-hidden", !show);
+      card.classList.remove("is-entering");
+      if (show) {
+        void card.offsetWidth;
+        card.classList.add("is-entering");
+      }
+    });
+  };
+
+  $$(".filter").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      $$(".filter").forEach((b) => b.classList.toggle("is-active", b === btn));
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  const activeTab = $(".filter.is-active");
+  if (activeTab) applyFilter(activeTab.dataset.filter);
+
+  const modal = $("#modal");
+  let lastFocus = null;
+  const open = (i) => {
+    const p = PROJECTS[i];
+    $("#modalMedia").innerHTML = mockHTML(p.mock);
+    $("#modalCat").textContent = (p.cat === "dev" ? "</> Development" : "✦ Design") + " · " + p.label;
+    $("#modalTitle").textContent = p.title;
+    $("#modalDesc").textContent = p.desc;
+    $("#modalRole").textContent = p.role;
+    $("#modalYear").textContent = p.year;
+    $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip">${t}</span>`).join("");
+    $("#modalLive").href = p.live;
+    $("#modalCode").href = p.code;
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    $(".modal__close", modal).focus();
+  };
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  };
+  grid.addEventListener("click", (e) => {
+    const card = e.target.closest(".project__card");
+    if (card) open(+card.dataset.index);
+  });
+  $$("[data-close]", modal).forEach((el) => el.addEventListener("click", close));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
+
+}
+
+/* ---------- Init ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  $("#year").textContent = new Date().getFullYear();
+  intro();
+  homeSweep();
+  clock();
+  nav();
+  projects();
+  slider();
+  tech();
+  reveals();
+});
