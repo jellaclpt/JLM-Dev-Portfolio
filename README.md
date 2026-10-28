@@ -18,5 +18,5 @@ HTML, CSS and JavaScript, deployed on Cloudflare Pages.
 ## Contact
 
 - Email: jellamaecalupit2003@gmail.com
-- LinkedIn: [jella-mae-calupit-268aa5363](https://www.linkedin.com/in/jella-mae-calupit-268aa5363)
+- LinkedIn: [jellamaecalupit](https://www.linkedin.com/in/jellamaecalupit)
 - GitHub: [jellaclpt](https://github.com/jellaclpt)
