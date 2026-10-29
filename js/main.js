@@ -618,7 +618,10 @@ function projects() {
   const open = (i) => {
     const p = PROJECTS[i];
     gallery(p);
-    $("#modalCat").textContent = (p.cat === "dev" ? "</> Development" : "✦ Design") + " · " + p.label;
+    // same icons as the About cards: Web Development for dev projects, UI / UX Design for design projects
+    const catIcon = SERVICES.find(([t]) => t === (p.cat === "dev" ? "Web|Development" : "UI / UX|Design"))[2];
+    $("#modalCat").innerHTML = `<svg class="modal__cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${catIcon}</svg>` +
+      (p.cat === "dev" ? "Development" : "Design") + " · " + p.label;
     $("#modalTitle").textContent = p.title;
     // overview paragraph, then any detail sections (headings with a paragraph, bullet list or numbered steps)
     const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
