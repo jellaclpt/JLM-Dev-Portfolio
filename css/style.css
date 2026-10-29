@@ -440,11 +440,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 
 /* left: image, then role/year, then tech stack */
 .modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
-.modal__media { position: relative; flex: none; aspect-ratio: 16 / 10; background: var(--bg); }
-.modal__meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1rem 1.4rem; border-block: 1px solid var(--line); }
+.modal__media { position: relative; flex: 1 1 auto; min-height: 0; background: var(--bg); } /* image takes all the free height */
+.modal__meta { flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .85rem 1.4rem; border-block: 1px solid var(--line); }
 .modal__meta span, .modal__stack > span { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
 .modal__meta p { font-size: .9rem; }
-.modal__stack { padding: 1rem 1.4rem; }
+.modal__stack { flex: none; padding: .85rem 1.4rem 1.1rem; }
 .modal__stack .chips { margin-top: .5rem; }
 
 /* right: category, title, scrollable description, centred buttons */
@@ -491,7 +491,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .modal__panel { grid-template-columns: 1fr; height: auto; max-height: calc(100svh - 2rem); overflow-y: auto; }
   .modal__side { border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
   .modal__body { overflow: visible; padding-right: 0; }
-  .modal__media { aspect-ratio: 16 / 10; }
+  .modal__media { flex: none; aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 720px) {
