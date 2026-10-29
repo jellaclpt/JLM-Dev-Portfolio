@@ -456,23 +456,47 @@ function projects() {
 
     const loaded = [];
     let idx = 0;
-    // all shots sit side by side in one strip; changing shot slides the strip
+    // all shots sit side by side in one strip; changing shot slides the strip.
+    // With several shots the strip is [copy of last, ...shots, copy of first], so going past either end
+    // slides onto the copy and then jumps (unanimated) to the real shot: the loop never rewinds.
     const render = () => {
-      box.innerHTML = `<div class="gallery__track">${loaded.map(([src, cap]) => `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />`).join("")}</div>` +
-        (loaded.length > 1 ? `
+      const n = loaded.length;
+      const strip = n > 1 ? [loaded[n - 1], ...loaded, loaded[0]] : loaded;
+      box.innerHTML = `<div class="gallery__track">${strip.map(([src, cap]) => `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />`).join("")}</div>` +
+        (n > 1 ? `
           <button class="gallery__arrow gallery__arrow--prev" aria-label="Previous screenshot">‹</button>
           <button class="gallery__arrow gallery__arrow--next" aria-label="Next screenshot">›</button>
           <div class="gallery__dots">${loaded.map(() => "<span></span>").join("")}</div>` : "");
       const track = $(".gallery__track", box);
       const dots = $$(".gallery__dots span", box);
+      let pos = n > 1 ? idx + 1 : 0; // position in the strip, counting the leading copy
+      const place = (animate) => {
+        track.style.transition = animate ? "" : "none";
+        track.style.transform = `translateX(${-pos * 100}%)`;
+        if (!animate) void track.offsetWidth; // apply the jump before the transition comes back
+      };
       const show = () => {
         capEl.textContent = loaded[idx][1];
-        track.style.transform = `translateX(${-idx * 100}%)`;
         dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
       };
+      // on a copy at either end: jump to the real shot it stands for
+      const snap = () => {
+        if (pos === 0) pos = n;
+        else if (pos === n + 1) pos = 1;
+        else return;
+        place(false);
+      };
+      place(false);
       show();
-      if (loaded.length > 1) {
-        galleryStep = (step) => { idx = (idx + step + loaded.length) % loaded.length; show(); };
+      if (n > 1) {
+        track.addEventListener("transitionend", snap);
+        galleryStep = (step) => {
+          snap();
+          pos += step;
+          idx = (pos - 1 + n) % n;
+          place(true);
+          show();
+        };
         $(".gallery__arrow--prev", box).onclick = () => galleryStep(-1);
         $(".gallery__arrow--next", box).onclick = () => galleryStep(1);
       }
