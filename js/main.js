@@ -8,6 +8,8 @@
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
 // desc: the overview, shown on the card and as the first paragraph of the pop-up.
 // details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
+// live / code: the pop-up's two button links. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
+// codeIcon: "figma" swaps the GitHub icon for the Figma logo.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -69,17 +71,36 @@ const PROJECTS = [
     code: "#",
   },
   {
-    title: "Loopin",
+    title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "design",
     label: "Mobile App UI/UX",
+    image: "assets/work/development/acadpal/mockup 1.png",
+    imageCap: "Welcome, Login and Sign Up",
+    gallery: [
+      ["assets/work/development/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
+      ["assets/work/development/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
+    ],
     mock: "phone",
     year: "2025",
-    role: "UI/UX Design",
-    desc: "A music streaming app concept, taken from user interviews and flows to a polished high-fidelity prototype with micro-interactions.",
-    tags: ["Figma", "Prototyping", "UX Research", "Design System"],
-    live: "#",
-    code: "#",
+    role: "UI/UX Designer",
+    desc: "AcadPal is a mobile app design that helps students keep their subjects, tasks and files in one place. Its idea is in its tagline: organize smarter, study better.",
+    details: [
+      { h: "What the app does", ul: [
+        "<b>Home</b> shows today's date, a search bar, the student's subjects, upcoming to-do tasks and recently uploaded files.",
+        "<b>Subjects</b> are grouped by term, each with its teacher, class schedule and room.",
+        "<b>Tasks</b> have due dates and are sorted into To-do, Missed and Done, for one subject or for all of them.",
+        "<b>Files</b> are kept per subject and sorted into Lessons, Activities and Projects.",
+        "<b>Settings</b> hold the student's profile, with options to share a board and switch workspaces.",
+      ] },
+      { h: "My role", p: "I designed the user flow and the high-fidelity screens in Figma, from the welcome, login and sign-up screens to the home, subjects, tasks, files and settings, and linked them into a clickable mobile prototype." },
+    ],
+    tags: ["Figma", "Prototyping", "Mobile UI"],
+    live: "https://www.figma.com/proto/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=50-2&p=f&t=ulsdvo61FbHF3qa2-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=50%3A2",
+    liveLabel: "View prototype",
+    code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
+    codeLabel: "Figma design",
+    codeIcon: "figma",
   },
   {
     title: "Kape & Co.",
@@ -479,6 +500,8 @@ function projects() {
   if (activeTab) applyFilter(activeTab.dataset.filter);
 
   const modal = $("#modal");
+  // GitHub icon from the page's Source code button, reused when a project's second button links to code
+  const githubIcon = $("#modalCode svg").outerHTML;
   let lastFocus = null;
 
   // pop-up gallery: cover + gallery shots with arrows and dots; the caption sits in the row above.
@@ -604,9 +627,11 @@ function projects() {
     // stack chips get the same logos as the Tech Stack section (pop-up only)
     const techSrc = { ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) };
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
-    $("#modalLogo").innerHTML = p.logo ? `<img src="${p.logo}" alt="" />` : "";
-    $("#modalLive").href = p.live;
-    $("#modalCode").href = p.code;
+    const live = $("#modalLive"), code = $("#modalCode");
+    live.href = p.live;
+    live.innerHTML = `<span class="btn__logo">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
+    code.href = p.code;
+    code.innerHTML = (p.codeIcon === "figma" ? `<img class="btn__icon" src="${ICON_URL.dev("figma/figma-original")}" width="15" height="15" alt="" />` : githubIcon) + (p.codeLabel || "Source code");
     lastFocus = document.activeElement;
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
