@@ -11,8 +11,9 @@ const PROJECTS = [
     title: "SorSUpport",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
-    label: "Complaint Ticketing System",
+    label: "Ticketing System",
     image: "assets/work/development/sorsupport/cover.png",
+    logo: "assets/work/development/sorsupport/logo.png", // shown on the Live demo button
     gallery: [
       ["assets/work/development/sorsupport/student.png", "Student"],
       ["assets/work/development/sorsupport/recipient.png", "Recipient (office staff)"],
@@ -487,7 +488,10 @@ function projects() {
     $("#modalDesc").textContent = p.desc;
     $("#modalRole").textContent = p.role;
     $("#modalYear").textContent = p.year;
-    $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip">${t}</span>`).join("");
+    // stack chips get the same logos as the Tech Stack section (pop-up only)
+    const techSrc = Object.fromEntries(TECH.flatMap(([, items]) => items));
+    $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
+    $("#modalLogo").innerHTML = p.logo ? `<img src="${p.logo}" alt="" />` : "";
     $("#modalLive").href = p.live;
     $("#modalCode").href = p.code;
     lastFocus = document.activeElement;
