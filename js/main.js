@@ -209,13 +209,16 @@ function nav() {
     .forEach((h) => { const s = document.getElementById(h.slice(1)); if (s) io.observe(s); });
 
   const burger = $("#burger");
+  // phone menu is a small dropdown: tapping a link or anywhere outside it closes it
   const toggle = (open) => {
     menu.classList.toggle("is-open", open);
     burger.setAttribute("aria-expanded", open);
-    document.body.style.overflow = open ? "hidden" : "";
   };
   burger.addEventListener("click", () => toggle(!menu.classList.contains("is-open")));
   links.forEach((l) => l.addEventListener("click", () => toggle(false)));
+  document.addEventListener("click", (e) => {
+    if (menu.classList.contains("is-open") && !menu.contains(e.target) && !burger.contains(e.target)) toggle(false);
+  });
 
   $("#toTop").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
 }
