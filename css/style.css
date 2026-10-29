@@ -530,6 +530,15 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 }
 
 @media (max-width: 720px) {
+  /* smaller maroon washes so they don't cover the whole narrow screen */
+  body {
+    background:
+      radial-gradient(420px 380px at -10% 0%, rgba(98, 15, 30, .62), transparent 70%),
+      radial-gradient(360px 340px at 110% 30%, rgba(98, 15, 30, .44), transparent 70%),
+      radial-gradient(400px 360px at -10% 58%, rgba(98, 15, 30, .48), transparent 70%),
+      radial-gradient(400px 380px at 110% 92%, rgba(98, 15, 30, .48), transparent 70%),
+      var(--bg);
+  }
   .info, .contact { grid-template-columns: 1fr; }
   .info__col { border-right: 0; border-bottom: 1px solid var(--line); }
   .tech { grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); }
