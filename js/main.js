@@ -576,6 +576,31 @@ function projects() {
 
 }
 
+/* ---------- Work process timeline ---------- */
+// As the page scrolls, the line fills down to a mark 60% down the screen and every step it passes lights up.
+function processLine() {
+  const box = $(".steps");
+  if (!box) return;
+  const items = $$(".step", box);
+  if (reducedMotion) { box.style.setProperty("--fill", 1); items.forEach((li) => li.classList.add("is-on")); return; }
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const mark = innerHeight * 0.6;
+    const r = box.getBoundingClientRect();
+    const fill = Math.min(1, Math.max(0, (mark - r.top - 22) / (r.height - 52)));
+    box.style.setProperty("--fill", fill);
+    items.forEach((li) => {
+      const icon = $(".step__icon", li).getBoundingClientRect();
+      li.classList.toggle("is-on", icon.top + icon.height / 2 <= mark);
+    });
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  addEventListener("scroll", queue, { passive: true });
+  addEventListener("resize", queue);
+  update();
+}
+
 /* ---------- CV link ---------- */
 // Phones and tablets open the Google Drive copy so the Drive app can take it.
 // Android gets an intent link that names the Drive app and falls back to the web page when it isn't installed;
@@ -607,5 +632,6 @@ document.addEventListener("DOMContentLoaded", () => {
   projects();
   slider();
   tech();
+  processLine();
   reveals();
 });

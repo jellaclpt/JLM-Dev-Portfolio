@@ -369,9 +369,15 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .chip { padding: .45rem .8rem; border: 1px solid var(--line-strong); border-radius: 6px; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); transition: background .3s, color .3s, border-color .3s; }
 .chip:hover { background: var(--maroon); border-color: var(--maroon); color: var(--text); }
 
-.steps { position: relative; }
-.steps::before { content: ""; position: absolute; left: calc(2.2rem + 1rem + 22px); top: 22px; bottom: 30px; width: 1px; background: var(--maroon); }
-.step { position: relative; display: grid; grid-template-columns: 2.2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.3rem; }
+/* scroll-linked timeline: the bright line grows with --fill (0–1, set in js/main.js) and each step it reaches gets .is-on */
+.steps { position: relative; --fill: 0; }
+.steps::before, .steps::after { content: ""; position: absolute; left: calc(2.2rem + 1rem + 22px); top: 22px; width: 1px; }
+.steps::before { bottom: 30px; background: rgba(122, 20, 36, .45); }
+.steps::after { width: 2px; margin-left: -.5px; height: calc((100% - 52px) * var(--fill)); background: linear-gradient(180deg, var(--maroon), var(--maroon-bright)); box-shadow: 0 0 10px rgba(198, 42, 67, .6); }
+.step { position: relative; display: grid; grid-template-columns: 2.2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.3rem; opacity: .4; transition: opacity .5s var(--ease); }
+.step.is-on { opacity: 1; }
+.step .step__icon { transition: background .5s var(--ease), border-color .5s, box-shadow .5s, transform .5s var(--ease); }
+.step.is-on .step__icon { background: var(--maroon); border-color: var(--maroon-bright); box-shadow: 0 0 18px rgba(198, 42, 67, .45); transform: scale(1.08); }
 .step:last-child { padding-bottom: 0; }
 .step__num { font-family: var(--f-mono); font-size: .95rem; color: var(--maroon-bright); padding-top: .7rem; }
 .step__icon { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--maroon); background: var(--bg); display: grid; place-items: center; color: var(--text); }
