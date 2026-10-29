@@ -3,8 +3,9 @@
    ========================================================= */
 
 /* ---------- Edit your projects here ---------- */
-// image: path to a screenshot in assets/work/… (see assets/work/README.md).
-// Until that file exists, the drawn "mock" placeholder is shown instead.
+// image: the cover screenshot in assets/work/… (see assets/work/README.md).
+// gallery: optional extra screenshots shown in the pop-up, each [file, caption].
+// Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
     title: "SorSUpport",
@@ -12,6 +13,11 @@ const PROJECTS = [
     cat: "dev",
     label: "Complaint Ticketing System",
     image: "assets/work/development/sorsupport/cover.png",
+    gallery: [
+      ["assets/work/development/sorsupport/student.png", "Student"],
+      ["assets/work/development/sorsupport/recipient.png", "Recipient (office staff)"],
+      ["assets/work/development/sorsupport/admin.png", "SDS Administrator"],
+    ],
     mock: "dash",
     year: "2026",
     role: "Full-Stack Developer & QA Tester",
@@ -411,9 +417,48 @@ function projects() {
 
   const modal = $("#modal");
   let lastFocus = null;
+
+  // pop-up gallery: cover + gallery shots with arrows, caption and dots.
+  // Screenshots that fail to load are dropped, so missing files never show as broken.
+  const gallery = (p) => {
+    const box = $("#modalMedia");
+    const shots = [[p.image, p.title], ...(p.gallery || [])].filter(([src]) => src);
+    box.innerHTML = mockHTML(p.mock);
+    if (!shots.length) return;
+
+    const loaded = [];
+    let idx = 0;
+    const render = () => {
+      const [src, cap] = loaded[idx];
+      box.innerHTML = `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />` +
+        (loaded.length > 1 ? `
+          <button class="gallery__arrow gallery__arrow--prev" aria-label="Previous screenshot">‹</button>
+          <button class="gallery__arrow gallery__arrow--next" aria-label="Next screenshot">›</button>
+          <span class="gallery__cap">${cap}</span>
+          <div class="gallery__dots">${loaded.map((_, k) => `<span class="${k === idx ? "is-active" : ""}"></span>`).join("")}</div>` : "");
+      if (loaded.length > 1) {
+        $(".gallery__arrow--prev", box).onclick = () => { idx = (idx - 1 + loaded.length) % loaded.length; render(); };
+        $(".gallery__arrow--next", box).onclick = () => { idx = (idx + 1) % loaded.length; render(); };
+      }
+    };
+    // preload each shot; keep the original order for the ones that exist
+    const results = new Array(shots.length);
+    let pending = shots.length;
+    shots.forEach(([src, cap], k) => {
+      const img = new Image();
+      img.onload = () => { results[k] = [src, cap]; if (--pending === 0) finish(); };
+      img.onerror = () => { if (--pending === 0) finish(); };
+      img.src = src;
+    });
+    const finish = () => {
+      loaded.push(...results.filter(Boolean));
+      if (loaded.length && modal.classList.contains("is-open")) render();
+    };
+  };
+
   const open = (i) => {
     const p = PROJECTS[i];
-    $("#modalMedia").innerHTML = mediaHTML(p);
+    gallery(p);
     $("#modalCat").textContent = (p.cat === "dev" ? "</> Development" : "✦ Design") + " · " + p.label;
     $("#modalTitle").textContent = p.title;
     $("#modalDesc").textContent = p.desc;

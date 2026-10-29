@@ -442,6 +442,19 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 /* left: image, then role/year, then tech stack */
 .modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
 .modal__media { position: relative; flex: 1 1 auto; min-height: 0; background: var(--bg); } /* image takes all the free height */
+/* pop-up gallery controls */
+.gallery__arrow {
+  position: absolute; top: 50%; z-index: 3; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%;
+  background: rgba(11, 10, 10, .7); border: 1px solid var(--line-strong); color: var(--text); font-size: 1.3rem; line-height: 1;
+  display: grid; place-items: center; transition: background .3s;
+}
+.gallery__arrow:hover { background: var(--maroon); }
+.gallery__arrow--prev { left: .75rem; }
+.gallery__arrow--next { right: .75rem; }
+.gallery__cap { position: absolute; left: .75rem; top: .75rem; z-index: 3; padding: .25rem .6rem; border-radius: 999px; background: rgba(11, 10, 10, .75); font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
+.gallery__dots { position: absolute; left: 0; right: 0; bottom: .75rem; z-index: 3; display: flex; justify-content: center; gap: .4rem; }
+.gallery__dots span { width: 7px; height: 7px; border-radius: 999px; background: rgba(243, 238, 233, .45); transition: width .3s, background .3s; }
+.gallery__dots span.is-active { width: 20px; background: var(--maroon-bright); }
 .modal__meta { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .85rem 1.4rem .3rem; border-top: 1px solid var(--line); }
 .modal__year { flex: none; font-family: var(--f-mono); font-size: .8rem; color: var(--maroon-bright); }
 .modal__meta p:first-child { font-size: .92rem; font-weight: 600; }
