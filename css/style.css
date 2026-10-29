@@ -403,7 +403,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 /* paper plane that flies a looping path, leaving a dashed trail (animated inside the SVG in index.html) */
 .contact__plane { display: inline-block; width: 3.2em; height: 1.6em; margin: -.45em 0 -.45em .2em; vertical-align: -.05em; /* negative margins keep it from stretching the line */ color: var(--maroon-bright); }
 .contact__plane svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.contact__intro p { color: var(--muted); font-size: .92rem; max-width: 40ch; text-align: justify; }
+.contact__intro p { color: var(--muted); font-size: .92rem; max-width: 40ch; }
 .contact__intro, .contact__reach { align-self: center; }
 
 .contact__list li { display: flex; align-items: center; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
