@@ -456,16 +456,23 @@ function projects() {
 
     const loaded = [];
     let idx = 0;
+    // all shots sit side by side in one strip; changing shot slides the strip
     const render = () => {
-      const [src, cap] = loaded[idx];
-      capEl.textContent = cap;
-      box.innerHTML = `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />` +
+      box.innerHTML = `<div class="gallery__track">${loaded.map(([src, cap]) => `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />`).join("")}</div>` +
         (loaded.length > 1 ? `
           <button class="gallery__arrow gallery__arrow--prev" aria-label="Previous screenshot">‹</button>
           <button class="gallery__arrow gallery__arrow--next" aria-label="Next screenshot">›</button>
-          <div class="gallery__dots">${loaded.map((_, k) => `<span class="${k === idx ? "is-active" : ""}"></span>`).join("")}</div>` : "");
+          <div class="gallery__dots">${loaded.map(() => "<span></span>").join("")}</div>` : "");
+      const track = $(".gallery__track", box);
+      const dots = $$(".gallery__dots span", box);
+      const show = () => {
+        capEl.textContent = loaded[idx][1];
+        track.style.transform = `translateX(${-idx * 100}%)`;
+        dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+      };
+      show();
       if (loaded.length > 1) {
-        galleryStep = (step) => { idx = (idx + step + loaded.length) % loaded.length; render(); };
+        galleryStep = (step) => { idx = (idx + step + loaded.length) % loaded.length; show(); };
         $(".gallery__arrow--prev", box).onclick = () => galleryStep(-1);
         $(".gallery__arrow--next", box).onclick = () => galleryStep(1);
       }

@@ -450,6 +450,10 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__shot { flex: none; padding: 1rem 1.4rem .85rem; border-bottom: 1px solid var(--line); font-size: .85rem; font-weight: 600; letter-spacing: .04em; }
 .modal__shot:empty { display: none; }
 .modal__media { position: relative; flex: none; aspect-ratio: 28 / 15; background: var(--bg); touch-action: pan-y; } /* same shape as the project mockups; sideways swipes change the shot */
+/* pop-up gallery: shots in one strip that slides */
+.gallery__track { position: absolute; inset: 0; z-index: 2; display: flex; transition: transform .6s var(--ease); }
+.gallery__track .media__img { position: static; flex: none; width: 100%; height: 100%; }
+.modal__media { overflow: hidden; }
 /* pop-up gallery controls */
 .gallery__arrow {
   position: absolute; top: 50%; z-index: 3; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%;
