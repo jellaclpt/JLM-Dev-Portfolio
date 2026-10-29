@@ -77,8 +77,8 @@ const PROJECTS = [
     label: "Mobile App UI/UX",
     image: "assets/work/development/acadpal/mockup 1.png",
     imageCap: "Welcome, Login and Sign Up",
-    logo: "assets/work/development/acadpal/logo-white.png", // shown on the View prototype button
-    logoPlain: true, // white logo on its own, without the white circle
+    logo: "assets/work/development/acadpal/logo-light.png", // shown on the View prototype button (lavender so it reads on maroon)
+    logoPlain: true, // logo on its own, without the white circle
     gallery: [
       ["assets/work/development/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
       ["assets/work/development/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
