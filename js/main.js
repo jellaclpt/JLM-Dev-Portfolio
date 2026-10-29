@@ -216,7 +216,9 @@ const SERVICES = [
     '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/>'],
   ["UI / UX|Design", "Wireframes and interface designs focused on clear and intuitive user flows.",
     '<circle cx="12" cy="5" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/><path d="M10.2 5.8C6.5 7.5 4.5 11.5 4.5 16M13.8 5.8c3.7 1.7 5.7 5.7 5.7 10.2"/>'],
-  ["System|Analysis", "Breaking down requirements and mapping out workflows before development begins.",
+  ["Project|Management", "Organizing tasks, timelines and team coordination to keep projects on track.",
+    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/><path d="M5.5 8h1.5M11 8h2M11 11h2M17 8h1.5M17 11h1.5M17 14h1.5"/>'],
+  ["Planning &|Analysis", "Breaking down requirements, mapping workflows and creating diagrams before development begins.",
     '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM8.5 11h7M8.5 15h4.5"/>'],
   ["Testing", "Testing and debugging features throughout development, then deploying working builds online.",
     '<path d="m8 2 1.9 1.9M14.1 3.9 16 2M9 7.1v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6Zm0 0v-9M6.5 9C4.6 8.8 3 7.1 3 5M6 13H2M3 21c0-2.1 1.7-3.9 3.8-4M21 5c0 2.1-1.6 3.8-3.5 4M22 13h-4M17.2 17c2.1.1 3.8 1.9 3.8 4"/>'],
@@ -284,14 +286,14 @@ const ICON_URL = {
   si: (p) => `https://cdn.simpleicons.org/${p}`,
 };
 const TECH = [
-  ["Project Management", [
+  ["Project Management & Planning", [
     ["ClickUp", "si:clickup"],
     ["Trello", "dev:trello/trello-original"],
+    ["draw.io", "si:diagramsdotnet"],
   ]],
   ["Design", [
-    ["Balsamiq", { badge: "B", color: "#CC0000" }],
-    ["draw.io", "si:diagramsdotnet"],
     ["Figma", "dev:figma/figma-original"],
+    ["Balsamiq", { badge: "B", color: "#CC0000" }],
   ]],
   ["Frontend", [
     ["HTML5", "dev:html5/html5-original"],
