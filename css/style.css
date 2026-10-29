@@ -441,11 +441,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 /* left: image, then role/year, then tech stack */
 .modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
 .modal__media { position: relative; flex: 1 1 auto; min-height: 0; background: var(--bg); } /* image takes all the free height */
-.modal__meta { flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .85rem 1.4rem; border-block: 1px solid var(--line); }
-.modal__meta span, .modal__stack > span { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
-.modal__meta p { font-size: .9rem; }
-.modal__stack { flex: none; padding: .85rem 1.4rem 1.1rem; }
-.modal__stack .chips { margin-top: .5rem; }
+.modal__meta { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .85rem 1.4rem .3rem; border-top: 1px solid var(--line); }
+.modal__year { flex: none; font-family: var(--f-mono); font-size: .8rem; color: var(--maroon-bright); }
+.modal__meta p:first-child { font-size: .92rem; font-weight: 600; }
+.modal__stack { flex: none; padding: .6rem 1.4rem 1.1rem; }
+
 
 /* right: category, title, scrollable description, centred buttons */
 .modal__content { display: flex; flex-direction: column; min-height: 0; padding: 2rem 2rem 1.5rem; }
