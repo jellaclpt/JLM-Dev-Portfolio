@@ -40,10 +40,10 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 /* mostly black, with large soft maroon washes scattered down the page; they scroll with the content */
 body {
   background:
-    radial-gradient(1100px 800px at -5% 0%, rgba(122, 20, 36, .40), transparent 70%),
-    radial-gradient(900px 700px at 105% 30%, rgba(122, 20, 36, .26), transparent 70%),
-    radial-gradient(1000px 750px at -5% 58%, rgba(122, 20, 36, .28), transparent 70%),
-    radial-gradient(1000px 800px at 105% 92%, rgba(122, 20, 36, .30), transparent 70%),
+    radial-gradient(1100px 800px at -5% 0%, rgba(74, 10, 22, .65), transparent 70%),
+    radial-gradient(900px 700px at 105% 30%, rgba(74, 10, 22, .45), transparent 70%),
+    radial-gradient(1000px 750px at -5% 58%, rgba(74, 10, 22, .5), transparent 70%),
+    radial-gradient(1000px 800px at 105% 92%, rgba(74, 10, 22, .5), transparent 70%),
     var(--bg);
   color: var(--text);
   font-family: var(--f-body);
