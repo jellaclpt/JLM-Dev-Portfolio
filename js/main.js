@@ -77,6 +77,7 @@ const PROJECTS = [
     label: "Mobile App UI/UX",
     image: "assets/work/development/acadpal/mockup 1.png",
     imageCap: "Welcome, Login and Sign Up",
+    logo: "assets/work/development/acadpal/logo.png", // shown on the View prototype button
     gallery: [
       ["assets/work/development/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
       ["assets/work/development/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
