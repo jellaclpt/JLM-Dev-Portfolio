@@ -127,6 +127,19 @@ const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// horizontal swipe on touch screens: fn(1) for a swipe left (next), fn(-1) for a swipe right (previous)
+const onSwipe = (el, fn) => {
+  let x = null, y = 0;
+  el.addEventListener("touchstart", (e) => { x = e.touches[0].clientX; y = e.touches[0].clientY; }, { passive: true });
+  el.addEventListener("touchend", (e) => {
+    if (x === null) return;
+    const dx = e.changedTouches[0].clientX - x;
+    const dy = e.changedTouches[0].clientY - y;
+    x = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) fn(dx < 0 ? 1 : -1);
+  }, { passive: true });
+};
+
 /* ---------- Intro: curtain slides up, hero fades in, then PORTFOLIO sweeps ---------- */
 function intro() {
   requestAnimationFrame(() => document.body.classList.add("is-loaded"));
@@ -298,6 +311,7 @@ function slider() {
   dots.forEach((d) => d.addEventListener("click", () => { stop(); go(+d.dataset.i); play(); }));
   $("#slider").addEventListener("mouseenter", stop);
   $("#slider").addEventListener("mouseleave", play);
+  onSwipe($("#slider"), (step) => { stop(); go(active + step); play(); });
 
   render();
   play();
@@ -427,12 +441,17 @@ function projects() {
 
   // pop-up gallery: cover + gallery shots with arrows and dots; the caption sits in the row above.
   // Screenshots that fail to load are dropped, so missing files never show as broken.
+  // set by the open project's gallery; swiping the picture steps through its shots
+  let galleryStep = null;
+  onSwipe($("#modalMedia"), (step) => { if (galleryStep) galleryStep(step); });
+
   const gallery = (p) => {
     const box = $("#modalMedia");
     const capEl = $("#modalShot");
     const shots = [[p.image, p.imageCap || p.title], ...(p.gallery || [])].filter(([src]) => src);
     box.innerHTML = mockHTML(p.mock);
     capEl.textContent = "";
+    galleryStep = null;
     if (!shots.length) return;
 
     const loaded = [];
@@ -446,8 +465,9 @@ function projects() {
           <button class="gallery__arrow gallery__arrow--next" aria-label="Next screenshot">›</button>
           <div class="gallery__dots">${loaded.map((_, k) => `<span class="${k === idx ? "is-active" : ""}"></span>`).join("")}</div>` : "");
       if (loaded.length > 1) {
-        $(".gallery__arrow--prev", box).onclick = () => { idx = (idx - 1 + loaded.length) % loaded.length; render(); };
-        $(".gallery__arrow--next", box).onclick = () => { idx = (idx + 1) % loaded.length; render(); };
+        galleryStep = (step) => { idx = (idx + step + loaded.length) % loaded.length; render(); };
+        $(".gallery__arrow--prev", box).onclick = () => galleryStep(-1);
+        $(".gallery__arrow--next", box).onclick = () => galleryStep(1);
       }
     };
     // preload each shot; keep the original order for the ones that exist
