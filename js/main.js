@@ -3,19 +3,22 @@
    ========================================================= */
 
 /* ---------- Edit your projects here ---------- */
+// image: path to a screenshot in assets/work/… (see assets/work/README.md).
+// Until that file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
-    title: "Velour Store",
+    title: "SorSUpport",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
-    label: "E-commerce Website",
-    mock: "shop",
+    label: "Complaint Ticketing System",
+    image: "assets/work/development/sorsupport/cover.png",
+    mock: "dash",
     year: "2026",
-    role: "Design & Front-end Development",
-    desc: "A fashion e-commerce storefront with product filtering, a cart drawer and smooth page transitions. I designed the UI in Figma and built it as a responsive React app.",
-    tags: ["React", "CSS Modules", "Figma", "REST API"],
-    live: "#",
-    code: "#",
+    role: "Full-Stack Developer & QA Tester",
+    desc: "A web-based complaint ticketing system for Sorsogon State University – Bulan Campus. Students submit their concerns online, and the Student Development Services Office reviews them and routes each one to the college or office that can act on it, tracking every step until the concern is resolved. The system has role-based access for students, office staff and administrators, confidential tickets, message threads with attachments, email notifications, automatic reminders for waiting tickets, analytics with PDF and Excel export, and an audit trail. I developed it with Laravel, Blade, Tailwind CSS and MySQL, tested it manually across all user roles and through API testing in Postman, and deployed it on Railway.",
+    tags: ["Laravel", "PHP", "Tailwind CSS", "MySQL", "Postman"],
+    live: "https://sorsupport-production.up.railway.app",
+    code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
     title: "Pulse Dashboard",
@@ -105,6 +108,10 @@ const MOCKS = {
 
 const mockHTML = (type) =>
   `<div class="mock mock--${type}"><div class="mock__bar"><i></i><i></i><i></i><b></b></div><div class="mock__body">${MOCKS[type]}</div></div>`;
+
+// real screenshot on top of the drawn mock; if the image file is missing it removes itself
+const mediaHTML = (p) =>
+  mockHTML(p.mock) + (p.image ? `<img class="media__img" src="${p.image}" alt="${p.title} screenshot" loading="lazy" onerror="this.remove()" />` : "");
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
@@ -370,7 +377,7 @@ function projects() {
   grid.innerHTML = list.map(({ p, i }) => `
     <article class="project" data-cat="${p.cat}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
-        <div class="project__media">${mockHTML(p.mock)}</div>
+        <div class="project__media">${mediaHTML(p)}</div>
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
           <p class="project__desc">${p.desc}<span class="project__more">… <u>Read more</u></span></p>
@@ -406,7 +413,7 @@ function projects() {
   let lastFocus = null;
   const open = (i) => {
     const p = PROJECTS[i];
-    $("#modalMedia").innerHTML = mockHTML(p.mock);
+    $("#modalMedia").innerHTML = mediaHTML(p);
     $("#modalCat").textContent = (p.cat === "dev" ? "</> Development" : "✦ Design") + " · " + p.label;
     $("#modalTitle").textContent = p.title;
     $("#modalDesc").textContent = p.desc;
