@@ -429,10 +429,10 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal.is-open { visibility: visible; }
 .modal__backdrop { position: absolute; inset: 0; background: rgba(5, 4, 4, .8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 0; transition: opacity .4s; }
 .modal.is-open .modal__backdrop { opacity: 1; }
-/* fixed-size panel: long descriptions scroll inside .modal__body instead of growing the modal */
+/* panel height follows the 16:10 picture; long descriptions page inside .modal__body instead of growing it */
 .modal__panel {
-  position: relative; width: min(980px, 100%); height: min(560px, calc(100svh - 2rem)); overflow: hidden;
-  display: grid; grid-template-columns: 1.05fr 1fr; background: var(--surface); border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px);
+  position: relative; width: min(1200px, 100%); max-height: calc(100svh - 2rem); overflow: hidden;
+  display: grid; grid-template-columns: 1.5fr 1fr; background: var(--surface); border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px);
   opacity: 0; transition: opacity .4s var(--ease);
 }
 .modal.is-open .modal__panel { opacity: 1; }
@@ -441,7 +441,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 
 /* left: image, then role/year, then tech stack */
 .modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
-.modal__media { position: relative; flex: 1 1 auto; min-height: 0; background: var(--bg); } /* image takes all the free height */
+.modal__media { position: relative; flex: none; aspect-ratio: 16 / 10; background: var(--bg); } /* desktop-screenshot shape */
 /* pop-up gallery controls */
 .gallery__arrow {
   position: absolute; top: 50%; z-index: 3; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%;
@@ -462,17 +462,17 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 
 
 /* right: category, title, scrollable description, centred buttons */
-.modal__content { display: flex; flex-direction: column; min-height: 0; padding: 2rem 2rem 1.5rem; }
+/* contain: size stops long text from making the panel taller; the column just fills the row */
+.modal__content { display: flex; flex-direction: column; min-height: 0; padding: 2rem 2rem 1.5rem; contain: size; }
 .modal__cat { font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); text-transform: uppercase; letter-spacing: .08em; padding-right: 2.5rem; }
 .modal__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); text-transform: uppercase; line-height: 1; margin: .5rem 2.5rem 1rem 0; }
-.modal__body {
-  flex: 1; min-height: 0; overflow-y: auto; padding-right: .9rem;
-  scrollbar-width: thin; scrollbar-color: var(--maroon-bright) var(--line-strong); /* Firefox */
-}
-/* slim pill scrollbar, styled like the slider dots */
-.modal__body::-webkit-scrollbar { width: 5px; }
-.modal__body::-webkit-scrollbar-track { background: var(--line-strong); border-radius: 999px; }
-.modal__body::-webkit-scrollbar-thumb { background: var(--maroon-bright); border-radius: 999px; }
+/* no visible scrollbar; the dots in .modal__pager show and change the position instead */
+.modal__body { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; }
+.modal__body::-webkit-scrollbar { display: none; }
+.modal__pager { display: flex; justify-content: center; gap: .45rem; margin-top: .9rem; }
+.modal__pager:empty { display: none; }
+.modal__pager button { width: 7px; height: 7px; padding: 0; border-radius: 999px; background: var(--line-strong); transition: width .4s var(--ease), background .4s; }
+.modal__pager button.is-active { width: 22px; background: var(--maroon-bright); }
 .modal__desc { color: var(--muted); font-size: .95rem; line-height: 1.75; }
 .modal__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
 .modal__actions .btn { padding: .65rem 1.15rem; font-size: .75rem; }
@@ -504,7 +504,9 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   /* phones: columns stack and the whole panel scrolls instead */
   .modal__panel { grid-template-columns: 1fr; height: auto; max-height: calc(100svh - 2rem); overflow-y: auto; }
   .modal__side { border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
-  .modal__body { overflow: visible; padding-right: 0; }
+  .modal__content { contain: none; }
+  .modal__body { overflow: visible; }
+  .modal__pager { display: none; }
   .modal__media { flex: none; aspect-ratio: 16 / 10; }
 }
 

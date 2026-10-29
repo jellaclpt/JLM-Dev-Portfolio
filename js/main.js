@@ -456,6 +456,29 @@ function projects() {
     };
   };
 
+  // description pager: one dot per screenful of text, in place of a scrollbar
+  const body = $(".modal__body", modal);
+  const pager = $("#modalPager");
+  // any real overflow (beyond rounding) needs at least two dots, or the end of the text is hidden
+  const pages = () => (body.scrollHeight - body.clientHeight > 2 ? Math.ceil(body.scrollHeight / body.clientHeight) : 1);
+  const syncPager = () => {
+    const n = pages(), max = body.scrollHeight - body.clientHeight;
+    const active = n > 1 && max > 0 ? Math.round((body.scrollTop / max) * (n - 1)) : 0;
+    $$("button", pager).forEach((d, k) => d.classList.toggle("is-active", k === active));
+  };
+  const buildPager = (retry = true) => {
+    const n = pages();
+    pager.innerHTML = n > 1 ? Array.from({ length: n }, (_, k) => `<button aria-label="Page ${k + 1} of ${n}"></button>`).join("") : "";
+    // showing the dots takes a little height from the text, so the page count can change once
+    if (retry && pages() !== n) return buildPager(false);
+    $$("button", pager).forEach((d, k) => d.addEventListener("click", () => {
+      body.scrollTo({ top: (k / (n - 1)) * (body.scrollHeight - body.clientHeight), behavior: reducedMotion ? "auto" : "smooth" });
+    }));
+    syncPager();
+  };
+  body.addEventListener("scroll", syncPager, { passive: true });
+  addEventListener("resize", () => { if (modal.classList.contains("is-open")) buildPager(); });
+
   const open = (i) => {
     const p = PROJECTS[i];
     gallery(p);
@@ -471,6 +494,8 @@ function projects() {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    body.scrollTop = 0;
+    requestAnimationFrame(() => buildPager());
     $(".modal__close", modal).focus();
   };
   const close = () => {
