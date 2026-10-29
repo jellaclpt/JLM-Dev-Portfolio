@@ -554,25 +554,34 @@ function projects() {
   // description pager: one dot per screenful of text, in place of a scrollbar
   const body = $(".modal__body", modal);
   const pager = $("#modalPager");
-  // any real overflow (beyond rounding) needs at least two dots, or the end of the text is hidden
-  const pages = () => (body.scrollHeight - body.clientHeight > 2 ? Math.ceil(body.scrollHeight / body.clientHeight) : 1);
+  // one dot per screenful: dot k starts at k screens down, and the last dot is the end of the text.
+  // Any real overflow (beyond rounding) needs at least two dots, or the end of the text is hidden.
+  const maxScroll = () => body.scrollHeight - body.clientHeight;
+  const pages = () => (maxScroll() > 2 ? Math.ceil(maxScroll() / body.clientHeight) + 1 : 1);
+  const pageTop = (k, n) => (k === n - 1 ? maxScroll() : k * body.clientHeight);
   const syncPager = () => {
-    const n = pages(), max = body.scrollHeight - body.clientHeight;
-    const active = n > 1 && max > 0 ? Math.round((body.scrollTop / max) * (n - 1)) : 0;
-    $$("button", pager).forEach((d, k) => d.classList.toggle("is-active", k === active));
+    const dots = $$("button", pager), n = dots.length;
+    if (!n) return;
+    // at the very end the last dot is active, otherwise the screenful the top of the view is in
+    const active = body.scrollTop >= maxScroll() - 2 ? n - 1 : Math.min(n - 2, Math.round(body.scrollTop / body.clientHeight));
+    dots.forEach((d, k) => d.classList.toggle("is-active", k === active));
   };
   const buildPager = (retry = true) => {
     const n = pages();
-    pager.innerHTML = n > 1 ? Array.from({ length: n }, (_, k) => `<button aria-label="Page ${k + 1} of ${n}"></button>`).join("") : "";
-    // showing the dots takes a little height from the text, so the page count can change once
-    if (retry && pages() !== n) return buildPager(false);
-    $$("button", pager).forEach((d, k) => d.addEventListener("click", () => {
-      body.scrollTo({ top: (k / (n - 1)) * (body.scrollHeight - body.clientHeight), behavior: reducedMotion ? "auto" : "smooth" });
-    }));
+    if (pager.children.length !== n) {
+      pager.innerHTML = n > 1 ? Array.from({ length: n }, (_, k) => `<button aria-label="Page ${k + 1} of ${n}"></button>`).join("") : "";
+      $$("button", pager).forEach((d, k) => d.addEventListener("click", () => {
+        body.scrollTo({ top: pageTop(k, pages()), behavior: reducedMotion ? "auto" : "smooth" });
+      }));
+      // showing the dots takes a little room from the text, so the page count can change once
+      if (retry && pages() !== n) return buildPager(false);
+    }
     syncPager();
   };
   body.addEventListener("scroll", syncPager, { passive: true });
-  addEventListener("resize", () => { if (modal.classList.contains("is-open")) buildPager(); });
+  // recount whenever the text area changes size: window resize, fonts loading, the dot column appearing
+  new ResizeObserver(() => { if (modal.classList.contains("is-open")) buildPager(); }).observe(body);
+  if (document.fonts) document.fonts.ready.then(() => { if (modal.classList.contains("is-open")) buildPager(); });
 
   const open = (i) => {
     const p = PROJECTS[i];
