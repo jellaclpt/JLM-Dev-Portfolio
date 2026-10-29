@@ -487,14 +487,14 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__meta { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .85rem 1.4rem .3rem; border-top: 1px solid var(--line); }
 .modal__year { flex: none; font-family: var(--f-mono); font-size: .8rem; color: var(--maroon-bright); }
 .modal__meta p:first-child { font-size: .92rem; font-weight: 600; }
-.modal__stack { flex: none; padding: .6rem 1.4rem 1.1rem; }
+.modal__stack { flex: none; padding: .6rem 1.4rem 1rem; }
 
 
 /* right: category, title, scrollable description, centred buttons */
 /* contain: size stops long text from making the panel taller; the column just fills the row */
 /* grid so the page dots can sit in a column to the right of the text */
-.modal__content { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto minmax(0, 1fr) auto; min-height: 0; padding: 2rem 2rem 1.5rem; contain: size; }
-.modal__cat, .modal__title, .modal__actions { grid-column: 1 / -1; }
+.modal__content { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto minmax(0, 1fr); min-height: 0; padding: 2rem 2rem 1.75rem; contain: size; }
+.modal__cat, .modal__title { grid-column: 1 / -1; }
 .modal__cat { font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); text-transform: uppercase; letter-spacing: .08em; padding-right: 2.5rem; }
 .modal__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin: .5rem 2.5rem 1rem 0; }
 /* no visible scrollbar; the dots in .modal__pager show and change the position instead */
@@ -513,7 +513,8 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__desc li { margin-bottom: .4rem; padding-left: .2rem; }
 .modal__desc li::marker { color: var(--maroon-bright); }
 .modal__desc b { color: var(--text); font-weight: 600; }
-.modal__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+/* buttons sit at the bottom of the left column, leaving the right column to the description */
+.modal__actions { flex: none; display: flex; flex-wrap: wrap; gap: .6rem; padding: .2rem 1.4rem 1.4rem; }
 .modal__actions .btn { padding: .65rem 1.15rem; font-size: .75rem; }
 .btn__logo { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; overflow: hidden; background: #fff; flex: none; }
 .btn__logo:empty { display: none; }
