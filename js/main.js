@@ -577,12 +577,17 @@ function projects() {
 }
 
 /* ---------- Work process timeline ---------- */
-// As the page scrolls, the line fills down to a mark 60% down the screen and every step it passes lights up.
+// As the page scrolls, the line fills down to a mark 60% down the screen; each circle fills from the top
+// as the mark passes through it, and the step lights up once the mark reaches its middle.
 function processLine() {
   const box = $(".steps");
   if (!box) return;
   const items = $$(".step", box);
-  if (reducedMotion) { box.style.setProperty("--fill", 1); items.forEach((li) => li.classList.add("is-on")); return; }
+  if (reducedMotion) {
+    box.style.setProperty("--fill", 1);
+    items.forEach((li) => { li.classList.add("is-on"); $(".step__icon", li).style.setProperty("--f", 1); });
+    return;
+  }
   let queued = false;
   const update = () => {
     queued = false;
@@ -591,8 +596,10 @@ function processLine() {
     const fill = Math.min(1, Math.max(0, (mark - r.top - 22) / (r.height - 52)));
     box.style.setProperty("--fill", fill);
     items.forEach((li) => {
-      const icon = $(".step__icon", li).getBoundingClientRect();
-      li.classList.toggle("is-on", icon.top + icon.height / 2 <= mark);
+      const icon = $(".step__icon", li);
+      const ir = icon.getBoundingClientRect();
+      icon.style.setProperty("--f", Math.min(1, Math.max(0, (mark - ir.top) / ir.height)));
+      li.classList.toggle("is-on", ir.top + ir.height / 2 <= mark);
     });
   };
   const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
