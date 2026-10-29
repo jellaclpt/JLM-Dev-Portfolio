@@ -413,6 +413,15 @@ function projects() {
       </button>
     </article>`).join("");
 
+  // "… Read more" only when the description is actually cut off; wrapping changes with width and fonts, so re-check then
+  const fitMore = () => $$(".project__desc").forEach((d) => {
+    if (!d.offsetParent) return; // hidden by a filter: checked when shown
+    $(".project__more", d).hidden = d.scrollHeight <= d.clientHeight + 1;
+  });
+  fitMore();
+  addEventListener("resize", () => requestAnimationFrame(fitMore));
+  if (document.fonts) document.fonts.ready.then(fitMore);
+
   // filter tabs exist only on projects.html
   const applyFilter = (f) => {
     $$(".project").forEach((card) => {
@@ -424,6 +433,7 @@ function projects() {
         card.classList.add("is-entering");
       }
     });
+    fitMore();
   };
 
   $$(".filter").forEach((btn) => {
