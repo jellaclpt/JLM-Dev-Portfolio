@@ -458,11 +458,12 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__close:hover { background: var(--maroon); }
 
 /* left: image, then role/year, then tech stack */
-.modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
+.modal__side { display: flex; flex-direction: column; min-height: 0; max-height: calc(100svh - 2rem - 2px); background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; } /* same cap as the panel, so the picture shrinks before anything is cut off */
 /* name of the screenshot being shown, in its own row above the picture */
 .modal__shot { flex: none; padding: 1rem 1.4rem .85rem; border-bottom: 1px solid var(--line); font-size: .85rem; font-weight: 600; letter-spacing: .04em; }
 .modal__shot:empty { display: none; }
-.modal__media { position: relative; flex: none; aspect-ratio: 28 / 15; background: var(--bg); touch-action: pan-y; } /* same shape as the project mockups; sideways swipes change the shot */
+/* the picture may shrink (not crop) when a long tech stack needs the room, so chips and buttons are never cut off */
+.modal__media { position: relative; flex: 0 1 auto; min-height: 180px; aspect-ratio: 28 / 15; background: var(--bg); touch-action: pan-y; } /* same shape as the project mockups; sideways swipes change the shot */
 /* pop-up gallery: shots in one strip that slides */
 .gallery__track { position: absolute; inset: 0; z-index: 2; display: flex; transition: transform .6s var(--ease); }
 .gallery__track .media__img { position: static; flex: none; width: 100%; height: 100%; }
@@ -556,7 +557,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .about__grid { grid-template-columns: 1fr; }
   /* phones: columns stack and the whole panel scrolls instead */
   .modal__panel { grid-template-columns: 1fr; height: auto; max-height: calc(100svh - 2rem); overflow-y: auto; }
-  .modal__side { border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
+  .modal__side { max-height: none; border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
   .modal__content { contain: none; }
   .modal__body { overflow: visible; }
   .modal__pager { display: none; }
