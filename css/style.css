@@ -519,6 +519,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__actions .btn { padding: .65rem 1.15rem; font-size: .75rem; }
 .btn__logo { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; overflow: hidden; background: #fff; flex: none; }
 .btn__logo:empty { display: none; }
+.btn__logo--plain { background: none; border-radius: 0; } /* logo shown on its own, no circle */
 .btn__logo img { width: 100%; height: 100%; object-fit: contain; }
 .btn__icon { flex: none; }
 /* tech logos inside the pop-up stack chips */

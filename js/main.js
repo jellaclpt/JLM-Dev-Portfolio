@@ -77,7 +77,8 @@ const PROJECTS = [
     label: "Mobile App UI/UX",
     image: "assets/work/development/acadpal/mockup 1.png",
     imageCap: "Welcome, Login and Sign Up",
-    logo: "assets/work/development/acadpal/logo.png", // shown on the View prototype button
+    logo: "assets/work/development/acadpal/logo-white.png", // shown on the View prototype button
+    logoPlain: true, // white logo on its own, without the white circle
     gallery: [
       ["assets/work/development/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
       ["assets/work/development/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
@@ -630,7 +631,7 @@ function projects() {
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
     const live = $("#modalLive"), code = $("#modalCode");
     live.href = p.live;
-    live.innerHTML = `<span class="btn__logo">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
+    live.innerHTML = `<span class="btn__logo${p.logoPlain ? " btn__logo--plain" : ""}">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
     code.href = p.code;
     code.innerHTML = (p.codeIcon === "figma" ? `<img class="btn__icon" src="${ICON_URL.dev("figma/figma-original")}" width="15" height="15" alt="" />` : githubIcon) + (p.codeLabel || "Source code");
     lastFocus = document.activeElement;
