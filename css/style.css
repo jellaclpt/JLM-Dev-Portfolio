@@ -509,7 +509,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
     background: var(--bg); clip-path: circle(0% at calc(100% - 2.5rem) 2.5rem); transition: clip-path .7s var(--ease);
   }
   .nav__links.is-open { clip-path: circle(150% at calc(100% - 2.5rem) 2.5rem); }
-  .nav__link { font-family: var(--f-display); font-size: 2.6rem; color: var(--text); }
+  .nav__link { font-size: 1.1rem; letter-spacing: .12em; color: var(--text); } /* same font as the desktop menu, sized for phones */
   .nav__burger { display: block; }
 
   .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; padding-top: 5rem; }
