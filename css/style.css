@@ -503,6 +503,14 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__pager button { width: 7px; height: 7px; padding: 0; border-radius: 999px; background: var(--line-strong); transition: width .4s var(--ease), background .4s; }
 .modal__pager button.is-active { width: 22px; background: var(--maroon-bright); }
 .modal__desc { color: var(--muted); font-size: .95rem; line-height: 1.75; }
+/* detail sections after the overview */
+.modal__desc h4 { margin: 1.4rem 0 .45rem; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--maroon-bright); }
+.modal__desc ul, .modal__desc ol { padding-left: 1.2rem; }
+.modal__desc ul { list-style: disc; }
+.modal__desc ol { list-style: decimal; }
+.modal__desc li { margin-bottom: .4rem; padding-left: .2rem; }
+.modal__desc li::marker { color: var(--maroon-bright); }
+.modal__desc b { color: var(--text); font-weight: 600; }
 .modal__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
 .modal__actions .btn { padding: .65rem 1.15rem; font-size: .75rem; }
 .btn__logo { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; overflow: hidden; background: #fff; flex: none; }

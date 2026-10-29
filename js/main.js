@@ -6,6 +6,8 @@
 // image: the cover screenshot in assets/work/… (see assets/work/README.md).
 // imageCap: optional caption for the cover in the pop-up (defaults to the title).
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
+// desc: the overview, shown on the card and as the first paragraph of the pop-up.
+// details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -25,7 +27,30 @@ const PROJECTS = [
     mock: "dash",
     year: "2026",
     role: "Full-Stack Developer & QA Tester",
-    desc: "A web-based complaint ticketing system for Sorsogon State University – Bulan Campus. Students submit their concerns online, and the Student Development Services Office reviews them and routes each one to the college or office that can act on it, tracking every step until the concern is resolved. The system has role-based access for students, office staff and administrators, confidential tickets, message threads with attachments, email notifications, automatic reminders for waiting tickets, analytics with PDF and Excel export, and an audit trail. I developed it with Laravel, Blade, Tailwind CSS and MySQL, tested it manually across all user roles and through API testing in Postman, and deployed it on Railway.",
+    desc: "A web-based complaint ticketing system for Sorsogon State University – Bulan Campus. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
+    details: [
+      { h: "Who uses it", ul: [
+        "<b>Students</b> submit concerns with attachments, hiding their identity if they need to. They follow the progress, talk with the handler, accept the resolution or ask for further action, and rate how it was handled.",
+        "<b>Recipients</b> (college or office staff) acknowledge the tickets assigned to them, talk with the student and record the resolution.",
+        "<b>SDS Administrators</b> review new tickets, assign, escalate or refer them, close them, and manage accounts, settings, analytics and the audit trail.",
+      ] },
+      { h: "How a concern is handled", ol: [
+        "A student submits a ticket under a category, with the details and any files.",
+        "The SDS Office reviews it, asks for clarification if needed, and assigns it to the office that can act on it.",
+        "The office acknowledges the ticket and works it out with the student in the ticket's message thread.",
+        "If it stalls, the SDS Office escalates it along the category's escalation path or refers it to a committee, while reminder emails go to whoever has to act next.",
+        "Once it is resolved, the student accepts the outcome or asks for further action, and the ticket is closed.",
+      ] },
+      { h: "Key features", ul: [
+        "Confidential and anonymous tickets: sensitive cases are visible only to the SDS Office and the assigned handler.",
+        "In-app notifications and an email at every step for each person involved.",
+        "Daily reminders for tickets that have waited too long, counted in working days.",
+        "Accounts created one by one or in bulk from an Excel file.",
+        "Analytics on ticket volume, resolution time, office performance and satisfaction, exportable to PDF and Excel.",
+        "An audit trail of every action and every email sent.",
+      ] },
+      { h: "My role", p: "I developed it with Laravel, Blade, Tailwind CSS, Alpine.js and MySQL, tested it manually across all user roles and through API testing in Postman, and deployed it on Railway with Docker." },
+    ],
     tags: ["Laravel", "PHP", "Tailwind CSS", "MySQL", "Postman"],
     live: "https://sorsupport-production.up.railway.app",
     code: "https://github.com/jellacalupit/SorSUpport",
@@ -554,7 +579,10 @@ function projects() {
     gallery(p);
     $("#modalCat").textContent = (p.cat === "dev" ? "</> Development" : "✦ Design") + " · " + p.label;
     $("#modalTitle").textContent = p.title;
-    $("#modalDesc").textContent = p.desc;
+    // overview paragraph, then any detail sections (headings with a paragraph, bullet list or numbered steps)
+    const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
+    $("#modalDesc").innerHTML = `<p>${p.desc}</p>` + (p.details || []).map((s) =>
+      `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ""}${list("ul", s.ul)}${list("ol", s.ol)}`).join("");
     $("#modalRole").textContent = p.role;
     $("#modalYear").textContent = p.year;
     // stack chips get the same logos as the Tech Stack section (pop-up only)
