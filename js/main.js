@@ -242,10 +242,11 @@ function slider() {
     return `
     <article class="slide" data-i="${i}">
       <h3 class="slide__title">
+        <span class="slide__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></span>
         <span>${first}</span>${second ? ` <span class="slide__title-2">${second}</span>` : ""}
       </h3>
       <p class="slide__text">${text}</p>
-      <span class="slide__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></span>
+      <span class="slide__num">${String(i + 1).padStart(2, "0")}</span>
     </article>`;
   }).join("");
   dotsBox.innerHTML = SERVICES.map((s, i) => `<button class="slider__dot" data-i="${i}" aria-label="Show ${s[0].replace("|", " ")}"></button>`).join("");

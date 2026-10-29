@@ -211,9 +211,10 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .slide.is-active { border-color: rgba(198, 42, 67, .55); box-shadow: 0 25px 50px -20px rgba(122, 20, 36, .6); cursor: default; }
 /* icon on its own row, title below it */
 .slide__title { margin-bottom: 1rem; font-family: var(--f-display); font-weight: 400; font-size: 1.8rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .02em; }
-.slide__icon { display: block; width: 2.7rem; height: 2.7rem; margin-top: auto; color: var(--maroon-bright); } /* pinned to the bottom of the card */
+.slide__icon { display: block; width: 2.7rem; height: 2.7rem; margin-bottom: .75rem; color: var(--maroon-bright); }
 .slide__icon svg { display: block; width: 100%; height: 100%; }
 .slide__text { font-size: .92rem; line-height: 1.6; color: var(--muted); }
+.slide__num { margin-top: auto; padding-top: .9rem; font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); }
 .slider__dots { position: absolute; left: 0; right: 0; bottom: .5rem; display: flex; justify-content: center; gap: .45rem; }
 .slider__dot { width: 7px; height: 7px; padding: 0; border-radius: 999px; background: var(--line-strong); transition: width .4s var(--ease), background .4s; }
 .slider__dot.is-active { width: 22px; background: var(--maroon-bright); }
