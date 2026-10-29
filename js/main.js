@@ -12,12 +12,13 @@ const PROJECTS = [
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
     label: "Ticketing System",
-    image: "assets/work/development/sorsupport/cover.png",
+    image: "assets/work/development/sorsupport/mockup.png",
     logo: "assets/work/development/sorsupport/logo.png", // shown on the Live demo button
     gallery: [
-      ["assets/work/development/sorsupport/student.png", "Student"],
-      ["assets/work/development/sorsupport/recipient.png", "Recipient (office staff)"],
-      ["assets/work/development/sorsupport/admin.png", "SDS Administrator"],
+      ["assets/work/development/sorsupport/admin dashboard.png", "SDS Administrator dashboard"],
+      ["assets/work/development/sorsupport/ticket details.png", "SDS Administrator ticket details"],
+      ["assets/work/development/sorsupport/student mockup.png", "Student"],
+      ["assets/work/development/sorsupport/recipient mockup.png", "Recipient (office staff)"],
     ],
     mock: "dash",
     year: "2026",
