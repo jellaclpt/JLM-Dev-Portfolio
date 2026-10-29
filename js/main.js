@@ -4,6 +4,7 @@
 
 /* ---------- Edit your projects here ---------- */
 // image: the cover screenshot in assets/work/… (see assets/work/README.md).
+// imageCap: optional caption for the cover in the pop-up (defaults to the title).
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
@@ -13,12 +14,13 @@ const PROJECTS = [
     cat: "dev",
     label: "Ticketing System",
     image: "assets/work/development/sorsupport/mockup.png",
+    imageCap: "SorSUpport Login Page",
     logo: "assets/work/development/sorsupport/logo.png", // shown on the Live demo button
     gallery: [
-      ["assets/work/development/sorsupport/admin dashboard.png", "SDS Administrator dashboard"],
-      ["assets/work/development/sorsupport/ticket details.png", "SDS Administrator ticket details"],
-      ["assets/work/development/sorsupport/student mockup.png", "Student"],
-      ["assets/work/development/sorsupport/recipient mockup.png", "Recipient (office staff)"],
+      ["assets/work/development/sorsupport/admin dashboard.png", "Administrator Dashboard"],
+      ["assets/work/development/sorsupport/ticket details.png", "Administrator Ticket Page and Details"],
+      ["assets/work/development/sorsupport/student mockup.png", "Student Account Overview"],
+      ["assets/work/development/sorsupport/recipient mockup.png", "Recipient Account Overview"],
     ],
     mock: "dash",
     year: "2026",
@@ -420,23 +422,25 @@ function projects() {
   const modal = $("#modal");
   let lastFocus = null;
 
-  // pop-up gallery: cover + gallery shots with arrows, caption and dots.
+  // pop-up gallery: cover + gallery shots with arrows and dots; the caption sits in the row above.
   // Screenshots that fail to load are dropped, so missing files never show as broken.
   const gallery = (p) => {
     const box = $("#modalMedia");
-    const shots = [[p.image, p.title], ...(p.gallery || [])].filter(([src]) => src);
+    const capEl = $("#modalShot");
+    const shots = [[p.image, p.imageCap || p.title], ...(p.gallery || [])].filter(([src]) => src);
     box.innerHTML = mockHTML(p.mock);
+    capEl.textContent = "";
     if (!shots.length) return;
 
     const loaded = [];
     let idx = 0;
     const render = () => {
       const [src, cap] = loaded[idx];
+      capEl.textContent = cap;
       box.innerHTML = `<img class="media__img" src="${src}" alt="${p.title}: ${cap}" />` +
         (loaded.length > 1 ? `
           <button class="gallery__arrow gallery__arrow--prev" aria-label="Previous screenshot">‹</button>
           <button class="gallery__arrow gallery__arrow--next" aria-label="Next screenshot">›</button>
-          <span class="gallery__cap">${cap}</span>
           <div class="gallery__dots">${loaded.map((_, k) => `<span class="${k === idx ? "is-active" : ""}"></span>`).join("")}</div>` : "");
       if (loaded.length > 1) {
         $(".gallery__arrow--prev", box).onclick = () => { idx = (idx - 1 + loaded.length) % loaded.length; render(); };
