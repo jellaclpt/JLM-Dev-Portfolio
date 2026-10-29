@@ -576,9 +576,30 @@ function projects() {
 
 }
 
+/* ---------- CV link ---------- */
+// Phones and tablets open the Google Drive copy so the Drive app can take it.
+// Android gets an intent link that names the Drive app and falls back to the web page when it isn't installed;
+// iOS opens drive.google.com links in the Drive app on its own. Desktop keeps the PDF.
+function cvLink() {
+  const a = $("#cvLink");
+  if (!a) return;
+  const drive = a.dataset.drive;
+  const ua = navigator.userAgent;
+  const android = /Android/i.test(ua);
+  const ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (android) {
+    const path = drive.replace(/^https:\/\//, "");
+    a.href = `intent://${path}#Intent;scheme=https;package=com.google.android.apps.docs;S.browser_fallback_url=${encodeURIComponent(drive)};end`;
+    a.removeAttribute("target");
+  } else if (ios) {
+    a.href = drive;
+  }
+}
+
 /* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   $("#year").textContent = new Date().getFullYear();
+  cvLink();
   intro();
   homeSweep();
   clock();
