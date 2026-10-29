@@ -431,8 +431,8 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal.is-open .modal__backdrop { opacity: 1; }
 /* panel height follows the 16:10 picture; long descriptions page inside .modal__body instead of growing it */
 .modal__panel {
-  position: relative; width: min(1200px, 100%); max-height: calc(100svh - 2rem); overflow: hidden;
-  display: grid; grid-template-columns: 1.5fr 1fr; background: var(--surface); border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px);
+  position: relative; width: min(1100px, 100%); max-height: calc(100svh - 2rem); overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr; background: var(--surface); border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px);
   opacity: 0; transition: opacity .4s var(--ease);
 }
 .modal.is-open .modal__panel { opacity: 1; }
