@@ -254,8 +254,8 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   transition: border-color .3s;
 }
 .project__card:hover { border-color: rgba(198, 42, 67, .55); }
-.project__media { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--bg); }
-.media__img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; object-position: top center; } /* real screenshot covers the mock */
+.project__media { position: relative; aspect-ratio: 28 / 15; border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.media__img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: contain; } /* real screenshot covers the mock, shown whole */
 .project__info { padding: 1rem .4rem .4rem; }
 .project__title { display: flex; flex-wrap: wrap; align-items: center; column-gap: .55rem; font-family: var(--f-display); font-weight: 400; font-size: 1.4rem; text-transform: uppercase; letter-spacing: .05em; line-height: 1.15; }
 .project__sep { color: var(--maroon-bright); font-family: var(--f-body); font-weight: 300; } /* full title height */
@@ -441,7 +441,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 
 /* left: image, then role/year, then tech stack */
 .modal__side { display: flex; flex-direction: column; min-height: 0; background: var(--bg); border-right: 1px solid var(--line); overflow: hidden; }
-.modal__media { position: relative; flex: none; aspect-ratio: 16 / 10; background: var(--bg); } /* desktop-screenshot shape */
+.modal__media { position: relative; flex: none; aspect-ratio: 28 / 15; background: var(--bg); } /* same shape as the project mockups */
 /* pop-up gallery controls */
 .gallery__arrow {
   position: absolute; top: 50%; z-index: 3; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%;
@@ -514,7 +514,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .modal__content { contain: none; }
   .modal__body { overflow: visible; }
   .modal__pager { display: none; }
-  .modal__media { flex: none; aspect-ratio: 16 / 10; }
+  .modal__media { flex: none; aspect-ratio: 28 / 15; }
 }
 
 @media (max-width: 720px) {
