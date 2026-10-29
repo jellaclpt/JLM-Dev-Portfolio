@@ -194,14 +194,14 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .about { padding-top: clamp(1.5rem, 3vw, 2.5rem); } /* sits closer to the Home section */
 .about .section__head { margin-bottom: .75rem; }
 .work { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
-.about__grid { display: grid; grid-template-columns: minmax(0, 1fr) min(540px, 46%); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; } /* text fills the row; slider column is only as wide as the card stack */
+.about__grid { display: grid; grid-template-columns: minmax(0, 1fr) min(420px, 36%); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; } /* text fills the row; slider column is only as wide as the card stack */
 
 /* ---------- About: coverflow slider ---------- */
-.slider { position: relative; height: 340px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+.slider { position: relative; height: 290px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
 .slider__track { position: absolute; inset: 0 0 2.5rem; }
 .slide {
-  position: absolute; top: 0; left: 50%; width: min(270px, 64%); height: 100%;
-  margin-left: calc(min(270px, 64%) / -2);
+  position: absolute; top: 0; left: 50%; width: min(220px, 62%); height: 100%;
+  margin-left: calc(min(220px, 62%) / -2);
   display: flex; flex-direction: column; padding: 1.6rem 1.4rem;
   background: linear-gradient(160deg, var(--surface-2), var(--surface) 60%);
   border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px);
@@ -210,10 +210,10 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 }
 .slide.is-active { border-color: rgba(198, 42, 67, .55); box-shadow: 0 25px 50px -20px rgba(122, 20, 36, .6); cursor: default; }
 /* icon on its own row, title below it */
-.slide__title { margin-bottom: 1rem; font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .02em; }
-.slide__icon { display: block; width: 2.4rem; height: 2.4rem; margin-bottom: .75rem; color: var(--maroon-bright); }
+.slide__title { margin-bottom: .8rem; font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .02em; }
+.slide__icon { display: block; width: 2rem; height: 2rem; margin-bottom: .65rem; color: var(--maroon-bright); }
 .slide__icon svg { display: block; width: 100%; height: 100%; }
-.slide__text { font-size: .85rem; line-height: 1.6; color: var(--muted); }
+.slide__text { font-size: .8rem; line-height: 1.6; color: var(--muted); }
 .slide__num { margin-top: auto; padding-top: .9rem; font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); }
 .slider__dots { position: absolute; left: 0; right: 0; bottom: .5rem; display: flex; justify-content: center; gap: .45rem; }
 .slider__dot { width: 7px; height: 7px; padding: 0; border-radius: 999px; background: var(--line-strong); transition: width .4s var(--ease), background .4s; }
@@ -350,9 +350,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .edu li > span { flex: none; font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); padding-top: .2rem; }
 /* About: education in two columns, most recent first */
 .about__edu-title { margin: 1.75rem 0 1rem; } /* same style as the "Tech Stack" heading */
-.edu--cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0; padding: 0; border: 0; }
-.edu--cols li { display: block; margin: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 2px solid var(--maroon-bright); border-radius: 10px; }
-.edu--cols li > span { display: block; padding: .6rem 0 0; }
+.edu--cols { display: grid; grid-template-columns: 1fr; gap: .75rem; margin: 0; padding: 0; border: 0; }
+.edu--cols li { margin: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 2px solid var(--maroon-bright); border-radius: 10px; }
+.edu--cols li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 1rem; } /* year sits to the right of the degree */
+.edu--cols li > span { grid-column: 2; grid-row: 1; padding: .15rem 0 0; white-space: nowrap; }
+.edu--cols li > :not(span) { grid-column: 1; }
 .edu--cols h4 { line-height: 1.35; margin-bottom: .2rem; }
 
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -478,7 +480,6 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .info, .contact { grid-template-columns: 1fr; }
   .info__col { border-right: 0; border-bottom: 1px solid var(--line); }
   .tech { grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); }
-  .edu--cols { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
