@@ -400,7 +400,7 @@ function projects() {
     .filter(({ p }) => !limit || p.featured)
     .slice(0, limit || undefined);
 
-  // picture · "Title | Type" · two-line description ending in "… Read more" · tech used
+  // picture · "Title | Type" · three-line description ending in "… Read more" · tech used
   grid.innerHTML = list.map(({ p, i }) => `
     <article class="project" data-cat="${p.cat}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
