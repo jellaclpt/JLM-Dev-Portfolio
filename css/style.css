@@ -200,8 +200,8 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .slider { position: relative; height: 350px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
 .slider__track { position: absolute; inset: 0 0 2.5rem; }
 .slide {
-  position: absolute; top: 0; left: 50%; width: min(260px, 62%); height: 100%;
-  margin-left: calc(min(260px, 62%) / -2);
+  position: absolute; top: 0; left: 50%; width: min(285px, 66%); height: 100%;
+  margin-left: calc(min(285px, 66%) / -2);
   display: flex; flex-direction: column; padding: 1.6rem 1.4rem;
   background: linear-gradient(160deg, var(--surface-2), var(--surface) 60%);
   border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px);
@@ -349,7 +349,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .edu p { font-size: .82rem; color: var(--muted); }
 .edu li > span { flex: none; font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); padding-top: .2rem; }
 /* About: education in two columns, most recent first */
-.about__edu-title { margin: 1.75rem 0 1rem; } /* same style as the "Tech Stack" heading */
+.about__edu-title { margin: .6rem 0 .9rem; } /* same style as the "Tech Stack" heading */
 .edu--cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0; padding: 0; border: 0; }
 .edu--cols li { display: block; margin: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 2px solid var(--maroon-bright); border-radius: 10px; }
 .edu--cols li > span { display: block; padding: .6rem 0 0; }
