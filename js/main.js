@@ -51,7 +51,7 @@ const PROJECTS = [
       ] },
       { h: "My role", p: "I am developing it with Laravel, Blade, Tailwind CSS, Alpine.js and MySQL, testing it manually across all user roles and through API testing in Postman, and deploying it on Railway with Docker." },
     ],
-    tags: ["Laravel", "PHP", "Tailwind CSS", "MySQL", "Postman"],
+    tags: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Docker", "Railway", "Postman"],
     live: "https://sorsupport-production.up.railway.app",
     code: "https://github.com/jellacalupit/SorSUpport",
   },
@@ -382,6 +382,13 @@ const TECH = [
   ]],
 ];
 
+// logos for tools that appear on project chips but not in the Tech Stack section
+const CHIP_LOGOS = {
+  "Alpine.js": "dev:alpinejs/alpinejs-original",
+  "Docker": "dev:docker/docker-original",
+  "Railway": "si:railway/white",
+};
+
 const techLogo = (src) => {
   if (typeof src === "object") return `<span class="tech__badge" style="--c:${src.color}">${src.badge}</span>`;
   const [lib, path] = src.split(":");
@@ -595,7 +602,7 @@ function projects() {
     $("#modalRole").textContent = p.role;
     $("#modalYear").textContent = p.year;
     // stack chips get the same logos as the Tech Stack section (pop-up only)
-    const techSrc = Object.fromEntries(TECH.flatMap(([, items]) => items));
+    const techSrc = { ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) };
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
     $("#modalLogo").innerHTML = p.logo ? `<img src="${p.logo}" alt="" />` : "";
     $("#modalLive").href = p.live;
