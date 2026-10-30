@@ -91,7 +91,7 @@ const PROJECTS = [
     year: "2025",
     types: ["design"],
     roles: ["UI/UX Designer"],
-    desc: "AcadPal is a mobile app design that helps students keep their subjects, tasks and files in one place. Its idea is in its tagline: organize smarter, study better.",
+    desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
     details: [
       { h: "What the app does", ul: [
         "<b>Home</b> shows today's date, a search bar, the student's subjects, upcoming to-do tasks and recently uploaded files.",
