@@ -321,6 +321,59 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .role-clear { padding: .4rem .5rem; font-size: .78rem; font-weight: 600; color: var(--maroon-bright); text-decoration: underline; text-underline-offset: 3px; }
 .role-clear[hidden] { display: none; }
 .projects__empty { padding: 3rem 0; text-align: center; color: var(--muted); }
+.projects__count { margin-bottom: .9rem; font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.filter__n { margin-left: .4rem; font-size: .7rem; font-variant-numeric: tabular-nums; opacity: .55; }
+.roles__toggle { display: none; }
+
+/* layouts B (sidebar, desktop) and C (dropdown): roles as a checklist of rows with square ticks */
+.work--page[data-layout="c"] .role { width: 100%; border: 0; border-radius: 8px; padding: .6rem .7rem; font-size: .85rem; }
+.work--page[data-layout="c"] .role::before { width: .85rem; height: .85rem; border-radius: 3px; }
+.work--page[data-layout="c"] .role[aria-pressed="true"] { background: var(--wash); color: var(--text); }
+.work--page[data-layout="c"] .role[aria-pressed="true"]::before { background: var(--maroon-bright); border-color: var(--maroon-bright); box-shadow: inset 0 0 0 2px var(--surface); }
+
+/* layout B: role checklist in a glass panel on the left, two columns of cards beside it */
+@media (min-width: 961px) {
+  .work--page[data-layout="b"] .browse { display: grid; grid-template-columns: 220px 1fr; gap: clamp(1.25rem, 2.5vw, 2.25rem); align-items: start; }
+  .work--page[data-layout="b"] .roles {
+    position: sticky; top: 5.5rem; flex-direction: column; align-items: stretch; gap: .6rem; margin: 0; padding: 1rem .75rem;
+    background: var(--glass); border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px);
+    -webkit-backdrop-filter: blur(18px) saturate(1.25); backdrop-filter: blur(18px) saturate(1.25); box-shadow: inset 0 1px 0 var(--glass-edge);
+  }
+  .work--page[data-layout="b"] .roles__label { padding: 0 .7rem; }
+  .work--page[data-layout="b"] .roles__list { flex-direction: column; gap: .1rem; }
+  .work--page[data-layout="b"] .role { width: 100%; border: 0; border-radius: 8px; padding: .6rem .7rem; font-size: .85rem; }
+  .work--page[data-layout="b"] .role::before { width: .85rem; height: .85rem; border-radius: 3px; }
+  .work--page[data-layout="b"] .role[aria-pressed="true"] { background: var(--wash); color: var(--text); }
+  .work--page[data-layout="b"] .role[aria-pressed="true"]::before { background: var(--maroon-bright); border-color: var(--maroon-bright); box-shadow: inset 0 0 0 2px var(--surface); }
+  .work--page[data-layout="b"] .role-clear { align-self: flex-start; margin-left: .3rem; }
+  .work--page[data-layout="b"] .projects { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* layout C: one "Filter by role" button; the checklist drops down under it */
+.work--page[data-layout="c"] .roles { position: relative; z-index: 5; }
+.work--page[data-layout="c"] .roles__label { display: none; }
+.work--page[data-layout="c"] .roles__toggle {
+  display: inline-flex; align-items: center; gap: .55rem; padding: .6rem 1.1rem; border: 1px solid var(--line-strong); border-radius: 999px;
+  font-size: .8rem; font-weight: 600; letter-spacing: .04em; color: var(--text); transition: border-color .3s, background .3s;
+}
+.work--page[data-layout="c"] .roles__toggle:hover, .work--page[data-layout="c"] .roles.is-open .roles__toggle { border-color: var(--maroon-bright); }
+.roles__toggle svg { transition: transform .3s var(--ease); }
+.roles.is-open .roles__toggle svg { transform: rotate(180deg); }
+.roles__badge { display: grid; place-items: center; min-width: 1.25rem; height: 1.25rem; padding: 0 .3rem; border-radius: 999px; background: var(--maroon); color: var(--on-maroon); font-size: .68rem; }
+.roles__badge[hidden] { display: none; }
+.work--page[data-layout="c"] .roles__list {
+  position: absolute; top: calc(100% + .5rem); left: 0; width: min(270px, 100%); min-width: 240px;
+  flex-direction: column; flex-wrap: nowrap; gap: .1rem; padding: .5rem; overflow: visible;
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 2px); box-shadow: 0 18px 40px var(--shadow);
+  opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+}
+.work--page[data-layout="c"] .roles.is-open .roles__list { opacity: 1; visibility: visible; transform: none; }
+.work--page[data-layout="c"] .role-clear { align-self: flex-start; margin: .2rem 0 0 .3rem; }
+
+/* TEMPORARY: layout preview switch */
+.layout-pick { position: fixed; left: 1rem; bottom: 1rem; z-index: 60; display: flex; align-items: center; gap: .25rem; padding: 4px 4px 4px .8rem; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; box-shadow: 0 10px 30px var(--shadow); font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.layout-pick button { width: 2rem; height: 2rem; border-radius: 50%; font-weight: 700; color: var(--muted); transition: background .3s, color .3s; }
+.layout-pick button[aria-pressed="true"] { background: var(--maroon); color: var(--on-maroon); }
 
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); }
 .project.is-hidden { display: none; }

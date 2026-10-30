@@ -46,7 +46,7 @@
   </header>
 
   <main>
-    <section class="section work work--page" id="projects">
+    <section class="section work work--page" id="projects" data-layout="a">
       <a href="index.html#projects" class="back-link">← Back to home</a>
 
       <div class="work__bar work__bar--page" data-reveal>
@@ -59,14 +59,28 @@
         </div>
       </div>
 
-      <!-- role chips are built from the projects' roles in js/main.js -->
-      <div class="roles" data-reveal>
-        <span class="roles__label">Role</span>
-        <div class="roles__list" id="roleFilters" aria-label="Filter by role"></div>
+      <div class="browse">
+        <!-- role chips are built from the projects' roles in js/main.js; the toggle is used only by layout C (dropdown) -->
+        <div class="roles" data-reveal>
+          <span class="roles__label">Role</span>
+          <button class="roles__toggle" type="button" aria-expanded="false" aria-controls="roleFilters">Filter by role<span class="roles__badge" hidden></span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="roles__list" id="roleFilters" aria-label="Filter by role"></div>
+        </div>
+
+        <div class="browse__main">
+          <p class="projects__count" id="projectsCount" aria-live="polite"></p>
+          <div class="projects" id="projectGrid"></div>
+          <p class="projects__empty" id="projectsEmpty" hidden>No projects match these filters yet.</p>
+        </div>
       </div>
 
-      <div class="projects" id="projectGrid"></div>
-      <p class="projects__empty" id="projectsEmpty" hidden>No projects match these filters yet.</p>
+      <!-- TEMPORARY: compare the three filter layouts; remove once one is chosen -->
+      <div class="layout-pick" role="group" aria-label="Preview layout">
+        <span>Layout</span>
+        <button type="button" data-pick="a">A</button>
+        <button type="button" data-pick="b">B</button>
+        <button type="button" data-pick="c">C</button>
+      </div>
     </section>
   </main>
 

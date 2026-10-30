@@ -502,17 +502,27 @@ function projects() {
   }
   const clearBtn = $(".role-clear");
   const empty = $("#projectsEmpty");
+  const count = $("#projectsCount");
+  const badge = $(".roles__badge");
+  const ofType = (card, type) => type === "all" || card.dataset.types.split(" ").includes(type);
 
   const applyFilter = () => {
     const tab = $(".filter.is-active");
     if (!tab) return;
     const type = tab.dataset.filter;
     const picked = $$(".role[aria-pressed='true']").map((b) => b.dataset.role);
+    const cards = $$(".project");
+    const hasRole = (card) => !picked.length || picked.some((r) => card.dataset.roles.split("|").includes(r));
+    // each tab shows how many projects it would list with the roles picked now
+    $$(".filter").forEach((b) => {
+      const n = cards.filter((c) => ofType(c, b.dataset.filter) && hasRole(c)).length;
+      let el = $(".filter__n", b);
+      if (!el) b.append(el = Object.assign(document.createElement("span"), { className: "filter__n" }));
+      el.textContent = n;
+    });
     let shown = 0;
-    $$(".project").forEach((card) => {
-      const roles = card.dataset.roles.split("|");
-      const show = (type === "all" || card.dataset.types.split(" ").includes(type))
-        && (!picked.length || picked.some((r) => roles.includes(r)));
+    cards.forEach((card) => {
+      const show = ofType(card, type) && hasRole(card);
       shown += show;
       card.classList.toggle("is-hidden", !show);
       card.classList.remove("is-entering");
@@ -523,6 +533,8 @@ function projects() {
     });
     if (clearBtn) clearBtn.hidden = !picked.length;
     if (empty) empty.hidden = shown > 0;
+    if (count) count.textContent = shown === cards.length ? `${shown} projects` : `Showing ${shown} of ${cards.length} projects`;
+    if (badge) { badge.hidden = !picked.length; badge.textContent = picked.length; }
     fitMore();
   };
 
@@ -544,6 +556,34 @@ function projects() {
   });
 
   applyFilter();
+
+  // layout C: the role checklist opens from the "Filter by role" button and closes on a click outside or Escape
+  const roles = $(".roles");
+  const toggle = $(".roles__toggle");
+  const setOpen = (open) => { roles.classList.toggle("is-open", open); toggle.setAttribute("aria-expanded", open); };
+  if (toggle) {
+    toggle.addEventListener("click", () => setOpen(!roles.classList.contains("is-open")));
+    document.addEventListener("click", (e) => { if (!roles.contains(e.target)) setOpen(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+  }
+
+  // TEMPORARY layout preview switch (A chips / B sidebar / C dropdown); remembered per browser
+  const page = $(".work--page");
+  const pick = (l) => {
+    page.dataset.layout = l;
+    $$("[data-pick]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.pick === l));
+    if (toggle) setOpen(false);
+    requestAnimationFrame(fitMore);
+  };
+  if (page && $(".layout-pick")) {
+    let saved = null;
+    try { saved = localStorage.getItem("layout"); } catch (e) {}
+    pick(["a", "b", "c"].includes(saved) ? saved : "a");
+    $$("[data-pick]").forEach((b) => b.addEventListener("click", () => {
+      pick(b.dataset.pick);
+      try { localStorage.setItem("layout", b.dataset.pick); } catch (e) {}
+    }));
+  }
 
   const modal = $("#modal");
   // GitHub icon from the page's Source code button, reused when a project's second button links to code
