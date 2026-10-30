@@ -739,10 +739,10 @@ function theme() {
     root.dataset.swipe = ltr ? "ltr" : "rtl";
     const vt = document.startViewTransition(() => apply(t));
     vt.ready.then(() => {
-      const pos = ltr ? ["100% 0", "0% 0"] : ["0% 0", "100% 0"];
+      const pos = ltr ? ["500% 0", "0% 0"] : ["-400% 0", "100% 0"]; // band from one screen edge to just past the other
       // fill: hold the end position; without it the mask snaps back to "hidden" for a frame before the switch ends (flicker)
       root.animate({ maskPosition: pos, webkitMaskPosition: pos },
-        { duration: 1000, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards", pseudoElement: "::view-transition-new(root)" });
+        { duration: 900, easing: "cubic-bezier(.3, .1, .2, 1)", fill: "forwards", pseudoElement: "::view-transition-new(root)" });
     });
     vt.finished.finally(() => delete root.dataset.swipe);
   });
