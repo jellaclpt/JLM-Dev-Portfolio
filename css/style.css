@@ -436,8 +436,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .steps::before, .steps::after { content: ""; position: absolute; z-index: 0; left: calc(2.2rem + 1rem + 22px); top: 22px; width: 1px; } /* behind the icons */
 .steps::before { bottom: 30px; background: rgba(122, 20, 36, .45); }
 .steps::after { width: 2px; margin-left: -.5px; height: calc((100% - 52px) * var(--fill)); background: linear-gradient(180deg, var(--maroon), var(--maroon-bright)); box-shadow: 0 0 10px rgba(198, 42, 67, .6); }
-.step { position: relative; z-index: 1; display: grid; grid-template-columns: 2.2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.3rem; opacity: .4; transition: opacity .5s var(--ease); }
-.step.is-on { opacity: 1; }
+.step { position: relative; z-index: 1; display: grid; grid-template-columns: 2.2rem 44px 1fr; gap: 1rem; align-items: start; padding-bottom: 1.3rem; }
+/* steps not reached yet are dimmed, but the circle keeps its solid fill so the line never shows through it */
+.step > :not(.step__icon), .step__icon svg { opacity: .4; transition: opacity .5s var(--ease); }
+.step.is-on > :not(.step__icon), .step.is-on .step__icon svg { opacity: 1; }
+.step:not(.is-on) .step__icon { border-color: rgba(122, 20, 36, .5); }
 /* the circle fills with maroon from the top down as the line passes through it (--f: 0–1, set per icon in js/main.js) */
 .step .step__icon {
   background: linear-gradient(180deg, var(--maroon) calc(var(--f, 0) * 100%), var(--bg) 0);
