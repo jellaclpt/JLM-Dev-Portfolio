@@ -36,21 +36,21 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* light theme: warm stone page, soft off-white cards, near-black text, maroon washes; maroons unchanged (bright one a touch deeper for contrast) */
+/* light theme: light dusty-maroon page, pale rose cards, near-black text, maroon washes; maroons unchanged (bright one a touch deeper for contrast) */
 :root[data-theme="light"] {
-  --bg: #e8dfd9;
-  --bg-2: #e0d5ce;
-  --surface: #f6f1ed;
-  --surface-2: #ece3dd;
+  --bg: #e5cfd1;
+  --bg-2: #dcc3c6;
+  --surface: #f2e4e5;
+  --surface-2: #e8d5d7;
   --line: rgba(40, 18, 22, 0.12);
   --line-strong: rgba(40, 18, 22, 0.24);
   --text: #1a1213;
   --muted: #554947;
   --dim: #85797a;
   --maroon-bright: #a81f36;
-  --wash: rgba(122, 20, 36, .22);
-  --wash-2: rgba(122, 20, 36, .15);
-  --nav-bg: rgba(232, 223, 217, .85);
+  --wash: rgba(122, 20, 36, .2);
+  --wash-2: rgba(122, 20, 36, .13);
+  --nav-bg: rgba(229, 207, 209, .85);
   --shadow: rgba(60, 20, 28, .22);
   color-scheme: light;
 }
