@@ -53,12 +53,20 @@
         <h1 class="section__title">All Projects</h1>
         <div class="filters" role="tablist" aria-label="Filter projects">
           <button class="filter is-active" data-filter="all">All</button>
-          <button class="filter" data-filter="dev">Development</button>
-          <button class="filter" data-filter="design">Design</button>
+          <button class="filter" data-filter="web">Web</button>
+          <button class="filter" data-filter="mobile">Mobile</button>
+          <button class="filter" data-filter="design">UI/UX Design</button>
         </div>
       </div>
 
+      <!-- role chips are built from the projects' roles in js/main.js -->
+      <div class="roles" data-reveal>
+        <span class="roles__label">Role</span>
+        <div class="roles__list" id="roleFilters" aria-label="Filter by role"></div>
+      </div>
+
       <div class="projects" id="projectGrid"></div>
+      <p class="projects__empty" id="projectsEmpty" hidden>No projects match these filters yet.</p>
     </section>
   </main>
 

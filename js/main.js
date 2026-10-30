@@ -10,6 +10,8 @@
 // details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
 // live / code: the pop-up's two button links. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
+// types: the All Projects tabs it shows under: "web", "mobile", "design" (one or more).
+// roles: what you did, from ROLES below; shown in the pop-up and used by the role filter.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -28,7 +30,8 @@ const PROJECTS = [
     ],
     mock: "dash",
     year: "2026",
-    role: "Full-Stack Developer & QA Tester",
+    types: ["web"],
+    roles: ["Full-Stack Developer", "QA Tester"],
     desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
     details: [
       { h: "Who uses it", ul: [
@@ -64,7 +67,8 @@ const PROJECTS = [
     label: "Analytics Web App",
     mock: "dash",
     year: "2026",
-    role: "Full-stack Development",
+    types: ["web"],
+    roles: ["Full-Stack Developer"],
     desc: "A data dashboard that turns raw numbers into clear, animated charts, with dark-mode-first UI, reusable components and live data from a Node.js API.",
     tags: ["JavaScript", "Node.js", "Chart.js", "MySQL"],
     live: "#",
@@ -85,7 +89,8 @@ const PROJECTS = [
     ],
     mock: "phone",
     year: "2025",
-    role: "UI/UX Designer",
+    types: ["mobile", "design"],
+    roles: ["UI/UX Designer"],
     desc: "AcadPal is a mobile app design that helps students keep their subjects, tasks and files in one place. Its idea is in its tagline: organize smarter, study better.",
     details: [
       { h: "What the app does", ul: [
@@ -111,7 +116,8 @@ const PROJECTS = [
     label: "Branding & Identity",
     mock: "brand",
     year: "2025",
-    role: "Brand & Visual Design",
+    types: ["design"],
+    roles: ["Graphic Designer"],
     desc: "A visual identity for a local coffee shop: logo, color palette, typography and social media templates, all built around a warm, cozy feel.",
     tags: ["Branding", "Logo Design", "Canva", "Photoshop"],
     live: "#",
@@ -124,7 +130,8 @@ const PROJECTS = [
     label: "Productivity Web App",
     mock: "app",
     year: "2025",
-    role: "Front-end Development",
+    types: ["web"],
+    roles: ["Frontend Developer"],
     desc: "A drag-and-drop kanban board that saves to local storage, with keyboard shortcuts and an interface that feels quick and calm.",
     tags: ["HTML", "CSS", "JavaScript", "LocalStorage"],
     live: "#",
@@ -137,13 +144,18 @@ const PROJECTS = [
     label: "Landing Page Design",
     mock: "travel",
     year: "2024",
-    role: "UI Design & Development",
+    types: ["web", "design"],
+    roles: ["UI/UX Designer", "Frontend Developer"],
     desc: "A landing page for a travel booking brand with bold visuals and a clear booking flow, designed in Figma and coded responsively with Bootstrap.",
     tags: ["Figma", "Bootstrap", "Responsive", "UI Design"],
     live: "#",
     code: "#",
   },
 ];
+
+// role filter chips on projects.html, in this order; only roles some project uses are shown
+const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Graphic Designer", "Full-Stack Developer",
+  "Frontend Developer", "Backend Developer", "Mobile Developer", "QA Tester"];
 
 const MOCKS = {
   shop: `<div class="hero-txt"><span class="ln ln--t"></span><span class="ln ln--t" style="width:65%"></span><span class="ln" style="width:80%"></span><span class="ln" style="width:60%"></span><span class="btn-s"></span></div>
@@ -458,7 +470,7 @@ function projects() {
 
   // picture · "Title | Type" · three-line description ending in "… Read more" · tech used
   grid.innerHTML = list.map(({ p, i }) => `
-    <article class="project" data-cat="${p.cat}">
+    <article class="project" data-types="${p.types.join(" ")}" data-roles="${p.roles.join("|")}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
         <div class="project__media">${mediaHTML(p)}</div>
         <div class="project__info">
@@ -478,10 +490,27 @@ function projects() {
   addEventListener("resize", () => requestAnimationFrame(fitMore));
   if (document.fonts) document.fonts.ready.then(fitMore);
 
-  // filter tabs exist only on projects.html
-  const applyFilter = (f) => {
+  // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
+  const roleBox = $("#roleFilters");
+  if (roleBox) {
+    const used = ROLES.filter((r) => PROJECTS.some((p) => p.roles.includes(r)));
+    roleBox.innerHTML = used.map((r) => `<button class="role" type="button" aria-pressed="false" data-role="${r}">${r}</button>`).join("")
+      + `<button class="role-clear" type="button" hidden>Clear</button>`;
+  }
+  const clearBtn = $(".role-clear");
+  const empty = $("#projectsEmpty");
+
+  const applyFilter = () => {
+    const tab = $(".filter.is-active");
+    if (!tab) return;
+    const type = tab.dataset.filter;
+    const picked = $$(".role[aria-pressed='true']").map((b) => b.dataset.role);
+    let shown = 0;
     $$(".project").forEach((card) => {
-      const show = f === "all" || card.dataset.cat === f;
+      const roles = card.dataset.roles.split("|");
+      const show = (type === "all" || card.dataset.types.split(" ").includes(type))
+        && (!picked.length || picked.some((r) => roles.includes(r)));
+      shown += show;
       card.classList.toggle("is-hidden", !show);
       card.classList.remove("is-entering");
       if (show) {
@@ -489,18 +518,29 @@ function projects() {
         card.classList.add("is-entering");
       }
     });
+    if (clearBtn) clearBtn.hidden = !picked.length;
+    if (empty) empty.hidden = shown > 0;
     fitMore();
   };
 
   $$(".filter").forEach((btn) => {
     btn.addEventListener("click", () => {
       $$(".filter").forEach((b) => b.classList.toggle("is-active", b === btn));
-      applyFilter(btn.dataset.filter);
+      applyFilter();
     });
   });
+  $$(".role").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
+      applyFilter();
+    });
+  });
+  if (clearBtn) clearBtn.addEventListener("click", () => {
+    $$(".role").forEach((b) => b.setAttribute("aria-pressed", "false"));
+    applyFilter();
+  });
 
-  const activeTab = $(".filter.is-active");
-  if (activeTab) applyFilter(activeTab.dataset.filter);
+  applyFilter();
 
   const modal = $("#modal");
   // GitHub icon from the page's Source code button, reused when a project's second button links to code
@@ -628,7 +668,7 @@ function projects() {
     const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
     $("#modalDesc").innerHTML = `<p>${p.desc}</p>` + (p.details || []).map((s) =>
       `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ""}${list("ul", s.ul)}${list("ol", s.ol)}`).join("");
-    $("#modalRole").textContent = p.role;
+    $("#modalRole").textContent = p.roles.join(" & ");
     $("#modalYear").textContent = p.year;
     // stack chips get the same logos as the Tech Stack section (pop-up only)
     const techSrc = { ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) };
