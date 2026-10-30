@@ -471,7 +471,7 @@ function projects() {
     .filter(({ p }) => !limit || p.featured)
     .slice(0, limit || undefined);
 
-  // picture · "Title | Type" · role and year · three-line description ending in "… Read more" · tech used
+  // picture · "Title | Type" · role and year · description cut to a few lines with "…" · tech used
   grid.innerHTML = list.map(({ p, i }) => `
     <article class="project" data-types="${p.types.join(" ")}" data-roles="${rolesOf(p).join("|")}" data-year="${p.year}" data-title="${p.title}" data-order="${i}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
@@ -479,20 +479,11 @@ function projects() {
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
           <p class="project__meta"><span>${p.roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
-          <p class="project__desc">${p.desc}<span class="project__more">… <u>Read more</u></span></p>
+          <p class="project__desc">${p.desc}</p>
           <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
         </div>
       </button>
     </article>`).join("");
-
-  // "… Read more" only when the description is actually cut off; wrapping changes with width and fonts, so re-check then
-  const fitMore = () => $$(".project__desc").forEach((d) => {
-    if (!d.offsetParent) return; // hidden by a filter: checked when shown
-    $(".project__more", d).hidden = d.scrollHeight <= d.clientHeight + 1;
-  });
-  fitMore();
-  addEventListener("resize", () => requestAnimationFrame(fitMore));
-  if (document.fonts) document.fonts.ready.then(fitMore);
 
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
@@ -536,7 +527,6 @@ function projects() {
     if (empty) empty.hidden = shown > 0;
     if (count) count.textContent = shown === cards.length ? `${shown} projects` : `Showing ${shown} of ${cards.length} projects`;
     if (badge) { badge.hidden = !picked.length; badge.textContent = picked.length; }
-    fitMore();
   };
 
   $$(".filter").forEach((btn) => {

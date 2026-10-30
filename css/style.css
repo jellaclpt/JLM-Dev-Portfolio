@@ -368,14 +368,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .project__title { display: flex; flex-wrap: wrap; align-items: center; column-gap: .55rem; font-family: var(--f-display); font-weight: 400; font-size: 1.4rem; text-transform: uppercase; letter-spacing: .05em; line-height: 1.15; }
 .project__sep { color: var(--maroon-bright); font-family: var(--f-body); font-weight: 300; } /* full title height */
 .project__type { font-family: var(--f-body); font-size: .8rem; font-weight: 500; letter-spacing: .02em; text-transform: none; color: var(--muted); } /* vertically centred against the title */
-/* three lines max; "… Read more" sits over the end of the third line */
 /* role on the left, year on the right */
 .project__meta { display: flex; justify-content: space-between; gap: .75rem; margin-top: .35rem; font-size: .75rem; font-weight: 600; letter-spacing: .03em; color: var(--text); opacity: .85; }
 .project__year { flex: none; color: var(--maroon-bright); font-variant-numeric: tabular-nums; }
-.project__desc { position: relative; margin-top: .4rem; font-size: .85rem; line-height: 1.6; color: var(--muted); max-height: calc(3 * 1.6em); overflow: hidden; }
-.project__more { position: absolute; right: 0; bottom: 0; padding-left: 2.5rem; background: linear-gradient(90deg, transparent, var(--glass) 2rem), linear-gradient(90deg, transparent, var(--glass) 2rem), linear-gradient(90deg, transparent, var(--glass) 2rem); color: var(--muted); }
-.project__more u { color: var(--maroon-bright); text-decoration: none; font-weight: 600; }
-.project__card:hover .project__more u { text-decoration: underline; text-underline-offset: 3px; }
+/* three lines on desktop, two on smaller screens; the browser ends the cut-off text with "…" */
+.project__desc { --lines: 3; margin-top: .4rem; font-size: .85rem; line-height: 1.6; color: var(--muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--lines); line-clamp: var(--lines); overflow: hidden; }
 .project__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
 .project__tags li { padding: .25rem .6rem; border: 1px solid var(--line-strong); border-radius: 6px; font-size: .7rem; letter-spacing: .03em; color: var(--text); white-space: nowrap; }
 
@@ -664,6 +661,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .hero__right { grid-column: 1; grid-row: 3; justify-self: stretch; max-width: none; padding-bottom: 3.5rem; margin-bottom: 0; }
 
   .about__grid { grid-template-columns: 1fr; }
+  .project__desc { --lines: 2; }
   /* phones: columns stack and the whole panel scrolls instead */
   .modal__panel { grid-template-columns: 1fr; height: auto; max-height: calc(100svh - 2rem); overflow-y: auto; }
   .modal__side { max-height: none; border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
