@@ -22,10 +22,10 @@
   --wash-2: rgba(98, 15, 30, .46);
   --nav-bg: rgba(11, 10, 10, .78);
   --shadow: rgba(0, 0, 0, .5);
-  /* frosted cards: mostly opaque, so the glass is subtle */
-  --glass: rgba(26, 20, 21, .72);
-  --glass-hi: rgba(255, 255, 255, .035);
-  --glass-edge: rgba(255, 255, 255, .07);
+  /* frosted cards: about half see-through */
+  --glass: rgba(26, 20, 21, .55);
+  --glass-hi: rgba(255, 255, 255, .06);
+  --glass-edge: rgba(255, 255, 255, .11);
 
   --f-display: "Anton", "Impact", sans-serif;
   --f-body: "Manrope", system-ui, sans-serif;
@@ -56,15 +56,15 @@
   --wash-2: rgba(122, 20, 36, .13);
   --nav-bg: rgba(229, 207, 209, .85);
   --shadow: rgba(60, 20, 28, .22);
-  --glass: rgba(242, 228, 229, .68);
-  --glass-hi: rgba(255, 255, 255, .4);
-  --glass-edge: rgba(255, 255, 255, .55);
+  --glass: rgba(242, 228, 229, .5);
+  --glass-hi: rgba(255, 255, 255, .5);
+  --glass-edge: rgba(255, 255, 255, .7);
   color-scheme: light;
 }
 /* glass cards: translucent fill, soft blur of what is behind, faint light along the top edge */
 .slide, .project__card, .tech__item, .edu--cols li {
   background: linear-gradient(160deg, var(--glass-hi), transparent 45%), var(--glass);
-  -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25); backdrop-filter: blur(18px) saturate(1.25);
   box-shadow: inset 0 1px 0 var(--glass-edge);
 }
 
@@ -333,7 +333,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .project__type { font-family: var(--f-body); font-size: .8rem; font-weight: 500; letter-spacing: .02em; text-transform: none; color: var(--muted); } /* vertically centred against the title */
 /* three lines max; "… Read more" sits over the end of the third line */
 .project__desc { position: relative; margin-top: .55rem; font-size: .85rem; line-height: 1.6; color: var(--muted); max-height: calc(3 * 1.6em); overflow: hidden; }
-.project__more { position: absolute; right: 0; bottom: 0; padding-left: 2.5rem; background: linear-gradient(90deg, transparent, var(--glass) 2rem), linear-gradient(90deg, transparent, var(--glass) 2rem); color: var(--muted); }
+.project__more { position: absolute; right: 0; bottom: 0; padding-left: 2.5rem; background: linear-gradient(90deg, transparent, var(--glass) 2rem), linear-gradient(90deg, transparent, var(--glass) 2rem), linear-gradient(90deg, transparent, var(--glass) 2rem); color: var(--muted); }
 .project__more u { color: var(--maroon-bright); text-decoration: none; font-weight: 600; }
 .project__card:hover .project__more u { text-decoration: underline; text-underline-offset: 3px; }
 .project__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
