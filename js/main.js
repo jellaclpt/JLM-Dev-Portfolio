@@ -729,8 +729,14 @@ function theme() {
   if (!btn) return;
   btn.addEventListener("click", () => {
     const t = root.dataset.theme === "light" ? "dark" : "light";
-    apply(t);
     try { localStorage.setItem("theme", t); } catch (e) {}
+    // the new theme wipes across the page: left to right into light, right to left back to dark
+    if (!document.startViewTransition || reducedMotion) return apply(t);
+    const from = t === "light" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
+    document.startViewTransition(() => apply(t)).ready.then(() => {
+      root.animate({ clipPath: [from, "inset(0 0 0 0)"] },
+        { duration: 700, easing: "cubic-bezier(.76, 0, .24, 1)", pseudoElement: "::view-transition-new(root)" });
+    });
   });
 }
 

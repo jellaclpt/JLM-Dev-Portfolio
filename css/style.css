@@ -54,6 +54,8 @@
   --shadow: rgba(60, 20, 28, .22);
   color-scheme: light;
 }
+/* theme switch: the new page is wiped in over the old one (see theme() in js/main.js), no default cross-fade */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 
 *,
 *::before,
@@ -70,7 +72,6 @@ body {
     radial-gradient(1000px 800px at 105% 92%, var(--wash-2), transparent 70%),
     var(--bg);
   color: var(--text);
-  transition: background-color .4s, color .4s;
   font-family: var(--f-body);
   font-size: 16px;
   line-height: 1.6;
