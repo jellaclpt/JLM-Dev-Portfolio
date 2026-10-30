@@ -400,6 +400,10 @@ const CHIP_LOGOS = {
   "Alpine.js": "dev:alpinejs/alpinejs-original",
   "Docker": "dev:docker/docker-original",
   "Railway": "si:railway/white",
+  "Vercel": "si:vercel/white",
+  "shadcn/ui": "si:shadcnui/white",
+  "PWA": "si:pwa",
+  "localStorage": { badge: "L", color: "#9D43AD" },
 };
 
 const techLogo = (src) => {
