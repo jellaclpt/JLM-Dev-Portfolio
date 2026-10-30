@@ -100,11 +100,12 @@ const PROJECTS = [
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
     label: "Task Management App",
-    image: "assets/work/development/prplbyts-task-manager/dark mode dashboard.png",
-    imageCap: "Dashboard in Dark Mode",
+    image: "assets/work/development/prplbyts-task-manager/mockup.png",
+    imageCap: "Dashboard on Desktop and Mobile",
     logo: "assets/work/development/prplbyts-task-manager/logo.png", // shown on the Live demo button
     gallery: [
-      ["assets/work/development/prplbyts-task-manager/light mode task page.png", "Tasks Page and Settings in Light Mode"],
+      ["assets/work/development/prplbyts-task-manager/light mode tasks.png", "Tasks Page in Light Mode"],
+      ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
     ],
     mock: "app",
     year: "2026",
