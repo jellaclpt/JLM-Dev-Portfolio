@@ -402,8 +402,6 @@ const CHIP_LOGOS = {
   "Railway": "si:railway/white",
   "Vercel": "si:vercel/white",
   "shadcn/ui": "si:shadcnui/white",
-  "PWA": "si:pwa",
-  "localStorage": { badge: "L", color: "#9D43AD" },
 };
 
 const techLogo = (src) => {
