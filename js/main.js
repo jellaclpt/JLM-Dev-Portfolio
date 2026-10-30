@@ -12,6 +12,7 @@
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
 // types: the All Projects tabs it shows under: "web", "mobile", "design" (one or more).
 // roles: what you did, from ROLES below; shown in the pop-up and used by the role filter.
+// subject: optional school subject it was made for; shown on the card and in the pop-up.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -32,6 +33,7 @@ const PROJECTS = [
     year: "2026",
     types: ["web"],
     roles: ["Full-Stack Developer", "QA Tester"],
+    subject: "Capstone project",
     desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
     details: [
       { h: "Who uses it", ul: [
@@ -76,6 +78,7 @@ const PROJECTS = [
     year: "2026",
     types: ["web"],
     roles: ["Frontend Developer"],
+    subject: "Frontend Development subject",
     desc: "Task Manager is a web app for keeping personal to-dos in one place. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device. It is also a progressive web app (PWA), so it can be installed on a phone or computer and opened like a regular app.",
     details: [
       { h: "What the app does", ul: [
@@ -108,6 +111,7 @@ const PROJECTS = [
     year: "2025",
     types: ["design"],
     roles: ["UI/UX Designer"],
+    subject: "UI/UX Design subject",
     desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
     details: [
       { h: "What the app does", ul: [
@@ -456,6 +460,7 @@ function projects() {
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
           <p class="project__meta"><span>${p.roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
+          ${p.subject ? `<p class="project__subject">${p.subject}</p>` : ""}
           <p class="project__desc">${p.desc}</p>
           <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
         </div>
@@ -683,6 +688,7 @@ function projects() {
     $("#modalCat").innerHTML = `<svg class="modal__cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${catIcon}</svg>` +
       (p.cat === "dev" ? "Development" : "Design") + " · " + p.label;
     $("#modalTitle").textContent = p.title;
+    $("#modalSubject").textContent = p.subject || "";
     // overview paragraph, then any detail sections (headings with a paragraph, bullet list or numbered steps)
     const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
     $("#modalDesc").innerHTML = `<p>${p.desc}</p>` + (p.details || []).map((s) =>
