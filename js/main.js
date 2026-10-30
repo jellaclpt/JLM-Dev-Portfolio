@@ -61,7 +61,7 @@ const PROJECTS = [
     code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
-    title: "Purple Bytes: Task Manager",
+    title: "Task Manager",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
     label: "Task Management App",
@@ -76,7 +76,7 @@ const PROJECTS = [
     year: "2026",
     types: ["web"],
     roles: ["Frontend Developer"],
-    desc: "Purple Bytes: Task Manager is a web app for keeping personal to-dos in one place. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device, and it can be installed and opened like a regular app.",
+    desc: "Task Manager is a web app for keeping personal to-dos in one place. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device, and it can be installed and opened like a regular app.",
     details: [
       { h: "What the app does", ul: [
         "<b>Dashboard</b> counts the tasks in To Do, In Progress and Done, and lists the five most recently created.",
