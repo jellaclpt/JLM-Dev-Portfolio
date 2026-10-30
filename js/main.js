@@ -730,13 +730,18 @@ function theme() {
   btn.addEventListener("click", () => {
     const t = root.dataset.theme === "light" ? "dark" : "light";
     try { localStorage.setItem("theme", t); } catch (e) {}
-    // the new theme wipes across the page: left to right into light, right to left back to dark
+    // the new theme sweeps across the page behind a soft, wide fade (no hard edge):
+    // left to right into light, right to left back to dark. The fade mask is set in css/style.css.
     if (!document.startViewTransition || reducedMotion) return apply(t);
-    const from = t === "light" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
-    document.startViewTransition(() => apply(t)).ready.then(() => {
-      root.animate({ clipPath: [from, "inset(0 0 0 0)"] },
-        { duration: 700, easing: "cubic-bezier(.76, 0, .24, 1)", pseudoElement: "::view-transition-new(root)" });
+    const ltr = t === "light";
+    root.dataset.swipe = ltr ? "ltr" : "rtl";
+    const vt = document.startViewTransition(() => apply(t));
+    vt.ready.then(() => {
+      const pos = ltr ? ["100% 0", "0% 0"] : ["0% 0", "100% 0"];
+      root.animate({ maskPosition: pos, webkitMaskPosition: pos },
+        { duration: 1000, easing: "cubic-bezier(.65, 0, .35, 1)", pseudoElement: "::view-transition-new(root)" });
     });
+    vt.finished.finally(() => delete root.dataset.swipe);
   });
 }
 
