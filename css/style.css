@@ -675,7 +675,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
   .section__head--split { flex-direction: column; align-items: flex-start; }
   .filters { width: 100%; }
   .filter { flex: 1; padding-inline: .5rem; }
+  /* phones: one row of chips that scrolls sideways */
   .roles { flex-direction: column; gap: .5rem; }
+  .roles__list { flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .roles__list::-webkit-scrollbar { display: none; }
+  .role, .role-clear { flex: none; white-space: nowrap; }
 }
 
 @media (prefers-reduced-motion: reduce) {

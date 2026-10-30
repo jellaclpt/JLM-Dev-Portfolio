@@ -89,7 +89,7 @@ const PROJECTS = [
     ],
     mock: "phone",
     year: "2025",
-    types: ["mobile", "design"],
+    types: ["design"],
     roles: ["UI/UX Designer"],
     desc: "AcadPal is a mobile app design that helps students keep their subjects, tasks and files in one place. Its idea is in its tagline: organize smarter, study better.",
     details: [
@@ -117,7 +117,7 @@ const PROJECTS = [
     mock: "brand",
     year: "2025",
     types: ["design"],
-    roles: ["Graphic Designer"],
+    roles: ["UI/UX Designer"],
     desc: "A visual identity for a local coffee shop: logo, color palette, typography and social media templates, all built around a warm, cozy feel.",
     tags: ["Branding", "Logo Design", "Canva", "Photoshop"],
     live: "#",
@@ -144,7 +144,7 @@ const PROJECTS = [
     label: "Landing Page Design",
     mock: "travel",
     year: "2024",
-    types: ["web", "design"],
+    types: ["web"],
     roles: ["UI/UX Designer", "Frontend Developer"],
     desc: "A landing page for a travel booking brand with bold visuals and a clear booking flow, designed in Figma and coded responsively with Bootstrap.",
     tags: ["Figma", "Bootstrap", "Responsive", "UI Design"],
@@ -153,9 +153,12 @@ const PROJECTS = [
   },
 ];
 
-// role filter chips on projects.html, in this order; only roles some project uses are shown
-const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Graphic Designer", "Full-Stack Developer",
-  "Frontend Developer", "Backend Developer", "Mobile Developer", "QA Tester"];
+// role filter chips on projects.html, in this order; only roles some project has are shown
+const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Frontend Developer", "Backend Developer",
+  "Full-Stack Developer", "Mobile Developer", "QA Tester", "Database Designer", "Technical Writer"];
+// a role that also counts as others when filtering: Full-Stack work shows under Frontend and Backend too
+const ROLE_ALSO = { "Full-Stack Developer": ["Frontend Developer", "Backend Developer"] };
+const rolesOf = (p) => [...new Set(p.roles.flatMap((r) => [r, ...(ROLE_ALSO[r] || [])]))];
 
 const MOCKS = {
   shop: `<div class="hero-txt"><span class="ln ln--t"></span><span class="ln ln--t" style="width:65%"></span><span class="ln" style="width:80%"></span><span class="ln" style="width:60%"></span><span class="btn-s"></span></div>
@@ -470,7 +473,7 @@ function projects() {
 
   // picture · "Title | Type" · three-line description ending in "… Read more" · tech used
   grid.innerHTML = list.map(({ p, i }) => `
-    <article class="project" data-types="${p.types.join(" ")}" data-roles="${p.roles.join("|")}">
+    <article class="project" data-types="${p.types.join(" ")}" data-roles="${rolesOf(p).join("|")}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
         <div class="project__media">${mediaHTML(p)}</div>
         <div class="project__info">
@@ -493,9 +496,9 @@ function projects() {
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
   if (roleBox) {
-    const used = ROLES.filter((r) => PROJECTS.some((p) => p.roles.includes(r)));
+    const used = ROLES.filter((r) => PROJECTS.some((p) => rolesOf(p).includes(r)));
     roleBox.innerHTML = used.map((r) => `<button class="role" type="button" aria-pressed="false" data-role="${r}">${r}</button>`).join("")
-      + `<button class="role-clear" type="button" hidden>Clear</button>`;
+      + `<button class="role-clear" type="button" hidden>× Clear</button>`;
   }
   const clearBtn = $(".role-clear");
   const empty = $("#projectsEmpty");
