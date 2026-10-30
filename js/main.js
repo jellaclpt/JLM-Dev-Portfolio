@@ -471,13 +471,14 @@ function projects() {
     .filter(({ p }) => !limit || p.featured)
     .slice(0, limit || undefined);
 
-  // picture · "Title | Type" · three-line description ending in "… Read more" · tech used
+  // picture · "Title | Type" · role and year · three-line description ending in "… Read more" · tech used
   grid.innerHTML = list.map(({ p, i }) => `
-    <article class="project" data-types="${p.types.join(" ")}" data-roles="${rolesOf(p).join("|")}">
+    <article class="project" data-types="${p.types.join(" ")}" data-roles="${rolesOf(p).join("|")}" data-year="${p.year}" data-title="${p.title}" data-order="${i}">
       <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
         <div class="project__media">${mediaHTML(p)}</div>
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
+          <p class="project__meta"><span>${p.roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
           <p class="project__desc">${p.desc}<span class="project__more">… <u>Read more</u></span></p>
           <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
         </div>
@@ -503,7 +504,7 @@ function projects() {
   const clearBtn = $(".role-clear");
   const empty = $("#projectsEmpty");
   const count = $("#projectsCount");
-  const badge = $(".roles__badge");
+  const badge = $("#roleDrop .drop__badge");
   const ofType = (card, type) => type === "all" || card.dataset.types.split(" ").includes(type);
 
   const applyFilter = () => {
@@ -555,34 +556,42 @@ function projects() {
     applyFilter();
   });
 
+  // sort: newest / oldest by year (ties keep the PROJECTS order), or by title
+  const SORTS = {
+    new: (a, b) => b.dataset.year - a.dataset.year || a.dataset.order - b.dataset.order,
+    old: (a, b) => a.dataset.year - b.dataset.year || a.dataset.order - b.dataset.order,
+    az: (a, b) => a.dataset.title.localeCompare(b.dataset.title),
+    za: (a, b) => b.dataset.title.localeCompare(a.dataset.title),
+  };
+  const sortBy = (key) => {
+    grid.append(...$$(".project", grid).sort(SORTS[key]));
+    $$(".sort").forEach((b) => b.setAttribute("aria-checked", b.dataset.sort === key));
+    const value = $("#sortDrop .drop__value");
+    if (value) value.textContent = $(`.sort[data-sort="${key}"]`).dataset.short;
+  };
+  $$(".sort").forEach((btn) => btn.addEventListener("click", () => {
+    sortBy(btn.dataset.sort);
+    applyFilter();
+    setOpen($("#sortDrop"), false);
+  }));
+  if ($(".sort")) sortBy("new");
+
   applyFilter();
 
-  // layout C: the role checklist opens from the "Filter by role" button and closes on a click outside or Escape
-  const roles = $(".roles");
-  const toggle = $(".roles__toggle");
-  const setOpen = (open) => { roles.classList.toggle("is-open", open); toggle.setAttribute("aria-expanded", open); };
-  if (toggle) {
-    toggle.addEventListener("click", () => setOpen(!roles.classList.contains("is-open")));
-    document.addEventListener("click", (e) => { if (!roles.contains(e.target)) setOpen(false); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
-  }
-
-  // TEMPORARY layout preview switch (A chips / B sidebar / C dropdown); remembered per browser
-  const page = $(".work--page");
-  const pick = (l) => {
-    page.dataset.layout = l;
-    $$("[data-pick]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.pick === l));
-    if (toggle) setOpen(false);
-    requestAnimationFrame(fitMore);
+  // dropdowns (role filter, sort): open from their button; close on a press anywhere outside, or Escape.
+  // pointerdown, not click: iPhones send no click for a tap on a plain, non-button area
+  const setOpen = (drop, open) => {
+    drop.classList.toggle("is-open", open);
+    $(".drop__toggle", drop).setAttribute("aria-expanded", open);
   };
-  if (page && $(".layout-pick")) {
-    let saved = null;
-    try { saved = localStorage.getItem("layout"); } catch (e) {}
-    pick(["a", "b", "c"].includes(saved) ? saved : "a");
-    $$("[data-pick]").forEach((b) => b.addEventListener("click", () => {
-      pick(b.dataset.pick);
-      try { localStorage.setItem("layout", b.dataset.pick); } catch (e) {}
-    }));
+  const drops = $$(".drop");
+  drops.forEach((drop) => $(".drop__toggle", drop).addEventListener("click", () => {
+    const open = !drop.classList.contains("is-open");
+    drops.forEach((d) => setOpen(d, d === drop && open)); // opening one closes the other
+  }));
+  if (drops.length) {
+    document.addEventListener("pointerdown", (e) => drops.forEach((d) => { if (!d.contains(e.target)) setOpen(d, false); }));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") drops.forEach((d) => setOpen(d, false)); });
   }
 
   const modal = $("#modal");
