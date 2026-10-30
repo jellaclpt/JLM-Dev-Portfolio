@@ -371,7 +371,6 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 /* role on the left, year on the right */
 .project__meta { display: flex; justify-content: space-between; gap: .75rem; margin-top: .35rem; font-size: .75rem; font-weight: 600; letter-spacing: .03em; color: var(--text); opacity: .85; }
 .project__year { flex: none; color: var(--maroon-bright); font-variant-numeric: tabular-nums; }
-.project__subject { margin-top: .15rem; font-size: .75rem; color: var(--muted); }
 /* three lines on desktop, two on smaller screens; the browser ends the cut-off text with "…" */
 .project__desc { --lines: 3; margin-top: .4rem; font-size: .85rem; line-height: 1.6; color: var(--muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--lines); line-clamp: var(--lines); overflow: hidden; }
 .project__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
@@ -603,8 +602,6 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__cat { display: flex; align-items: center; gap: .5rem; font-family: var(--f-mono); font-size: .75rem; color: var(--maroon-bright); text-transform: uppercase; letter-spacing: .08em; padding-right: 2.5rem; }
 .modal__cat-icon { flex: none; width: 1.25em; height: 1.25em; }
 .modal__title { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.5rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin: .5rem 2.5rem 1rem 0; }
-.modal__subject { margin-top: .15rem; font-size: .8rem; font-weight: 400; color: var(--muted); }
-.modal__subject:empty { display: none; }
 /* no visible scrollbar; the dots in .modal__pager show and change the position instead */
 .modal__body { grid-column: 1; grid-row: 3; min-height: 0; overflow-y: auto; scrollbar-width: none; }
 .modal__body::-webkit-scrollbar { display: none; }
