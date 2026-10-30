@@ -61,20 +61,6 @@ const PROJECTS = [
     code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
-    title: "Pulse Dashboard",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "dev",
-    label: "Analytics Web App",
-    mock: "dash",
-    year: "2026",
-    types: ["web"],
-    roles: ["Full-Stack Developer"],
-    desc: "A data dashboard that turns raw numbers into clear, animated charts, with dark-mode-first UI, reusable components and live data from a Node.js API.",
-    tags: ["JavaScript", "Node.js", "Chart.js", "MySQL"],
-    live: "#",
-    code: "#",
-  },
-  {
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "design",
@@ -108,48 +94,6 @@ const PROJECTS = [
     code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
     codeLabel: "Figma design",
     codeIcon: "figma",
-  },
-  {
-    title: "Kape & Co.",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "design",
-    label: "Branding & Identity",
-    mock: "brand",
-    year: "2025",
-    types: ["design"],
-    roles: ["UI/UX Designer"],
-    desc: "A visual identity for a local coffee shop: logo, color palette, typography and social media templates, all built around a warm, cozy feel.",
-    tags: ["Branding", "Logo Design", "Canva", "Photoshop"],
-    live: "#",
-    code: "#",
-  },
-  {
-    title: "TaskFlow",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "dev",
-    label: "Productivity Web App",
-    mock: "app",
-    year: "2025",
-    types: ["web"],
-    roles: ["Frontend Developer"],
-    desc: "A drag-and-drop kanban board that saves to local storage, with keyboard shortcuts and an interface that feels quick and calm.",
-    tags: ["HTML", "CSS", "JavaScript", "LocalStorage"],
-    live: "#",
-    code: "#",
-  },
-  {
-    title: "Atlas Travel",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "design",
-    label: "Landing Page Design",
-    mock: "travel",
-    year: "2024",
-    types: ["web"],
-    roles: ["UI/UX Designer", "Frontend Developer"],
-    desc: "A landing page for a travel booking brand with bold visuals and a clear booking flow, designed in Figma and coded responsively with Bootstrap.",
-    tags: ["Figma", "Bootstrap", "Responsive", "UI Design"],
-    live: "#",
-    code: "#",
   },
 ];
 
