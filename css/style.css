@@ -36,22 +36,22 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* light theme: warm off-white page, white cards, near-black text, same maroons (bright one a touch deeper for contrast) */
+/* light theme: warm stone page, soft off-white cards, near-black text, maroon washes; maroons unchanged (bright one a touch deeper for contrast) */
 :root[data-theme="light"] {
-  --bg: #f6f1ee;
-  --bg-2: #efe8e4;
-  --surface: #ffffff;
-  --surface-2: #f4eeea;
-  --line: rgba(28, 20, 20, 0.1);
-  --line-strong: rgba(28, 20, 20, 0.2);
-  --text: #1c1515;
-  --muted: #5e5451;
-  --dim: #8c8380;
-  --maroon-bright: #b3233b;
-  --wash: rgba(198, 42, 67, .14);
-  --wash-2: rgba(198, 42, 67, .1);
-  --nav-bg: rgba(246, 241, 238, .82);
-  --shadow: rgba(60, 20, 28, .18);
+  --bg: #e8dfd9;
+  --bg-2: #e0d5ce;
+  --surface: #f6f1ed;
+  --surface-2: #ece3dd;
+  --line: rgba(40, 18, 22, 0.12);
+  --line-strong: rgba(40, 18, 22, 0.24);
+  --text: #1a1213;
+  --muted: #554947;
+  --dim: #85797a;
+  --maroon-bright: #a81f36;
+  --wash: rgba(122, 20, 36, .22);
+  --wash-2: rgba(122, 20, 36, .15);
+  --nav-bg: rgba(232, 223, 217, .85);
+  --shadow: rgba(60, 20, 28, .22);
   color-scheme: light;
 }
 
@@ -182,6 +182,7 @@ body.is-loaded .curtain { transform: translateY(-100%); }
   mask-image: radial-gradient(ellipse 50% 62% at 50% 40%, #000 58%, transparent 100%);
 }
 .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.08); }
+:root[data-theme="light"] .hero__photo img { filter: none; } /* light-mode photo shows in colour */
 
 .hero__left, .hero__right { align-self: end; position: relative; z-index: 3; padding-bottom: 1.5rem; }
 /* left column starts at the bottom edge of PORTFOLIO so only "Hello, I'm" overlaps it */
