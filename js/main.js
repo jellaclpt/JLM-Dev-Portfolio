@@ -415,7 +415,8 @@ const CHIP_LOGOS = {
 const techLogo = (src) => {
   if (typeof src === "object") return `<span class="tech__badge" style="--c:${src.color}">${src.badge}</span>`;
   const [lib, path] = src.split(":");
-  return `<img class="tech__icon" src="${ICON_URL[lib](path)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />`;
+  const white = path.endsWith("/white") ? " tech__icon--white" : ""; // turned black in light mode
+  return `<img class="tech__icon${white}" src="${ICON_URL[lib](path)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />`;
 };
 
 function tech() {
@@ -712,9 +713,31 @@ function cvLink() {
   }
 }
 
+/* ---------- Light / dark theme ---------- */
+// The page's <head> sets the starting theme (saved choice, else the device setting); this wires up the switch.
+// Photos with data-light swap to their light-mode version.
+function theme() {
+  const root = document.documentElement;
+  const btn = $("#themeToggle");
+  const photos = $$("img[data-light]").map((img) => ({ img, dark: img.getAttribute("src"), light: img.dataset.light }));
+  const apply = (t) => {
+    root.dataset.theme = t;
+    photos.forEach((p) => (p.img.src = t === "light" ? p.light : p.dark));
+    if (btn) btn.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
+  };
+  apply(root.dataset.theme === "light" ? "light" : "dark");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const t = root.dataset.theme === "light" ? "dark" : "light";
+    apply(t);
+    try { localStorage.setItem("theme", t); } catch (e) {}
+  });
+}
+
 /* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   $("#year").textContent = new Date().getFullYear();
+  theme();
   cvLink();
   intro();
   homeSweep();
