@@ -61,6 +61,37 @@ const PROJECTS = [
     code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
+    title: "Purple Bytes: Task Manager",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
+    cat: "dev",
+    label: "Task Management App",
+    image: "assets/work/development/prplbyts-task-manager/mockup.png",
+    imageCap: "Dashboard on Desktop and Mobile",
+    logo: "assets/work/development/prplbyts-task-manager/logo.png", // shown on the Live demo button
+    gallery: [
+      ["assets/work/development/prplbyts-task-manager/light mode tasks.png", "Tasks Page in Light Mode"],
+      ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
+    ],
+    mock: "app",
+    year: "2026",
+    types: ["web"],
+    roles: ["Frontend Developer"],
+    desc: "Purple Bytes: Task Manager is a web app for keeping personal to-dos in one place. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device, and it can be installed and opened like a regular app.",
+    details: [
+      { h: "What the app does", ul: [
+        "<b>Dashboard</b> counts the tasks in To Do, In Progress and Done, and lists the five most recently created.",
+        "<b>Tasks</b> appear as cards that can be created, edited, deleted and moved to another status.",
+        "<b>Search, filters and sorting</b> find tasks by title or description, narrow them by status or category, and order them by date created, due date, priority, status or title.",
+        "<b>Due dates</b> are picked from a calendar, and cards flag tasks that are due today or overdue.",
+        "<b>Settings</b> hold the dark mode switch and the option to install the app on a device.",
+      ] },
+      { h: "My role", p: "I built the frontend with React, TypeScript and Tailwind CSS, using shadcn/ui components, React Hook Form and Zod for the task form, and browser localStorage for saving tasks. I also made the layout responsive, added installable app support with a service worker, and deployed it on Vercel." },
+    ],
+    tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "localStorage", "PWA", "Vercel"],
+    live: "https://purplebytes-taskmanager.vercel.app",
+    code: "https://github.com/jellaclpt/purple-bytes-task-manager",
+  },
+  {
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "design",
@@ -94,37 +125,6 @@ const PROJECTS = [
     code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
     codeLabel: "Figma design",
     codeIcon: "figma",
-  },
-  {
-    title: "Purple Bytes: Task Manager",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "dev",
-    label: "Task Management App",
-    image: "assets/work/development/prplbyts-task-manager/mockup.png",
-    imageCap: "Dashboard on Desktop and Mobile",
-    logo: "assets/work/development/prplbyts-task-manager/logo.png", // shown on the Live demo button
-    gallery: [
-      ["assets/work/development/prplbyts-task-manager/light mode tasks.png", "Tasks Page in Light Mode"],
-      ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
-    ],
-    mock: "app",
-    year: "2026",
-    types: ["web"],
-    roles: ["Frontend Developer"],
-    desc: "Purple Bytes: Task Manager is a web app for keeping personal to-dos in one place. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device, and it can be installed and opened like a regular app.",
-    details: [
-      { h: "What the app does", ul: [
-        "<b>Dashboard</b> counts the tasks in To Do, In Progress and Done, and lists the five most recently created.",
-        "<b>Tasks</b> appear as cards that can be created, edited, deleted and moved to another status.",
-        "<b>Search, filters and sorting</b> find tasks by title or description, narrow them by status or category, and order them by date created, due date, priority, status or title.",
-        "<b>Due dates</b> are picked from a calendar, and cards flag tasks that are due today or overdue.",
-        "<b>Settings</b> hold the dark mode switch and the option to install the app on a device.",
-      ] },
-      { h: "My role", p: "I built the frontend with React, TypeScript and Tailwind CSS, using shadcn/ui components, React Hook Form and Zod for the task form, and browser localStorage for saving tasks. I also made the layout responsive, added installable app support with a service worker, and deployed it on Vercel." },
-    ],
-    tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "localStorage", "PWA", "Vercel"],
-    live: "https://purplebytes-taskmanager.vercel.app",
-    code: "https://github.com/jellaclpt/purple-bytes-task-manager",
   },
 ];
 
