@@ -446,7 +446,7 @@ function reveals() {
 
 /* ---------- Projects: render, filter, modal ---------- */
 function projects() {
-  const grid = $("#projects");
+  const grid = $("#projectGrid");
   if (!grid) return;
 
   // Home shows the first data-featured featured projects; projects.html shows everything
