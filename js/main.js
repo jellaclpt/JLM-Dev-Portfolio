@@ -726,6 +726,8 @@ function theme() {
     if (btn) btn.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
   };
   apply(root.dataset.theme === "light" ? "light" : "dark");
+  // load the other theme's photo now, so switching never waits on a download (late photo = flicker)
+  addEventListener("load", () => photos.forEach((p) => { new Image().src = p.light; new Image().src = p.dark; }));
   if (!btn) return;
   btn.addEventListener("click", () => {
     const t = root.dataset.theme === "light" ? "dark" : "light";
@@ -738,8 +740,9 @@ function theme() {
     const vt = document.startViewTransition(() => apply(t));
     vt.ready.then(() => {
       const pos = ltr ? ["100% 0", "0% 0"] : ["0% 0", "100% 0"];
+      // fill: hold the end position; without it the mask snaps back to "hidden" for a frame before the switch ends (flicker)
       root.animate({ maskPosition: pos, webkitMaskPosition: pos },
-        { duration: 1000, easing: "cubic-bezier(.65, 0, .35, 1)", pseudoElement: "::view-transition-new(root)" });
+        { duration: 1000, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards", pseudoElement: "::view-transition-new(root)" });
     });
     vt.finished.finally(() => delete root.dataset.swipe);
   });
