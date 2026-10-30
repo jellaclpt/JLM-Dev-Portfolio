@@ -463,32 +463,15 @@ function projects() {
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
           <p class="project__desc">${p.desc}<span class="project__more">… <u>Read more</u></span></p>
-          <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}<li class="project__tags-more" hidden></li></ul>
+          <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
         </div>
       </button>
     </article>`).join("");
 
   // "… Read more" only when the description is actually cut off; wrapping changes with width and fonts, so re-check then
-  // tags stay on one row: whatever doesn't fit is hidden and counted in a "+N" chip at the end
-  const fitTags = (ul) => {
-    const tags = $$("li:not(.project__tags-more)", ul);
-    const more = $(".project__tags-more", ul);
-    tags.forEach((t) => (t.hidden = false));
-    more.hidden = true;
-    const top = tags[0].offsetTop;
-    if (tags[tags.length - 1].offsetTop === top) return; // all fit
-    let shown = tags.length;
-    more.hidden = false;
-    // drop tags from the end until the rest plus the "+N" chip sit on the first row
-    do {
-      tags[--shown].hidden = true;
-      more.textContent = `+${tags.length - shown}`;
-    } while (shown > 1 && more.offsetTop !== top);
-  };
   const fitMore = () => $$(".project__desc").forEach((d) => {
     if (!d.offsetParent) return; // hidden by a filter: checked when shown
     $(".project__more", d).hidden = d.scrollHeight <= d.clientHeight + 1;
-    fitTags($(".project__tags", d.parentElement));
   });
   fitMore();
   addEventListener("resize", () => requestAnimationFrame(fitMore));
