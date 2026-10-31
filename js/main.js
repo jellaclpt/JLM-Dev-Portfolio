@@ -92,6 +92,42 @@ const PROJECTS = [
     code: "https://github.com/jellaclpt/purple-bytes-task-manager",
   },
   {
+    title: "Sweet Bite",
+    cat: "dev",
+    label: "Bakery Pre-order System",
+    image: "assets/work/development/sweet-bite/mockup.png",
+    imageCap: "Login Page on Desktop and Customer Home on Mobile",
+    logo: "assets/work/development/sweet-bite/logo.png", // shown on the Live demo button
+    gallery: [
+      ["assets/work/development/sweet-bite/admin dashboard clean.png", "Admin Dashboard"],
+      ["assets/work/development/sweet-bite/admin add product.png", "Admin Add Product Page"],
+      ["assets/work/development/sweet-bite/admin orders.png", "Admin Orders Page with GCash Deposit Review"],
+      ["assets/work/development/sweet-bite/customer mockup.png", "Customer Products, Checkout and Orders"],
+    ],
+    mock: "dash",
+    year: "2026",
+    types: ["web"],
+    roles: ["Frontend Developer", "QA Tester"],
+    desc: "Sweet Bite is a web-based pre-order system for a bakery. Customers order cakes, breads, pastries, cupcakes and cookies for the date and time they choose, send a GCash deposit to confirm, and pay the balance on pickup or delivery. Bakery staff manage the menu, check each deposit and update every order's progress from an admin panel.",
+    details: [
+      { h: "Who uses it", ul: [
+        "<b>Customers</b> browse the menu, check out with pickup or delivery, upload their GCash receipt, and follow their orders from their phone or computer.",
+        "<b>Administrators</b> add, edit and remove products, mark items as available or out of stock, confirm or reject deposits, and update order statuses.",
+      ] },
+      { h: "How a pre-order works", ol: [
+        "The customer adds items to the cart and picks pickup or delivery, a date and a time within opening hours.",
+        "The customer sends the deposit, 50% of the total by default, by GCash and submits the reference number and a receipt screenshot.",
+        "The admin checks the receipt, then confirms the deposit or rejects it so the customer can send it again.",
+        "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
+        "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
+      ] },
+      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar, and connected them to the system's Laravel API. As QA tester, I tested the customer and admin flows, from placing an order to confirming its deposit." },
+    ],
+    tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
+    live: "https://sweet-bite-bakery-system.vercel.app",
+    code: "https://github.com/jellaclpt/sweet_bite_bakery_system",
+  },
+  {
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "design",
@@ -402,6 +438,10 @@ const CHIP_LOGOS = {
   "Railway": "si:railway/white",
   "Vercel": "si:vercel/white",
   "shadcn/ui": "si:shadcnui/white",
+  "React Router": "si:reactrouter/white",
+  "PostgreSQL": "dev:postgresql/postgresql-original",
+  "Cloudinary": "si:cloudinary",
+  "Render": "si:render/white",
 };
 
 const techLogo = (src) => {
