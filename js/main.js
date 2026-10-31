@@ -12,6 +12,7 @@
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
 // types: the All Projects tabs it shows under: "web", "mobile", "design" (one or more).
 // roles: what you did, from ROLES below; shown in the pop-up and used by the role filter.
+// id: optional name, so another project's details can link here with <a href="#" class="modal__link" data-project="id">.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -61,6 +62,7 @@ const PROJECTS = [
     code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
+    id: "sweet-bite-dev",
     title: "Sweet Bite",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
@@ -91,11 +93,48 @@ const PROJECTS = [
         "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
         "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
       ] },
-      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render." },
+      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render. I designed the interface too: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>." },
     ],
     tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
     live: "https://sweet-bite-bakery-system.vercel.app",
     code: "https://github.com/jellaclpt/sweet_bite_bakery_system",
+  },
+  {
+    id: "sweet-bite-ui",
+    title: "Sweet Bite",
+    cat: "design",
+    label: "Web App UI/UX",
+    image: "assets/work/ui-ux/sweet-bite/mockup 1.png",
+    imageCap: "Login, Home and Products",
+    logo: "assets/work/development/sweet-bite/logo.png", // shown on the View prototype button
+    gallery: [
+      ["assets/work/ui-ux/sweet-bite/mockup 2.png", "Checkout, Orders and Profile"],
+      ["assets/work/ui-ux/sweet-bite/mockup 3.png", "Customer Home on a Larger Screen"],
+      ["assets/work/ui-ux/sweet-bite/mockup 4.png", "Admin Dashboard on a Larger Screen"],
+    ],
+    mock: "phone",
+    year: "2025",
+    types: ["design"],
+    roles: ["UI/UX Designer"],
+    desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
+    details: [
+      { h: "What the design covers", ul: [
+        "<b>Login</b> lets customers sign in with a username or email, or go on to create an account.",
+        "<b>Home</b> welcomes customers, explains pre-ordering in four steps and shows a few products.",
+        "<b>Products</b> can be filtered and sorted, with quantity controls and an Add to Cart button on each one.",
+        "<b>Checkout</b> shows the cart items, then the order details such as pickup or delivery.",
+        "<b>Orders</b> show each order's schedule, items, status, payment status and total, with a button to pay a deposit that is still needed.",
+        "<b>Profile</b> holds the customer's details, photo, password change and log out.",
+        "<b>Admin dashboard</b> shows product counts, recent products and a table of the whole menu with edit and delete actions.",
+      ] },
+      { h: "My role", p: "I designed the screens in Figma and linked them into a clickable prototype. I also built this design into the working system: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a>." },
+    ],
+    tags: ["Figma", "Prototyping", "Mobile UI", "Web UI"],
+    live: "https://www.figma.com/proto/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?t=PiL5zhUpxK4zCZ6B-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&node-id=2463-7352&starting-point-node-id=2463%3A5304&show-proto-sidebar=1",
+    liveLabel: "View prototype",
+    code: "https://www.figma.com/design/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?node-id=2440-11&t=vcRCB1sdRMJ8aiBe-1",
+    codeLabel: "Figma design",
+    codeIcon: "figma",
   },
   {
     title: "AcadPal",
@@ -737,7 +776,7 @@ function projects() {
     live.innerHTML = `<span class="btn__logo${p.logoPlain ? " btn__logo--plain" : ""}">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
     code.href = p.code;
     code.innerHTML = (p.codeIcon === "figma" ? `<img class="btn__icon" src="${ICON_URL.dev("figma/figma-original")}" width="15" height="15" alt="" />` : githubIcon) + (p.codeLabel || "Source code");
-    lastFocus = document.activeElement;
+    if (!modal.classList.contains("is-open")) lastFocus = document.activeElement; // keep the card when switching project from a link
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -754,6 +793,13 @@ function projects() {
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".project__card");
     if (card) open(+card.dataset.index);
+  });
+  // links in a project's details open the related project in the same pop-up
+  $("#modalDesc").addEventListener("click", (e) => {
+    const link = e.target.closest(".modal__link");
+    if (!link) return;
+    e.preventDefault();
+    open(PROJECTS.findIndex((p) => p.id === link.dataset.project));
   });
   $$("[data-close]", modal).forEach((el) => el.addEventListener("click", close));
   addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });

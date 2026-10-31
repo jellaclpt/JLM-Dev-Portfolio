@@ -618,6 +618,7 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .modal__desc li { margin-bottom: .4rem; padding-left: .2rem; }
 .modal__desc li::marker { color: var(--maroon-bright); }
 .modal__desc b { color: var(--text); font-weight: 600; }
+.modal__link { color: var(--maroon-bright); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 /* buttons sit at the bottom of the left column, leaving the right column to the description */
 .modal__actions { flex: none; display: flex; flex-wrap: wrap; gap: .6rem; padding: .2rem 1.4rem 1.4rem; }
 .modal__actions .btn { padding: .65rem 1.15rem; font-size: .75rem; }
