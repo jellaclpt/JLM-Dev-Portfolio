@@ -31,7 +31,7 @@ const PROJECTS = [
     mock: "dash",
     year: "2026",
     types: ["web"],
-    roles: ["Full-Stack Developer", "QA Tester"],
+    roles: ["Full-Stack Developer"],
     desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus, built as our capstone project. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
     details: [
       { h: "Who uses it", ul: [
