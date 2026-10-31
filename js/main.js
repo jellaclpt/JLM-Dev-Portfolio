@@ -62,7 +62,6 @@ const PROJECTS = [
   },
   {
     title: "Task Manager",
-    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
     label: "Task Management App",
     image: "assets/work/development/prplbyts-task-manager/mockup.png",
@@ -73,7 +72,7 @@ const PROJECTS = [
       ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
     ],
     mock: "app",
-    year: "2026",
+    year: "2025",
     types: ["web"],
     roles: ["Frontend Developer"],
     desc: "Task Manager is a web app for keeping personal to-dos in one place, made as one of our projects in our Frontend Development subject. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device. It is also a progressive web app (PWA), so it can be installed on a phone or computer and opened like a regular app.",
@@ -93,6 +92,7 @@ const PROJECTS = [
   },
   {
     title: "Sweet Bite",
+    featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "dev",
     label: "Bakery Pre-order System",
     image: "assets/work/development/sweet-bite/mockup.png",
@@ -105,9 +105,9 @@ const PROJECTS = [
       ["assets/work/development/sweet-bite/customer mockup.png", "Customer Products, Checkout and Orders"],
     ],
     mock: "dash",
-    year: "2026",
+    year: "2025",
     types: ["web"],
-    roles: ["Frontend Developer", "QA Tester"],
+    roles: ["Full-Stack Developer"],
     desc: "Sweet Bite is a web-based pre-order system for a bakery. Customers order cakes, breads, pastries, cupcakes and cookies for the date and time they choose, send a GCash deposit to confirm, and pay the balance on pickup or delivery. Bakery staff manage the menu, check each deposit and update every order's progress from an admin panel.",
     details: [
       { h: "Who uses it", ul: [
@@ -121,7 +121,7 @@ const PROJECTS = [
         "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
         "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
       ] },
-      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar, and connected them to the system's Laravel API. As QA tester, I tested the customer and admin flows, from placing an order to confirming its deposit." },
+      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render." },
     ],
     tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
     live: "https://sweet-bite-bakery-system.vercel.app",
