@@ -8,9 +8,10 @@
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
 // desc: the overview, shown on the card and as the first paragraph of the pop-up.
 // details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
-// live / code: the pop-up's two button links. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
+// live / code: the pop-up's two button links, each left out if it has no link. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
-// types: the All Projects tabs it shows under: "web", "mobile", "design" (one or more).
+// cat: the kind of work named at the top of the pop-up, from CATS below.
+// types: the All Projects tabs it shows under: "web", "mobile" (built systems and apps), "design", "others" (one or more).
 // roles: what you did, from ROLES below; shown in the pop-up and used by the role filter.
 // id: optional name, so another project's details can link here with <a href="#" class="modal__link" data-project="id">.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
@@ -93,7 +94,7 @@ const PROJECTS = [
         "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
         "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
       ] },
-      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render. I designed the interface too: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>." },
+      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render. I designed the interface too: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>. I also managed the project's tasks: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-pm\">Sweet Bite project management work</a>." },
     ],
     tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
     live: "https://sweet-bite-bakery-system.vercel.app",
@@ -115,7 +116,7 @@ const PROJECTS = [
     mock: "phone",
     year: "2025",
     types: ["design"],
-    roles: ["UI/UX Designer"],
+    roles: ["UI/UX Designer (Hi-Fi)"],
     desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
     details: [
       { h: "What the design covers", ul: [
@@ -127,7 +128,7 @@ const PROJECTS = [
         "<b>Profile</b> holds the customer's details, photo, password change and log out.",
         "<b>Admin dashboard</b> shows product counts, recent products and a table of the whole menu with edit and delete actions.",
       ] },
-      { h: "My role", p: "I designed the screens in Figma and linked them into a clickable prototype. I also built this design into the working system: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a>." },
+      { h: "My role", p: "I designed the screens in Figma and linked them into a clickable prototype. I also built this design into the working system: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a>. The tasks behind it are in the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-pm\">Sweet Bite project management work</a>." },
     ],
     tags: ["Figma", "Prototyping", "Mobile UI", "Web UI"],
     live: "https://www.figma.com/proto/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?t=PiL5zhUpxK4zCZ6B-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&node-id=2463-7352&starting-point-node-id=2463%3A5304&show-proto-sidebar=1",
@@ -137,6 +138,38 @@ const PROJECTS = [
     codeIcon: "figma",
   },
   {
+    id: "sweet-bite-pm",
+    title: "Sweet Bite",
+    cat: "pm",
+    label: "ClickUp Project Tracking",
+    image: "assets/work/project-management/Sweet-bite-Clickup/1.png",
+    imageCap: "Week 1: Application Concept",
+    logo: "assets/work/development/sweet-bite/logo.png",
+    gallery: [
+      ["assets/work/project-management/Sweet-bite-Clickup/2.png", "Week 2: Application Analysis and Design"],
+      ["assets/work/project-management/Sweet-bite-Clickup/3.png", "Week 3: Workflows and Wireframes"],
+      ["assets/work/project-management/Sweet-bite-Clickup/4.png", "Week 4: UI/UX Design"],
+      ["assets/work/project-management/Sweet-bite-Clickup/5.png", "Final Project"],
+    ],
+    mock: "dash",
+    year: "2025",
+    types: ["others"],
+    roles: ["Project Manager"],
+    desc: "This is how the Sweet Bite bakery pre-order system was planned and tracked as a team project in ClickUp. The project had one task list for each stage of the work, so everyone could see what was assigned to them, when it was due and how urgent it was. ClickUp's free plan can't share a workspace publicly, so these screenshots show it instead.",
+    details: [
+      { h: "How the work was organized", ul: [
+        "<b>Week 1, Application Concept:</b> choosing the application type, frameworks and tools for each part of the project.",
+        "<b>Week 2, Analysis and Design:</b> the system features, project scope, use case diagram and ERD.",
+        "<b>Week 3, Workflows and Wireframes:</b> the chosen module, system workflow, API design and documentation, and wireframes.",
+        "<b>Week 4, UI/UX Design:</b> the interface design and mockups.",
+        "<b>Final Project:</b> frontend and backend development, API documentation and QA testing.",
+      ] },
+      { h: "My role", p: "As project manager, I managed the team's tasks in ClickUp from September to December 2025, tracking each one through to completed. I also took on tasks myself, including the four presentations, the project scope and the API documentation. See the results in the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a> and the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>." },
+    ],
+    tags: ["ClickUp", "Task Tracking", "Team Coordination"],
+  },
+  {
+    id: "acadpal-ui",
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     cat: "design",
@@ -152,7 +185,7 @@ const PROJECTS = [
     mock: "phone",
     year: "2025",
     types: ["design"],
-    roles: ["UI/UX Designer"],
+    roles: ["UI/UX Designer (Hi-Fi)"],
     desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design, made as one of our projects in our UI/UX Design subject, that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
     details: [
       { h: "What the app does", ul: [
@@ -162,7 +195,7 @@ const PROJECTS = [
         "<b>Files</b> are kept per subject and sorted into Lessons, Activities and Projects.",
         "<b>Settings</b> hold the student's profile, with options to share a board and switch workspaces.",
       ] },
-      { h: "My role", p: "I designed the user flow and the high-fidelity screens in Figma, from the welcome, login and sign-up screens to the home, subjects, tasks, files and settings, and linked them into a clickable mobile prototype." },
+      { h: "My role", p: "I designed the user flow and the high-fidelity screens in Figma, from the welcome, login and sign-up screens to the home, subjects, tasks, files and settings, and linked them into a clickable mobile prototype. See how the group's work was organized in the <a href=\"#\" class=\"modal__link\" data-project=\"acadpal-pm\">AcadPal project management work</a>." },
     ],
     tags: ["Figma", "Prototyping", "Mobile UI"],
     live: "https://www.figma.com/proto/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=50-2&p=f&t=ulsdvo61FbHF3qa2-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=50%3A2",
@@ -170,6 +203,33 @@ const PROJECTS = [
     code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
     codeLabel: "Figma design",
     codeIcon: "figma",
+  },
+  {
+    id: "acadpal-pm",
+    title: "AcadPal",
+    cat: "pm",
+    label: "Trello Project Board",
+    image: "assets/work/project-management/Acadpal-Trello/board.png",
+    imageCap: "AcadPal Group Board (Members Blurred for Privacy)",
+    logo: "assets/work/ui-ux/acadpal/logo-light.png",
+    logoPlain: true,
+    mock: "dash",
+    year: "2025",
+    types: ["others"],
+    roles: ["Project Manager"],
+    desc: "This is the Trello board our group used to plan and track AcadPal, a mobile app design for students. It kept the tasks, design outputs and activities of the project in one place, so everyone in the group could see what was left to do and find the latest work.",
+    details: [
+      { h: "How the board is organized", ul: [
+        "<b>To-Do, In Progress and Done</b> show where each task stands, from writing the problem statement and “How Might We” questions to creating the high-fidelity prototype.",
+        "<b>Storyboard and Wireframes</b> holds the storyboard, the lo-fi wireframe and a link to the hi-fi wireframe.",
+        "<b>Activities</b> holds the problem statement and brainstorming, the features of AcadPal and the visual style guide.",
+        "<b>Members</b> lists everyone in the group.",
+      ] },
+      { h: "My role", p: "As project manager, I managed the board and the group's tasks until everything was done. See the final design in the <a href=\"#\" class=\"modal__link\" data-project=\"acadpal-ui\">AcadPal UI/UX design project</a>." },
+    ],
+    tags: ["Trello", "Task Tracking", "Team Coordination"],
+    live: "https://trello.com/b/3f2I9WD4",
+    liveLabel: "View board",
   },
   {
     title: "Task Manager",
@@ -203,11 +263,23 @@ const PROJECTS = [
   },
 ];
 
-// role filter chips on projects.html, in this order; only roles some project has are shown
-const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Frontend Developer", "Backend Developer",
-  "Full-Stack Developer", "Mobile Developer", "QA Tester", "Database Designer", "Technical Writer"];
+// role filter chips on projects.html, in this order: each tab lists its own, even before a project has one; All lists every role
+const DEV_ROLES = ["Full-Stack Developer", "Frontend Developer", "Backend Developer"];
+const TAB_ROLES = {
+  web: DEV_ROLES,
+  mobile: DEV_ROLES,
+  design: ["UI/UX Designer (Lo-Fi)", "UI/UX Designer (Hi-Fi)"],
+  others: ["Project Manager", "System Analyst", "QA Tester"],
+};
+const ROLES = [...DEV_ROLES, ...TAB_ROLES.design, ...TAB_ROLES.others];
 // a role that also counts as others when filtering: Full-Stack work shows under Frontend and Backend too
 const ROLE_ALSO = { "Full-Stack Developer": ["Frontend Developer", "Backend Developer"] };
+// a project's cat: the About card whose icon it uses, and the name shown in the pop-up
+const CATS = {
+  dev: ["Web|Development", "Development"],
+  design: ["UI / UX|Design", "Design"],
+  pm: ["Project|Management", "Project Management"],
+};
 const rolesOf = (p) => [...new Set(p.roles.flatMap((r) => [r, ...(ROLE_ALSO[r] || [])]))];
 
 const MOCKS = {
@@ -481,6 +553,8 @@ const CHIP_LOGOS = {
   "PostgreSQL": "dev:postgresql/postgresql-original",
   "Cloudinary": "si:cloudinary",
   "Render": "si:render/white",
+  "Trello": "si:trello",
+  "ClickUp": "si:clickup",
 };
 
 const techLogo = (src) => {
@@ -544,8 +618,7 @@ function projects() {
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
   if (roleBox) {
-    const used = ROLES.filter((r) => PROJECTS.some((p) => rolesOf(p).includes(r)));
-    roleBox.innerHTML = used.map((r) => `<button class="role" type="button" aria-pressed="false" data-role="${r}">${r}</button>`).join("")
+    roleBox.innerHTML = ROLES.map((r) => `<button class="role" type="button" aria-pressed="false" data-role="${r}">${r}</button>`).join("")
       + `<button class="role-clear" type="button" hidden>× Clear</button>`;
   }
   const clearBtn = $(".role-clear");
@@ -560,17 +633,22 @@ function projects() {
     const type = tab.dataset.filter;
     const picked = $$(".role[aria-pressed='true']").map((b) => b.dataset.role);
     const cards = $$(".project");
-    const hasRole = (card) => !picked.length || picked.some((r) => card.dataset.roles.split("|").includes(r));
+    // roles from another tab don't narrow this one
+    const hasRole = (card, tabType) => {
+      const roles = picked.filter((r) => tabType === "all" || TAB_ROLES[tabType].includes(r));
+      return !roles.length || roles.some((r) => card.dataset.roles.split("|").includes(r));
+    };
+    $$(".role").forEach((b) => { b.hidden = type !== "all" && !TAB_ROLES[type].includes(b.dataset.role); });
     // each tab shows how many projects it would list with the roles picked now
     $$(".filter").forEach((b) => {
-      const n = cards.filter((c) => ofType(c, b.dataset.filter) && hasRole(c)).length;
+      const n = cards.filter((c) => ofType(c, b.dataset.filter) && hasRole(c, b.dataset.filter)).length;
       let el = $(".filter__n", b);
       if (!el) b.append(el = Object.assign(document.createElement("span"), { className: "filter__n" }));
       el.textContent = n;
     });
     let shown = 0;
     cards.forEach((card) => {
-      const show = ofType(card, type) && hasRole(card);
+      const show = ofType(card, type) && hasRole(card, type);
       shown += show;
       card.classList.toggle("is-hidden", !show);
       card.classList.remove("is-entering");
@@ -588,6 +666,9 @@ function projects() {
   $$(".filter").forEach((btn) => {
     btn.addEventListener("click", () => {
       $$(".filter").forEach((b) => b.classList.toggle("is-active", b === btn));
+      // untick roles the new tab doesn't list
+      const type = btn.dataset.filter;
+      if (type !== "all") $$(".role").forEach((b) => { if (!TAB_ROLES[type].includes(b.dataset.role)) b.setAttribute("aria-pressed", "false"); });
       applyFilter();
     });
   });
@@ -757,10 +838,11 @@ function projects() {
   const open = (i) => {
     const p = PROJECTS[i];
     gallery(p);
-    // same icons as the About cards: Web Development for dev projects, UI / UX Design for design projects
-    const catIcon = SERVICES.find(([t]) => t === (p.cat === "dev" ? "Web|Development" : "UI / UX|Design"))[2];
+    // same icons as the About cards
+    const [service, catName] = CATS[p.cat];
+    const catIcon = SERVICES.find(([t]) => t === service)[2];
     $("#modalCat").innerHTML = `<svg class="modal__cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${catIcon}</svg>` +
-      (p.cat === "dev" ? "Development" : "Design") + " · " + p.label;
+      catName + " · " + p.label;
     $("#modalTitle").textContent = p.title;
     // overview paragraph, then any detail sections (headings with a paragraph, bullet list or numbered steps)
     const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
@@ -772,9 +854,11 @@ function projects() {
     const techSrc = { ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) };
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
     const live = $("#modalLive"), code = $("#modalCode");
-    live.href = p.live;
+    live.style.display = p.live ? "" : "none";
+    code.style.display = p.code ? "" : "none";
+    live.href = p.live || "#";
     live.innerHTML = `<span class="btn__logo${p.logoPlain ? " btn__logo--plain" : ""}">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
-    code.href = p.code;
+    code.href = p.code || "#";
     code.innerHTML = (p.codeIcon === "figma" ? `<img class="btn__icon" src="${ICON_URL.dev("figma/figma-original")}" width="15" height="15" alt="" />` : githubIcon) + (p.codeLabel || "Source code");
     if (!modal.classList.contains("is-open")) lastFocus = document.activeElement; // keep the card when switching project from a link
     modal.classList.add("is-open");
