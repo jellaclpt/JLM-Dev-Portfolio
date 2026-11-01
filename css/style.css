@@ -379,6 +379,11 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .project__tags { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .6rem; }
 .project__tags li { display: inline-flex; align-items: center; gap: .2rem; padding: .12rem .35rem; border: 1px solid var(--line-strong); border-radius: 5px; font-size: .58rem; color: var(--text); white-space: nowrap; }
 .project__tags .tech__icon, .project__tags .tech__badge { width: 10px; height: 10px; font-size: .4rem; border-radius: 2px; }
+/* wide screens have room for a bigger stack in the same number of rows */
+@media (min-width: 1536px) {
+  .project__tags li { padding: .16rem .45rem; font-size: .66rem; }
+  .project__tags .tech__icon, .project__tags .tech__badge { width: 12px; height: 12px; font-size: .45rem; }
+}
 
 /* --- CSS mockups (project thumbnails) --- */
 .mock { position: absolute; inset: 0; display: flex; flex-direction: column; }
