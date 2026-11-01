@@ -375,15 +375,12 @@ body.is-loaded .hero__photo { opacity: 1; transition: opacity 1.4s var(--ease); 
 .project__roles li { padding: .22rem .6rem; border-radius: 999px; background: var(--maroon); color: var(--on-maroon); font-size: .7rem; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
 /* three lines on desktop, two on smaller screens; the browser ends the cut-off text with "…" */
 .project__desc { --lines: 3; margin-top: .4rem; font-size: .85rem; line-height: 1.6; color: var(--muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--lines); line-clamp: var(--lines); overflow: hidden; }
-/* smaller than the role tags, so a long stack still fits in about two rows */
+/* --stack-size is set by fitStacks in js/main.js: the largest size that keeps every stack in two rows */
+.projects { --stack-size: 9px; }
+.projects.is-measuring .project.is-hidden { display: flex; } /* hidden cards count too, so the size doesn't change between tabs */
 .project__tags { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .6rem; }
-.project__tags li { display: inline-flex; align-items: center; gap: .2rem; padding: .12rem .35rem; border: 1px solid var(--line-strong); border-radius: 5px; font-size: .58rem; color: var(--text); white-space: nowrap; }
-.project__tags .tech__icon, .project__tags .tech__badge { width: 10px; height: 10px; font-size: .4rem; border-radius: 2px; }
-/* wide screens have room for a bigger stack in the same number of rows */
-@media (min-width: 1536px) {
-  .project__tags li { padding: .16rem .45rem; font-size: .66rem; }
-  .project__tags .tech__icon, .project__tags .tech__badge { width: 12px; height: 12px; font-size: .45rem; }
-}
+.project__tags li { display: inline-flex; align-items: center; gap: .35em; padding: .2em .55em; border: 1px solid var(--line-strong); border-radius: 5px; font-size: var(--stack-size); color: var(--text); white-space: nowrap; }
+.project__tags .tech__icon, .project__tags .tech__badge { width: calc(var(--stack-size) * 1.1); height: calc(var(--stack-size) * 1.1); font-size: calc(var(--stack-size) * .7); border-radius: 2px; }
 
 /* --- CSS mockups (project thumbnails) --- */
 .mock { position: absolute; inset: 0; display: flex; flex-direction: column; }

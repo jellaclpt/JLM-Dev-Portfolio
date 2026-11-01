@@ -622,6 +622,26 @@ function projects() {
   grid.innerHTML = list.map(({ p, i }) => `
     <article class="project" data-year="${p.year}" data-title="${p.title}" data-order="${i}" data-view="0">${cardHTML(i, 0)}</article>`).join("");
 
+  // stack size on the cards: the largest that keeps every stack in two rows, and still smaller than the role tags.
+  // Worked out again when the cards change width or the fonts arrive
+  const fitStacks = () => {
+    grid.classList.add("is-measuring");
+    const lists = $$(".project__tags", grid);
+    const fits = () => lists.every((ul) => new Set([...ul.children].map((li) => li.offsetTop)).size <= 2);
+    let size = 11;
+    grid.style.setProperty("--stack-size", size + "px");
+    while (!fits() && size > 6) {
+      size -= 0.25;
+      grid.style.setProperty("--stack-size", size + "px");
+    }
+    grid.classList.remove("is-measuring");
+  };
+  let gridWidth = 0;
+  new ResizeObserver(() => {
+    if (grid.clientWidth !== gridWidth) { gridWidth = grid.clientWidth; fitStacks(); }
+  }).observe(grid);
+  if (document.fonts) document.fonts.ready.then(fitStacks);
+
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
   if (roleBox) {
