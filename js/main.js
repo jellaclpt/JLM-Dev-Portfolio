@@ -572,8 +572,8 @@ function tech() {
       <h3 class="info__label">${name}</h3>
       <ul class="tech">${items.map(([tool, src]) => `<li class="tech__item">${techLogo(src)}<span>${tool}</span></li>`).join("")}</ul>
     </div>`;
-  // first half of TECH in the left column, second half in the right
-  const half = Math.ceil(TECH.length / 2);
+  // first half of TECH in the left column, second half in the right; with an odd number the right gets the extra group, as Frontend makes the left long
+  const half = Math.floor(TECH.length / 2);
   box.innerHTML = [TECH.slice(0, half), TECH.slice(half)]
     .map((col) => `<div class="stack__col">${col.map(group).join("")}</div>`).join("");
 }
