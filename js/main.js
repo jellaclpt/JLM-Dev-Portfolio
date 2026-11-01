@@ -3,7 +3,8 @@
    ========================================================= */
 
 /* ---------- Edit your projects here ---------- */
-// Each project has one card, with its title, featured (home page) and year, and one or more views: one per kind of work you did on it.
+// Each project has one card, with its title, featured (home page), year, types (the All Projects tabs it shows under: "web", "mobile", one or both)
+// and one or more views: one per kind of work you did on it.
 // The first view is the one shown by default; with several, the pop-up gets a switcher. Everything below belongs to a view.
 // image: the cover screenshot in assets/work/… (see assets/work/README.md).
 // imageCap: optional caption for the cover in the pop-up (defaults to the title).
@@ -13,14 +14,15 @@
 // live / code: the pop-up's two button links, each left out if it has no link. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
 // cat: the kind of work named at the top of the pop-up and on its switcher, from CATS below.
-// types: the All Projects tabs that show this view on the card: "web", "mobile" (built systems and apps), "design", "others" (one or more).
-// roles: what you did, from ROLES below; shown on the card and in the pop-up, and used by the role filter.
+// roles: what you did; shown on the card and in the pop-up, and used by the role filter (see ROLES and ROLE_ALSO below).
+// tags: the tools and skills used, shown in the pop-up. The card lists those of all views that have a logo (see TECH and CHIP_LOGOS below).
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
     title: "SorSUpport",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     year: "2026",
+    types: ["web"],
     views: [
       {
         cat: "dev",
@@ -35,7 +37,6 @@ const PROJECTS = [
           ["assets/work/development/sorsupport/recipient mockup.png", "Recipient Account Overview"],
         ],
         mock: "dash",
-        types: ["web"],
         roles: ["Full-Stack Developer"],
         desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus, built as our capstone project. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
         details: [
@@ -71,6 +72,7 @@ const PROJECTS = [
     title: "Sweet Bite",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     year: "2025",
+    types: ["web"],
     views: [
       {
         cat: "dev",
@@ -85,7 +87,6 @@ const PROJECTS = [
           ["assets/work/development/sweet-bite/customer mockup.png", "Customer Products, Checkout and Orders"],
         ],
         mock: "dash",
-        types: ["web"],
         roles: ["Full-Stack Developer"],
         desc: "Sweet Bite is a web-based pre-order system for a bakery, made as one of our projects in our Applications Development and Emerging Technologies subject. Customers order cakes, breads, pastries, cupcakes and cookies for the date and time they choose, send a GCash deposit to confirm, and pay the balance on pickup or delivery. Bakery staff manage the menu, check each deposit and update every order's progress from an admin panel.",
         details: [
@@ -118,7 +119,6 @@ const PROJECTS = [
           ["assets/work/ui-ux/sweet-bite/mockup 4.png", "Admin Dashboard on a Larger Screen"],
         ],
         mock: "phone",
-        types: ["design"],
         roles: ["UI/UX Designer (Hi-Fi)"],
         desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
         details: [
@@ -153,7 +153,6 @@ const PROJECTS = [
           ["assets/work/project-management/Sweet-bite-Clickup/5.png", "Final Project"],
         ],
         mock: "dash",
-        types: ["others"],
         roles: ["Project Manager"],
         desc: "This is how the Sweet Bite bakery pre-order system was planned and tracked as a team project in ClickUp. The project had one task list for each stage of the work, so everyone could see what was assigned to them, when it was due and how urgent it was. ClickUp's free plan can't share a workspace publicly, so these screenshots show it instead.",
         details: [
@@ -174,6 +173,7 @@ const PROJECTS = [
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
     year: "2025",
+    types: ["mobile"],
     views: [
       {
         cat: "design",
@@ -187,7 +187,6 @@ const PROJECTS = [
           ["assets/work/ui-ux/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
         ],
         mock: "phone",
-        types: ["design"],
         roles: ["UI/UX Designer (Hi-Fi)"],
         desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design, made as one of our projects in our UI/UX Design subject, that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
         details: [
@@ -215,7 +214,6 @@ const PROJECTS = [
         logo: "assets/work/ui-ux/acadpal/logo-light.png",
         logoPlain: true,
         mock: "dash",
-        types: ["others"],
         roles: ["Project Manager"],
         desc: "This is the Trello board our group used to plan and track AcadPal, a mobile app design for students. It kept the tasks, design outputs and activities of the project in one place, so everyone in the group could see what was left to do and find the latest work.",
         details: [
@@ -236,6 +234,7 @@ const PROJECTS = [
   {
     title: "Task Manager",
     year: "2025",
+    types: ["web"],
     views: [
       {
         cat: "dev",
@@ -248,7 +247,6 @@ const PROJECTS = [
           ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
         ],
         mock: "app",
-        types: ["web"],
         roles: ["Frontend Developer"],
         desc: "Task Manager is a web app for keeping personal to-dos in one place, made as one of our projects in our Frontend Development subject. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device. It is also a progressive web app (PWA), so it can be installed on a phone or computer and opened like a regular app.",
         details: [
@@ -269,17 +267,14 @@ const PROJECTS = [
   },
 ];
 
-// role filter chips on projects.html, in this order: each tab lists its own, even before a project has one; All lists every role
-const DEV_ROLES = ["Full-Stack Developer", "Frontend Developer", "Backend Developer"];
-const TAB_ROLES = {
-  web: DEV_ROLES,
-  mobile: DEV_ROLES,
-  design: ["UI/UX Designer (Lo-Fi)", "UI/UX Designer (Hi-Fi)"],
-  others: ["Project Manager", "System Analyst", "QA Tester"],
+// role filter on projects.html, in this order, even before a project has one
+const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Frontend Developer", "Backend Developer", "Full-Stack Developer", "QA Tester"];
+// a role that also counts as others when filtering. Ticking Full-Stack disables Frontend and Backend, since it covers both
+const ROLE_ALSO = {
+  "Full-Stack Developer": ["Frontend Developer", "Backend Developer"],
+  "UI/UX Designer (Lo-Fi)": ["UI/UX Designer"],
+  "UI/UX Designer (Hi-Fi)": ["UI/UX Designer"],
 };
-const ROLES = [...DEV_ROLES, ...TAB_ROLES.design, ...TAB_ROLES.others];
-// a role that also counts as others when filtering: Full-Stack work shows under Frontend and Backend too
-const ROLE_ALSO = { "Full-Stack Developer": ["Frontend Developer", "Backend Developer"] };
 // a project's cat: the About card whose icon it uses, and the name shown in the pop-up
 const CATS = {
   dev: ["Web|Development", "Development"],
@@ -565,6 +560,8 @@ const CHIP_LOGOS = {
   "ClickUp": "si:clickup",
 };
 
+const stackLogos = () => ({ ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) });
+
 const techLogo = (src) => {
   if (typeof src === "object") return `<span class="tech__badge" style="--c:${src.color}">${src.badge}</span>`;
   const [lib, path] = src.split(":");
@@ -609,24 +606,26 @@ function projects() {
     .filter(({ p }) => !limit || p.featured)
     .slice(0, limit || undefined);
 
-  // picture · "Title | Type" · role and year · description cut to a few lines with "…" · tech used.
-  // Shows one view of the project; allRoles lists the roles from all its views, for when no tab or role narrows it down.
-  const cardHTML = (i, v, allRoles) => {
+  // picture with the year on it · "Title | Type" · roles · description cut to a few lines with "…" · tools.
+  // The picture, type and description come from one view; the roles and tools from all the project's views.
+  const cardHTML = (i, v) => {
     const p = viewOf(PROJECTS[i], v);
-    const roles = allRoles ? [...new Set(p.views.flatMap((view) => view.roles))] : p.roles;
+    const roles = [...new Set(p.views.flatMap((view) => view.roles))];
+    const logos = stackLogos();
+    const stack = [...new Set(p.views.flatMap((view) => view.tags))].filter((t) => logos[t]);
     return `
       <button class="project__card" data-index="${i}" data-view="${v}" aria-label="Open project ${p.title}">
-        <div class="project__media">${mediaHTML(p)}</div>
+        <div class="project__media">${mediaHTML(p)}<span class="project__year">${p.year}</span></div>
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
-          <p class="project__meta"><span>${roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
+          <ul class="project__roles">${roles.map((r) => `<li>${r}</li>`).join("")}</ul>
           <p class="project__desc">${p.desc}</p>
-          <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
+          <ul class="project__tags">${stack.map((t) => `<li>${techLogo(logos[t])}${t}</li>`).join("")}</ul>
         </div>
       </button>`;
   };
   grid.innerHTML = list.map(({ p, i }) => `
-    <article class="project" data-year="${p.year}" data-title="${p.title}" data-order="${i}" data-shows="0|all">${cardHTML(i, 0, true)}</article>`).join("");
+    <article class="project" data-year="${p.year}" data-title="${p.title}" data-order="${i}" data-view="0">${cardHTML(i, 0)}</article>`).join("");
 
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
@@ -643,16 +642,20 @@ function projects() {
     const tab = $(".filter.is-active");
     if (!tab) return;
     const type = tab.dataset.filter;
+    // a ticked role that covers others (Full-Stack) unticks and disables them
+    const covered = $$(".role[aria-pressed='true']").flatMap((b) => ROLE_ALSO[b.dataset.role] || []);
+    $$(".role").forEach((b) => {
+      b.disabled = covered.includes(b.dataset.role);
+      if (b.disabled) b.setAttribute("aria-pressed", "false");
+    });
     const picked = $$(".role[aria-pressed='true']").map((b) => b.dataset.role);
     const cards = $$(".project");
-    // the first view of a card's project that fits a tab and the roles picked, or -1 if none does.
-    // Roles from another tab don't narrow this one
+    // the first view of a card's project that fits a tab and the roles picked, or -1 if none does
     const pickView = (card, tabType) => {
-      const roles = picked.filter((r) => tabType === "all" || TAB_ROLES[tabType].includes(r));
-      return PROJECTS[card.dataset.order].views.findIndex((view) =>
-        (tabType === "all" || view.types.includes(tabType)) && (!roles.length || roles.some((r) => rolesOf(view).includes(r))));
+      const p = PROJECTS[card.dataset.order];
+      if (tabType !== "all" && !p.types.includes(tabType)) return -1;
+      return p.views.findIndex((view) => !picked.length || picked.some((r) => rolesOf(view).includes(r)));
     };
-    $$(".role").forEach((b) => { b.hidden = type !== "all" && !TAB_ROLES[type].includes(b.dataset.role); });
     // each tab shows how many projects it would list with the roles picked now
     $$(".filter").forEach((b) => {
       const n = cards.filter((c) => pickView(c, b.dataset.filter) >= 0).length;
@@ -666,11 +669,9 @@ function projects() {
       const show = v >= 0;
       shown += show;
       // redraw only when the card has to change, so its picture doesn't reload
-      const allRoles = type === "all" && !picked.length;
-      const shows = `${v}|${allRoles ? "all" : "view"}`;
-      if (show && card.dataset.shows !== shows) {
-        card.dataset.shows = shows;
-        card.innerHTML = cardHTML(+card.dataset.order, v, allRoles);
+      if (show && +card.dataset.view !== v) {
+        card.dataset.view = v;
+        card.innerHTML = cardHTML(+card.dataset.order, v);
       }
       card.classList.toggle("is-hidden", !show);
       card.classList.remove("is-entering");
@@ -688,9 +689,6 @@ function projects() {
   $$(".filter").forEach((btn) => {
     btn.addEventListener("click", () => {
       $$(".filter").forEach((b) => b.classList.toggle("is-active", b === btn));
-      // untick roles the new tab doesn't list
-      const type = btn.dataset.filter;
-      if (type !== "all") $$(".role").forEach((b) => { if (!TAB_ROLES[type].includes(b.dataset.role)) b.setAttribute("aria-pressed", "false"); });
       applyFilter();
     });
   });
@@ -879,7 +877,7 @@ function projects() {
     $("#modalRole").textContent = p.roles.join(" & ");
     $("#modalYear").textContent = p.year;
     // stack chips get the same logos as the Tech Stack section (pop-up only)
-    const techSrc = { ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) };
+    const techSrc = stackLogos();
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
     const live = $("#modalLive"), code = $("#modalCode");
     live.style.display = p.live ? "" : "none";
