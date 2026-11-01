@@ -15,7 +15,7 @@
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
 // cat: the kind of work named at the top of the pop-up, from CATS below.
 // roles: what you did; shown on the card and in the pop-up, and used by the role filter (see ROLES and ROLE_ALSO below).
-// tags: the tools and skills used, shown in the pop-up. The card lists those of all views that have a logo (see TECH and CHIP_LOGOS below).
+// tags: the tools and skills used, shown in the pop-up. The card lists those of all views that have a logo (see TECH below).
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
@@ -527,11 +527,16 @@ const TECH = [
     ["TypeScript", "dev:typescript/typescript-original"],
     ["React", "dev:react/react-original"],
     ["Tailwind CSS", "dev:tailwindcss/tailwindcss-original"],
+    ["React Router", "si:reactrouter/white"],
+    ["Alpine.js", "dev:alpinejs/alpinejs-original"],
+    ["shadcn/ui", "si:shadcnui/white"],
   ]],
   ["Backend", [
     ["PHP", "dev:php/php-original"],
     ["Laravel", "dev:laravel/laravel-original"],
     ["MySQL", "dev:mysql/mysql-original"],
+    ["PostgreSQL", "dev:postgresql/postgresql-original"],
+    ["Cloudinary", "si:cloudinary"],
   ]],
   ["Mobile App", [
     ["React Native", "dev:react/react-original"],
@@ -541,24 +546,16 @@ const TECH = [
     ["Postman", "dev:postman/postman-original"],
     ["Playwright", "dev:playwright/playwright-original"],
   ]],
+  ["Deployment", [
+    ["Docker", "dev:docker/docker-original"],
+    ["Vercel", "si:vercel/white"],
+    ["Railway", "si:railway/white"],
+    ["Render", "si:render/white"],
+  ]],
 ];
 
-// logos for tools that appear on project chips but not in the Tech Stack section
-const CHIP_LOGOS = {
-  "Alpine.js": "dev:alpinejs/alpinejs-original",
-  "Docker": "dev:docker/docker-original",
-  "Railway": "si:railway/white",
-  "Vercel": "si:vercel/white",
-  "shadcn/ui": "si:shadcnui/white",
-  "React Router": "si:reactrouter/white",
-  "PostgreSQL": "dev:postgresql/postgresql-original",
-  "Cloudinary": "si:cloudinary",
-  "Render": "si:render/white",
-  "Trello": "si:trello",
-  "ClickUp": "si:clickup",
-};
-
-const stackLogos = () => ({ ...CHIP_LOGOS, ...Object.fromEntries(TECH.flatMap(([, items]) => items)) });
+// each tool's logo, for the stacks on the project cards and pop-ups
+const stackLogos = () => Object.fromEntries(TECH.flatMap(([, items]) => items));
 
 const techLogo = (src) => {
   if (typeof src === "object") return `<span class="tech__badge" style="--c:${src.color}">${src.badge}</span>`;
