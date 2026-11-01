@@ -5,7 +5,7 @@
 /* ---------- Edit your projects here ---------- */
 // Each project has one card, with its title, featured (home page), year, types (the All Projects tabs it shows under: "web", "mobile", one or both)
 // and one or more views: one per kind of work you did on it.
-// The first view is the one shown by default; with several, the pop-up gets a switcher. Everything below belongs to a view.
+// The first view is the one shown by default; the pop-up lists each view's role, and with several you can switch between them. Everything below belongs to a view.
 // image: the cover screenshot in assets/work/… (see assets/work/README.md).
 // imageCap: optional caption for the cover in the pop-up (defaults to the title).
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
@@ -13,7 +13,7 @@
 // details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
 // live / code: the pop-up's two button links, each left out if it has no link. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
-// cat: the kind of work named at the top of the pop-up and on its switcher, from CATS below.
+// cat: the kind of work named at the top of the pop-up, from CATS below.
 // roles: what you did; shown on the card and in the pop-up, and used by the role filter (see ROLES and ROLE_ALSO below).
 // tags: the tools and skills used, shown in the pop-up. The card lists those of all views that have a logo (see TECH and CHIP_LOGOS below).
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
@@ -119,7 +119,7 @@ const PROJECTS = [
           ["assets/work/ui-ux/sweet-bite/mockup 4.png", "Admin Dashboard on a Larger Screen"],
         ],
         mock: "phone",
-        roles: ["UI/UX Designer (Hi-Fi)"],
+        roles: ["UI/UX Designer"],
         desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
         details: [
           { h: "What the design covers", ul: [
@@ -187,7 +187,7 @@ const PROJECTS = [
           ["assets/work/ui-ux/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
         ],
         mock: "phone",
-        roles: ["UI/UX Designer (Hi-Fi)"],
+        roles: ["UI/UX Designer"],
         desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design, made as one of our projects in our UI/UX Design subject, that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
         details: [
           { h: "What the app does", ul: [
@@ -272,8 +272,6 @@ const ROLES = ["Project Manager", "System Analyst", "UI/UX Designer", "Frontend 
 // a role that also counts as others when filtering. Ticking Full-Stack disables Frontend and Backend, since it covers both
 const ROLE_ALSO = {
   "Full-Stack Developer": ["Frontend Developer", "Backend Developer"],
-  "UI/UX Designer (Lo-Fi)": ["UI/UX Designer"],
-  "UI/UX Designer (Hi-Fi)": ["UI/UX Designer"],
 };
 // a project's cat: the About card whose icon it uses, and the name shown in the pop-up
 const CATS = {
@@ -861,9 +859,10 @@ function projects() {
   const open = (i, v = 0) => {
     const p = viewOf(PROJECTS[i], v);
     gallery(p);
-    // switcher for a project with several views, one tab per kind of work
-    $("#modalViews").innerHTML = p.views.length < 2 ? "" : p.views.map((view, k) =>
-      `<button class="modal__view${k === v ? " is-active" : ""}" type="button" role="tab" aria-selected="${k === v}" data-index="${i}" data-view="${k}">${CATS[view.cat][1]}</button>`).join("");
+    // the role of each view: a switcher when there are several, a plain label when there is one
+    $("#modalViews").innerHTML = p.views.length < 2 ? `<span class="modal__view is-active">${p.roles.join(" & ")}</span>` : p.views.map((view, k) =>
+      `<button class="modal__view${k === v ? " is-active" : ""}" type="button" role="tab" aria-selected="${k === v}" data-index="${i}" data-view="${k}">${view.roles.join(" & ")}</button>`).join("");
+    $("#modalViews").setAttribute("role", p.views.length < 2 ? "group" : "tablist");
     // same icons as the About cards
     const [service, catName] = CATS[p.cat];
     const catIcon = SERVICES.find(([t]) => t === service)[2];
@@ -874,8 +873,7 @@ function projects() {
     const list = (tag, items) => (items ? `<${tag}>${items.map((li) => `<li>${li}</li>`).join("")}</${tag}>` : "");
     $("#modalDesc").innerHTML = `<p>${p.desc}</p>` + (p.details || []).map((s) =>
       `<h4>${s.h}</h4>${s.p ? `<p>${s.p}</p>` : ""}${list("ul", s.ul)}${list("ol", s.ol)}`).join("");
-    $("#modalRole").textContent = p.roles.join(" & ");
-    $("#modalYear").textContent = p.year;
+    $("#modalMedia").dataset.year = p.year; // shown on the picture by css/style.css
     // stack chips get the same logos as the Tech Stack section (pop-up only)
     const techSrc = stackLogos();
     $("#modalTags").innerHTML = p.tags.map((t) => `<span class="chip chip--logo">${techSrc[t] ? techLogo(techSrc[t]) : ""}${t}</span>`).join("");
@@ -905,7 +903,7 @@ function projects() {
     if (card) open(+card.dataset.index, +card.dataset.view);
   });
   $("#modalViews").addEventListener("click", (e) => {
-    const tab = e.target.closest(".modal__view");
+    const tab = e.target.closest("button.modal__view");
     if (!tab) return;
     open(+tab.dataset.index, +tab.dataset.view);
     $(".modal__view.is-active").focus({ preventScroll: true });
