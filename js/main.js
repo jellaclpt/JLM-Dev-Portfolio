@@ -3,6 +3,8 @@
    ========================================================= */
 
 /* ---------- Edit your projects here ---------- */
+// Each project has one card, with its title, featured (home page) and year, and one or more views: one per kind of work you did on it.
+// The first view is the one shown by default; with several, the pop-up gets a switcher. Everything below belongs to a view.
 // image: the cover screenshot in assets/work/… (see assets/work/README.md).
 // imageCap: optional caption for the cover in the pop-up (defaults to the title).
 // gallery: optional extra screenshots shown in the pop-up, each [file, caption].
@@ -10,256 +12,260 @@
 // details: optional pop-up sections after the overview, each { h: heading, p: paragraph, ul: [items], ol: [steps] }.
 // live / code: the pop-up's two button links, each left out if it has no link. liveLabel / codeLabel rename them (default "Live demo" / "Source code");
 // codeIcon: "figma" swaps the GitHub icon for the Figma logo.
-// cat: the kind of work named at the top of the pop-up, from CATS below.
-// types: the All Projects tabs it shows under: "web", "mobile" (built systems and apps), "design", "others" (one or more).
-// roles: what you did, from ROLES below; shown in the pop-up and used by the role filter.
-// id: optional name, so another project's details can link here with <a href="#" class="modal__link" data-project="id">.
+// cat: the kind of work named at the top of the pop-up and on its switcher, from CATS below.
+// types: the All Projects tabs that show this view on the card: "web", "mobile" (built systems and apps), "design", "others" (one or more).
+// roles: what you did, from ROLES below; shown on the card and in the pop-up, and used by the role filter.
 // Until an image file exists, the drawn "mock" placeholder is shown instead.
 const PROJECTS = [
   {
     title: "SorSUpport",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "dev",
-    label: "Ticketing System",
-    image: "assets/work/development/sorsupport/mockup.png",
-    imageCap: "SorSUpport Login Page",
-    logo: "assets/work/development/sorsupport/logo.png", // shown on the Live demo button
-    gallery: [
-      ["assets/work/development/sorsupport/admin dashboard.png", "Administrator Dashboard"],
-      ["assets/work/development/sorsupport/ticket details.png", "Administrator Ticket Page and Details"],
-      ["assets/work/development/sorsupport/student mockup.png", "Student Account Overview"],
-      ["assets/work/development/sorsupport/recipient mockup.png", "Recipient Account Overview"],
-    ],
-    mock: "dash",
     year: "2026",
-    types: ["web"],
-    roles: ["Full-Stack Developer"],
-    desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus, built as our capstone project. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
-    details: [
-      { h: "Who uses it", ul: [
-        "<b>Students</b> submit concerns with attachments, hiding their identity if they need to. They follow the progress, talk with the handler, accept the resolution or ask for further action, and rate how it was handled.",
-        "<b>Recipients</b> (college or office staff) acknowledge the tickets assigned to them, talk with the student and record the resolution.",
-        "<b>SDS Administrators</b> review new tickets, assign, escalate or refer them, close them, and manage accounts, settings, analytics and the audit trail.",
-      ] },
-      { h: "How a concern is handled", ol: [
-        "A student submits a ticket under a category, with the details and any files.",
-        "The SDS Office reviews it, asks for clarification if needed, and assigns it to the office that can act on it.",
-        "The office acknowledges the ticket and works it out with the student in the ticket's message thread.",
-        "If it stalls, the SDS Office escalates it along the category's escalation path or refers it to a committee, while reminder emails go to whoever has to act next.",
-        "Once it is resolved, the student accepts the outcome or asks for further action, and the ticket is closed.",
-      ] },
-      { h: "Key features", ul: [
-        "Confidential and anonymous tickets: sensitive cases are visible only to the SDS Office and the assigned handler.",
-        "In-app notifications and an email at every step for each person involved.",
-        "Daily reminders for tickets that have waited too long, counted in working days.",
-        "Accounts created one by one or in bulk from an Excel file.",
-        "Analytics on ticket volume, resolution time, office performance and satisfaction, exportable to PDF and Excel.",
-        "An audit trail of every action and every email sent.",
-      ] },
-      { h: "My role", p: "I am developing it with Laravel, Blade, Tailwind CSS, Alpine.js and MySQL, testing it manually across all user roles with 122 documented test cases, also checked by automated feature tests (PHPUnit), and deploying it on Railway with Docker." },
+    views: [
+      {
+        cat: "dev",
+        label: "Ticketing System",
+        image: "assets/work/development/sorsupport/mockup.png",
+        imageCap: "SorSUpport Login Page",
+        logo: "assets/work/development/sorsupport/logo.png", // shown on the Live demo button
+        gallery: [
+          ["assets/work/development/sorsupport/admin dashboard.png", "Administrator Dashboard"],
+          ["assets/work/development/sorsupport/ticket details.png", "Administrator Ticket Page and Details"],
+          ["assets/work/development/sorsupport/student mockup.png", "Student Account Overview"],
+          ["assets/work/development/sorsupport/recipient mockup.png", "Recipient Account Overview"],
+        ],
+        mock: "dash",
+        types: ["web"],
+        roles: ["Full-Stack Developer"],
+        desc: "SorSUpport joins “SorSU” (Sorsogon State University) and “support”, a place where students raise concerns and get help until they are resolved. It is a web-based complaint ticketing system for SorSU – Bulan Campus, built as our capstone project. Students submit their concerns online, the Student Development Services (SDS) Office sends each one to the college or office that can act on it, and every step is tracked until the concern is resolved and closed. It follows the procedures of the SorSU Student Handbook (Revised 2024).",
+        details: [
+          { h: "Who uses it", ul: [
+            "<b>Students</b> submit concerns with attachments, hiding their identity if they need to. They follow the progress, talk with the handler, accept the resolution or ask for further action, and rate how it was handled.",
+            "<b>Recipients</b> (college or office staff) acknowledge the tickets assigned to them, talk with the student and record the resolution.",
+            "<b>SDS Administrators</b> review new tickets, assign, escalate or refer them, close them, and manage accounts, settings, analytics and the audit trail.",
+          ] },
+          { h: "How a concern is handled", ol: [
+            "A student submits a ticket under a category, with the details and any files.",
+            "The SDS Office reviews it, asks for clarification if needed, and assigns it to the office that can act on it.",
+            "The office acknowledges the ticket and works it out with the student in the ticket's message thread.",
+            "If it stalls, the SDS Office escalates it along the category's escalation path or refers it to a committee, while reminder emails go to whoever has to act next.",
+            "Once it is resolved, the student accepts the outcome or asks for further action, and the ticket is closed.",
+          ] },
+          { h: "Key features", ul: [
+            "Confidential and anonymous tickets: sensitive cases are visible only to the SDS Office and the assigned handler.",
+            "In-app notifications and an email at every step for each person involved.",
+            "Daily reminders for tickets that have waited too long, counted in working days.",
+            "Accounts created one by one or in bulk from an Excel file.",
+            "Analytics on ticket volume, resolution time, office performance and satisfaction, exportable to PDF and Excel.",
+            "An audit trail of every action and every email sent.",
+          ] },
+          { h: "My role", p: "I am developing it with Laravel, Blade, Tailwind CSS, Alpine.js and MySQL, testing it manually across all user roles with 122 documented test cases, also checked by automated feature tests (PHPUnit), and deploying it on Railway with Docker." },
+        ],
+        tags: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Docker", "Railway"],
+        live: "https://sorsupport-production.up.railway.app",
+        code: "https://github.com/jellacalupit/SorSUpport",
+      },
     ],
-    tags: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Docker", "Railway"],
-    live: "https://sorsupport-production.up.railway.app",
-    code: "https://github.com/jellacalupit/SorSUpport",
   },
   {
-    id: "sweet-bite-dev",
     title: "Sweet Bite",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "dev",
-    label: "Bakery Pre-order System",
-    image: "assets/work/development/sweet-bite/mockup.png",
-    imageCap: "Login Page on Desktop and Customer Home on Mobile",
-    logo: "assets/work/development/sweet-bite/logo.png", // shown on the Live demo button
-    gallery: [
-      ["assets/work/development/sweet-bite/admin dashboard clean.png", "Admin Dashboard"],
-      ["assets/work/development/sweet-bite/admin add product.png", "Admin Add Product Page"],
-      ["assets/work/development/sweet-bite/admin orders.png", "Admin Orders Page with GCash Deposit Review"],
-      ["assets/work/development/sweet-bite/customer mockup.png", "Customer Products, Checkout and Orders"],
-    ],
-    mock: "dash",
     year: "2025",
-    types: ["web"],
-    roles: ["Full-Stack Developer"],
-    desc: "Sweet Bite is a web-based pre-order system for a bakery, made as one of our projects in our Applications Development and Emerging Technologies subject. Customers order cakes, breads, pastries, cupcakes and cookies for the date and time they choose, send a GCash deposit to confirm, and pay the balance on pickup or delivery. Bakery staff manage the menu, check each deposit and update every order's progress from an admin panel.",
-    details: [
-      { h: "Who uses it", ul: [
-        "<b>Customers</b> browse the menu, check out with pickup or delivery, upload their GCash receipt, and follow their orders from their phone or computer.",
-        "<b>Administrators</b> add, edit and remove products, mark items as available or out of stock, confirm or reject deposits, and update order statuses.",
-      ] },
-      { h: "How a pre-order works", ol: [
-        "The customer adds items to the cart and picks pickup or delivery, a date and a time within opening hours.",
-        "The customer sends the deposit, 50% of the total by default, by GCash and submits the reference number and a receipt screenshot.",
-        "The admin checks the receipt, then confirms the deposit or rejects it so the customer can send it again.",
-        "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
-        "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
-      ] },
-      { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render. I designed the interface too: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>. I also managed the project's tasks: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-pm\">Sweet Bite project management work</a>." },
+    views: [
+      {
+        cat: "dev",
+        label: "Bakery Pre-order System",
+        image: "assets/work/development/sweet-bite/mockup.png",
+        imageCap: "Login Page on Desktop and Customer Home on Mobile",
+        logo: "assets/work/development/sweet-bite/logo.png", // shown on the Live demo button
+        gallery: [
+          ["assets/work/development/sweet-bite/admin dashboard clean.png", "Admin Dashboard"],
+          ["assets/work/development/sweet-bite/admin add product.png", "Admin Add Product Page"],
+          ["assets/work/development/sweet-bite/admin orders.png", "Admin Orders Page with GCash Deposit Review"],
+          ["assets/work/development/sweet-bite/customer mockup.png", "Customer Products, Checkout and Orders"],
+        ],
+        mock: "dash",
+        types: ["web"],
+        roles: ["Full-Stack Developer"],
+        desc: "Sweet Bite is a web-based pre-order system for a bakery, made as one of our projects in our Applications Development and Emerging Technologies subject. Customers order cakes, breads, pastries, cupcakes and cookies for the date and time they choose, send a GCash deposit to confirm, and pay the balance on pickup or delivery. Bakery staff manage the menu, check each deposit and update every order's progress from an admin panel.",
+        details: [
+          { h: "Who uses it", ul: [
+            "<b>Customers</b> browse the menu, check out with pickup or delivery, upload their GCash receipt, and follow their orders from their phone or computer.",
+            "<b>Administrators</b> add, edit and remove products, mark items as available or out of stock, confirm or reject deposits, and update order statuses.",
+          ] },
+          { h: "How a pre-order works", ol: [
+            "The customer adds items to the cart and picks pickup or delivery, a date and a time within opening hours.",
+            "The customer sends the deposit, 50% of the total by default, by GCash and submits the reference number and a receipt screenshot.",
+            "The admin checks the receipt, then confirms the deposit or rejects it so the customer can send it again.",
+            "The admin moves the order through Pending, Confirmed, Preparing, Ready and Completed.",
+            "The customer pays the balance on pickup or delivery, and the admin marks the order as fully paid.",
+          ] },
+          { h: "My role", p: "I built the frontend with React, React Router and Tailwind CSS, including the customer pages, the admin panel and the mobile layout with its bottom navigation bar. I also built the Laravel API with a PostgreSQL database, stored product photos and receipts on Cloudinary, and deployed the frontend on Vercel and the backend on Render." },
+        ],
+        tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
+        live: "https://sweet-bite-bakery-system.vercel.app",
+        code: "https://github.com/jellaclpt/sweet_bite_bakery_system",
+      },
+      {
+        cat: "design",
+        label: "Web App UI/UX",
+        image: "assets/work/ui-ux/sweet-bite/mockup 1.png",
+        imageCap: "Login, Home and Products",
+        logo: "assets/work/development/sweet-bite/logo.png", // shown on the View prototype button
+        gallery: [
+          ["assets/work/ui-ux/sweet-bite/mockup 2.png", "Checkout, Orders and Profile"],
+          ["assets/work/ui-ux/sweet-bite/mockup 3.png", "Customer Home on a Larger Screen"],
+          ["assets/work/ui-ux/sweet-bite/mockup 4.png", "Admin Dashboard on a Larger Screen"],
+        ],
+        mock: "phone",
+        types: ["design"],
+        roles: ["UI/UX Designer (Hi-Fi)"],
+        desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
+        details: [
+          { h: "What the design covers", ul: [
+            "<b>Login</b> lets customers sign in with a username or email, or go on to create an account.",
+            "<b>Home</b> welcomes customers, explains pre-ordering in four steps and shows a few products.",
+            "<b>Products</b> can be filtered and sorted, with quantity controls and an Add to Cart button on each one.",
+            "<b>Checkout</b> shows the cart items, then the order details such as pickup or delivery.",
+            "<b>Orders</b> show each order's schedule, items, status, payment status and total, with a button to pay a deposit that is still needed.",
+            "<b>Profile</b> holds the customer's details, photo, password change and log out.",
+            "<b>Admin dashboard</b> shows product counts, recent products and a table of the whole menu with edit and delete actions.",
+          ] },
+          { h: "My role", p: "I designed the screens in Figma and linked them into a clickable prototype. I also built this design into the working system." },
+        ],
+        tags: ["Figma", "Prototyping", "Mobile UI", "Web UI"],
+        live: "https://www.figma.com/proto/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?t=PiL5zhUpxK4zCZ6B-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&node-id=2463-7352&starting-point-node-id=2463%3A5304&show-proto-sidebar=1",
+        liveLabel: "View prototype",
+        code: "https://www.figma.com/design/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?node-id=2440-11&t=vcRCB1sdRMJ8aiBe-1",
+        codeLabel: "Figma design",
+        codeIcon: "figma",
+      },
+      {
+        cat: "pm",
+        label: "ClickUp Project Tracking",
+        image: "assets/work/project-management/Sweet-bite-Clickup/1.png",
+        imageCap: "Week 1: Application Concept",
+        logo: "assets/work/development/sweet-bite/logo.png",
+        gallery: [
+          ["assets/work/project-management/Sweet-bite-Clickup/2.png", "Week 2: Application Analysis and Design"],
+          ["assets/work/project-management/Sweet-bite-Clickup/3.png", "Week 3: Workflows and Wireframes"],
+          ["assets/work/project-management/Sweet-bite-Clickup/4.png", "Week 4: UI/UX Design"],
+          ["assets/work/project-management/Sweet-bite-Clickup/5.png", "Final Project"],
+        ],
+        mock: "dash",
+        types: ["others"],
+        roles: ["Project Manager"],
+        desc: "This is how the Sweet Bite bakery pre-order system was planned and tracked as a team project in ClickUp. The project had one task list for each stage of the work, so everyone could see what was assigned to them, when it was due and how urgent it was. ClickUp's free plan can't share a workspace publicly, so these screenshots show it instead.",
+        details: [
+          { h: "How the work was organized", ul: [
+            "<b>Week 1, Application Concept:</b> choosing the application type, frameworks and tools for each part of the project.",
+            "<b>Week 2, Analysis and Design:</b> the system features, project scope, use case diagram and ERD.",
+            "<b>Week 3, Workflows and Wireframes:</b> the chosen module, system workflow, API design and documentation, and wireframes.",
+            "<b>Week 4, UI/UX Design:</b> the interface design and mockups.",
+            "<b>Final Project:</b> frontend and backend development, API documentation and QA testing.",
+          ] },
+          { h: "My role", p: "As project manager, I managed the team's tasks in ClickUp from September to December 2025, tracking each one through to completed. I also took on tasks myself, including the four presentations, the project scope and the API documentation." },
+        ],
+        tags: ["ClickUp", "Task Tracking", "Team Coordination"],
+      },
     ],
-    tags: ["React", "React Router", "Tailwind CSS", "Laravel", "PostgreSQL", "Cloudinary", "Vercel", "Render"],
-    live: "https://sweet-bite-bakery-system.vercel.app",
-    code: "https://github.com/jellaclpt/sweet_bite_bakery_system",
   },
   {
-    id: "sweet-bite-ui",
-    title: "Sweet Bite",
-    cat: "design",
-    label: "Web App UI/UX",
-    image: "assets/work/ui-ux/sweet-bite/mockup 1.png",
-    imageCap: "Login, Home and Products",
-    logo: "assets/work/development/sweet-bite/logo.png", // shown on the View prototype button
-    gallery: [
-      ["assets/work/ui-ux/sweet-bite/mockup 2.png", "Checkout, Orders and Profile"],
-      ["assets/work/ui-ux/sweet-bite/mockup 3.png", "Customer Home on a Larger Screen"],
-      ["assets/work/ui-ux/sweet-bite/mockup 4.png", "Admin Dashboard on a Larger Screen"],
-    ],
-    mock: "phone",
-    year: "2025",
-    types: ["design"],
-    roles: ["UI/UX Designer (Hi-Fi)"],
-    desc: "This is the interface design of Sweet Bite, a web-based pre-order system for a bakery. It covers what customers see on their phones, from browsing the menu to checking out and tracking their orders, along with larger-screen layouts for the customer home and the admin dashboard. Warm browns and creams, rounded cards and photos of the bakes keep it feeling like a bakery.",
-    details: [
-      { h: "What the design covers", ul: [
-        "<b>Login</b> lets customers sign in with a username or email, or go on to create an account.",
-        "<b>Home</b> welcomes customers, explains pre-ordering in four steps and shows a few products.",
-        "<b>Products</b> can be filtered and sorted, with quantity controls and an Add to Cart button on each one.",
-        "<b>Checkout</b> shows the cart items, then the order details such as pickup or delivery.",
-        "<b>Orders</b> show each order's schedule, items, status, payment status and total, with a button to pay a deposit that is still needed.",
-        "<b>Profile</b> holds the customer's details, photo, password change and log out.",
-        "<b>Admin dashboard</b> shows product counts, recent products and a table of the whole menu with edit and delete actions.",
-      ] },
-      { h: "My role", p: "I designed the screens in Figma and linked them into a clickable prototype. I also built this design into the working system: see the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a>. The tasks behind it are in the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-pm\">Sweet Bite project management work</a>." },
-    ],
-    tags: ["Figma", "Prototyping", "Mobile UI", "Web UI"],
-    live: "https://www.figma.com/proto/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?t=PiL5zhUpxK4zCZ6B-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&node-id=2463-7352&starting-point-node-id=2463%3A5304&show-proto-sidebar=1",
-    liveLabel: "View prototype",
-    code: "https://www.figma.com/design/twRZXCnjdExiy9LwkpioxP/Bakery-Pre-order-System?node-id=2440-11&t=vcRCB1sdRMJ8aiBe-1",
-    codeLabel: "Figma design",
-    codeIcon: "figma",
-  },
-  {
-    id: "sweet-bite-pm",
-    title: "Sweet Bite",
-    cat: "pm",
-    label: "ClickUp Project Tracking",
-    image: "assets/work/project-management/Sweet-bite-Clickup/1.png",
-    imageCap: "Week 1: Application Concept",
-    logo: "assets/work/development/sweet-bite/logo.png",
-    gallery: [
-      ["assets/work/project-management/Sweet-bite-Clickup/2.png", "Week 2: Application Analysis and Design"],
-      ["assets/work/project-management/Sweet-bite-Clickup/3.png", "Week 3: Workflows and Wireframes"],
-      ["assets/work/project-management/Sweet-bite-Clickup/4.png", "Week 4: UI/UX Design"],
-      ["assets/work/project-management/Sweet-bite-Clickup/5.png", "Final Project"],
-    ],
-    mock: "dash",
-    year: "2025",
-    types: ["others"],
-    roles: ["Project Manager"],
-    desc: "This is how the Sweet Bite bakery pre-order system was planned and tracked as a team project in ClickUp. The project had one task list for each stage of the work, so everyone could see what was assigned to them, when it was due and how urgent it was. ClickUp's free plan can't share a workspace publicly, so these screenshots show it instead.",
-    details: [
-      { h: "How the work was organized", ul: [
-        "<b>Week 1, Application Concept:</b> choosing the application type, frameworks and tools for each part of the project.",
-        "<b>Week 2, Analysis and Design:</b> the system features, project scope, use case diagram and ERD.",
-        "<b>Week 3, Workflows and Wireframes:</b> the chosen module, system workflow, API design and documentation, and wireframes.",
-        "<b>Week 4, UI/UX Design:</b> the interface design and mockups.",
-        "<b>Final Project:</b> frontend and backend development, API documentation and QA testing.",
-      ] },
-      { h: "My role", p: "As project manager, I managed the team's tasks in ClickUp from September to December 2025, tracking each one through to completed. I also took on tasks myself, including the four presentations, the project scope and the API documentation. See the results in the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-dev\">Sweet Bite web development project</a> and the <a href=\"#\" class=\"modal__link\" data-project=\"sweet-bite-ui\">Sweet Bite UI/UX design project</a>." },
-    ],
-    tags: ["ClickUp", "Task Tracking", "Team Coordination"],
-  },
-  {
-    id: "acadpal-ui",
     title: "AcadPal",
     featured: true, // shown in "Featured Projects" on the home page (max 3 per tab)
-    cat: "design",
-    label: "Mobile App UI/UX",
-    image: "assets/work/ui-ux/acadpal/mockup 1.png",
-    imageCap: "Welcome, Login and Sign Up",
-    logo: "assets/work/ui-ux/acadpal/logo-light.png", // shown on the View prototype button (lavender so it reads on maroon)
-    logoPlain: true, // logo on its own, without the white circle
-    gallery: [
-      ["assets/work/ui-ux/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
-      ["assets/work/ui-ux/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
-    ],
-    mock: "phone",
     year: "2025",
-    types: ["design"],
-    roles: ["UI/UX Designer (Hi-Fi)"],
-    desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design, made as one of our projects in our UI/UX Design subject, that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
-    details: [
-      { h: "What the app does", ul: [
-        "<b>Home</b> shows today's date, a search bar, the student's subjects, upcoming to-do tasks and recently uploaded files.",
-        "<b>Subjects</b> are grouped by term, each with its teacher, class schedule and room.",
-        "<b>Tasks</b> have due dates and are sorted into To-do, Missed and Done, for one subject or for all of them.",
-        "<b>Files</b> are kept per subject and sorted into Lessons, Activities and Projects.",
-        "<b>Settings</b> hold the student's profile, with options to share a board and switch workspaces.",
-      ] },
-      { h: "My role", p: "I designed the user flow and the high-fidelity screens in Figma, from the welcome, login and sign-up screens to the home, subjects, tasks, files and settings, and linked them into a clickable mobile prototype. See how the group's work was organized in the <a href=\"#\" class=\"modal__link\" data-project=\"acadpal-pm\">AcadPal project management work</a>." },
+    views: [
+      {
+        cat: "design",
+        label: "Mobile App UI/UX",
+        image: "assets/work/ui-ux/acadpal/mockup 1.png",
+        imageCap: "Welcome, Login and Sign Up",
+        logo: "assets/work/ui-ux/acadpal/logo-light.png", // shown on the View prototype button (lavender so it reads on maroon)
+        logoPlain: true, // logo on its own, without the white circle
+        gallery: [
+          ["assets/work/ui-ux/acadpal/mockup 2.png", "Home, Subjects and Subject Tasks"],
+          ["assets/work/ui-ux/acadpal/mockup 3.png", "Subject Files, Tasks and Settings"],
+        ],
+        mock: "phone",
+        types: ["design"],
+        roles: ["UI/UX Designer (Hi-Fi)"],
+        desc: "AcadPal joins “academic” and “pal”, a study companion that keeps a student's school life in one place. It is a mobile app design, made as one of our projects in our UI/UX Design subject, that brings together their subjects, class schedules, tasks and files, so they no longer have to keep track of deadlines across group chats, notes and folders. At a glance, students see what is due, which tasks they have missed or finished, and where each lesson, activity and project file is kept. Its idea is in its tagline: organize smarter, study better.",
+        details: [
+          { h: "What the app does", ul: [
+            "<b>Home</b> shows today's date, a search bar, the student's subjects, upcoming to-do tasks and recently uploaded files.",
+            "<b>Subjects</b> are grouped by term, each with its teacher, class schedule and room.",
+            "<b>Tasks</b> have due dates and are sorted into To-do, Missed and Done, for one subject or for all of them.",
+            "<b>Files</b> are kept per subject and sorted into Lessons, Activities and Projects.",
+            "<b>Settings</b> hold the student's profile, with options to share a board and switch workspaces.",
+          ] },
+          { h: "My role", p: "I designed the user flow and the high-fidelity screens in Figma, from the welcome, login and sign-up screens to the home, subjects, tasks, files and settings, and linked them into a clickable mobile prototype." },
+        ],
+        tags: ["Figma", "Prototyping", "Mobile UI"],
+        live: "https://www.figma.com/proto/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=50-2&p=f&t=ulsdvo61FbHF3qa2-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=50%3A2",
+        liveLabel: "View prototype",
+        code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
+        codeLabel: "Figma design",
+        codeIcon: "figma",
+      },
+      {
+        cat: "pm",
+        label: "Trello Project Board",
+        image: "assets/work/project-management/Acadpal-Trello/board.png",
+        imageCap: "AcadPal Group Board (Members Blurred for Privacy)",
+        logo: "assets/work/ui-ux/acadpal/logo-light.png",
+        logoPlain: true,
+        mock: "dash",
+        types: ["others"],
+        roles: ["Project Manager"],
+        desc: "This is the Trello board our group used to plan and track AcadPal, a mobile app design for students. It kept the tasks, design outputs and activities of the project in one place, so everyone in the group could see what was left to do and find the latest work.",
+        details: [
+          { h: "How the board is organized", ul: [
+            "<b>To-Do, In Progress and Done</b> show where each task stands, from writing the problem statement and “How Might We” questions to creating the high-fidelity prototype.",
+            "<b>Storyboard and Wireframes</b> holds the storyboard, the lo-fi wireframe and a link to the hi-fi wireframe.",
+            "<b>Activities</b> holds the problem statement and brainstorming, the features of AcadPal and the visual style guide.",
+            "<b>Members</b> lists everyone in the group.",
+          ] },
+          { h: "My role", p: "As project manager, I managed the board and the group's tasks until everything was done." },
+        ],
+        tags: ["Trello", "Task Tracking", "Team Coordination"],
+        live: "https://trello.com/b/3f2I9WD4",
+        liveLabel: "View board",
+      },
     ],
-    tags: ["Figma", "Prototyping", "Mobile UI"],
-    live: "https://www.figma.com/proto/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=50-2&p=f&t=ulsdvo61FbHF3qa2-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=50%3A2",
-    liveLabel: "View prototype",
-    code: "https://www.figma.com/design/Fvu39CPQy443PIFT2pOM6x/AcadPal?node-id=0-1&t=D3vbvoHBZ5E582MF-1",
-    codeLabel: "Figma design",
-    codeIcon: "figma",
-  },
-  {
-    id: "acadpal-pm",
-    title: "AcadPal",
-    cat: "pm",
-    label: "Trello Project Board",
-    image: "assets/work/project-management/Acadpal-Trello/board.png",
-    imageCap: "AcadPal Group Board (Members Blurred for Privacy)",
-    logo: "assets/work/ui-ux/acadpal/logo-light.png",
-    logoPlain: true,
-    mock: "dash",
-    year: "2025",
-    types: ["others"],
-    roles: ["Project Manager"],
-    desc: "This is the Trello board our group used to plan and track AcadPal, a mobile app design for students. It kept the tasks, design outputs and activities of the project in one place, so everyone in the group could see what was left to do and find the latest work.",
-    details: [
-      { h: "How the board is organized", ul: [
-        "<b>To-Do, In Progress and Done</b> show where each task stands, from writing the problem statement and “How Might We” questions to creating the high-fidelity prototype.",
-        "<b>Storyboard and Wireframes</b> holds the storyboard, the lo-fi wireframe and a link to the hi-fi wireframe.",
-        "<b>Activities</b> holds the problem statement and brainstorming, the features of AcadPal and the visual style guide.",
-        "<b>Members</b> lists everyone in the group.",
-      ] },
-      { h: "My role", p: "As project manager, I managed the board and the group's tasks until everything was done. See the final design in the <a href=\"#\" class=\"modal__link\" data-project=\"acadpal-ui\">AcadPal UI/UX design project</a>." },
-    ],
-    tags: ["Trello", "Task Tracking", "Team Coordination"],
-    live: "https://trello.com/b/3f2I9WD4",
-    liveLabel: "View board",
   },
   {
     title: "Task Manager",
-    cat: "dev",
-    label: "Task Management App",
-    image: "assets/work/development/prplbyts-task-manager/mockup.png",
-    imageCap: "Dashboard on Desktop and Mobile",
-    logo: "assets/work/development/prplbyts-task-manager/logo.png", // shown on the Live demo button
-    gallery: [
-      ["assets/work/development/prplbyts-task-manager/light mode tasks.png", "Tasks Page in Light Mode"],
-      ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
-    ],
-    mock: "app",
     year: "2025",
-    types: ["web"],
-    roles: ["Frontend Developer"],
-    desc: "Task Manager is a web app for keeping personal to-dos in one place, made as one of our projects in our Frontend Development subject. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device. It is also a progressive web app (PWA), so it can be installed on a phone or computer and opened like a regular app.",
-    details: [
-      { h: "What the app does", ul: [
-        "<b>Dashboard</b> counts the tasks in To Do, In Progress and Done, and lists the five most recently created.",
-        "<b>Tasks</b> appear as cards that can be created, edited, deleted and moved to another status.",
-        "<b>Search, filters and sorting</b> find tasks by title or description, narrow them by status or category, and order them by date created, due date, priority, status or title.",
-        "<b>Due dates</b> are picked from a calendar, and cards flag tasks that are due today or overdue.",
-        "<b>Settings</b> hold the dark mode switch and the option to install the app on a device.",
-      ] },
-      { h: "My role", p: "I built the frontend with React, TypeScript and Tailwind CSS, using shadcn/ui components, React Hook Form and Zod for the task form, and browser localStorage for saving tasks. I also made the layout responsive, made it an installable progressive web app (PWA) with a web app manifest and a service worker, and deployed it on Vercel." },
+    views: [
+      {
+        cat: "dev",
+        label: "Task Management App",
+        image: "assets/work/development/prplbyts-task-manager/mockup.png",
+        imageCap: "Dashboard on Desktop and Mobile",
+        logo: "assets/work/development/prplbyts-task-manager/logo.png", // shown on the Live demo button
+        gallery: [
+          ["assets/work/development/prplbyts-task-manager/light mode tasks.png", "Tasks Page in Light Mode"],
+          ["assets/work/development/prplbyts-task-manager/settings.png", "Settings Menu"],
+        ],
+        mock: "app",
+        types: ["web"],
+        roles: ["Frontend Developer"],
+        desc: "Task Manager is a web app for keeping personal to-dos in one place, made as one of our projects in our Frontend Development subject. People add tasks with a description, category, priority and due date, then move them from To Do to In Progress to Done. A dashboard shows how many tasks are at each stage and which were added most recently. It runs entirely in the browser with no account or server: tasks are saved on the person's own device. It is also a progressive web app (PWA), so it can be installed on a phone or computer and opened like a regular app.",
+        details: [
+          { h: "What the app does", ul: [
+            "<b>Dashboard</b> counts the tasks in To Do, In Progress and Done, and lists the five most recently created.",
+            "<b>Tasks</b> appear as cards that can be created, edited, deleted and moved to another status.",
+            "<b>Search, filters and sorting</b> find tasks by title or description, narrow them by status or category, and order them by date created, due date, priority, status or title.",
+            "<b>Due dates</b> are picked from a calendar, and cards flag tasks that are due today or overdue.",
+            "<b>Settings</b> hold the dark mode switch and the option to install the app on a device.",
+          ] },
+          { h: "My role", p: "I built the frontend with React, TypeScript and Tailwind CSS, using shadcn/ui components, React Hook Form and Zod for the task form, and browser localStorage for saving tasks. I also made the layout responsive, made it an installable progressive web app (PWA) with a web app manifest and a service worker, and deployed it on Vercel." },
+        ],
+        tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "localStorage", "PWA", "Vercel"],
+        live: "https://purplebytes-taskmanager.vercel.app",
+        code: "https://github.com/jellaclpt/purple-bytes-task-manager",
+      },
     ],
-    tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "localStorage", "PWA", "Vercel"],
-    live: "https://purplebytes-taskmanager.vercel.app",
-    code: "https://github.com/jellaclpt/purple-bytes-task-manager",
   },
 ];
 
@@ -280,7 +286,9 @@ const CATS = {
   design: ["UI / UX|Design", "Design"],
   pm: ["Project|Management", "Project Management"],
 };
-const rolesOf = (p) => [...new Set(p.roles.flatMap((r) => [r, ...(ROLE_ALSO[r] || [])]))];
+const rolesOf = (view) => [...new Set(view.roles.flatMap((r) => [r, ...(ROLE_ALSO[r] || [])]))];
+// one view of a project with the project's own fields, so it reads as a whole
+const viewOf = (p, v) => ({ ...p, ...p.views[v] });
 
 const MOCKS = {
   shop: `<div class="hero-txt"><span class="ln ln--t"></span><span class="ln ln--t" style="width:65%"></span><span class="ln" style="width:80%"></span><span class="ln" style="width:60%"></span><span class="btn-s"></span></div>
@@ -601,19 +609,24 @@ function projects() {
     .filter(({ p }) => !limit || p.featured)
     .slice(0, limit || undefined);
 
-  // picture · "Title | Type" · role and year · description cut to a few lines with "…" · tech used
-  grid.innerHTML = list.map(({ p, i }) => `
-    <article class="project" data-types="${p.types.join(" ")}" data-roles="${rolesOf(p).join("|")}" data-year="${p.year}" data-title="${p.title}" data-order="${i}">
-      <button class="project__card" data-index="${i}" aria-label="Open project ${p.title}">
+  // picture · "Title | Type" · role and year · description cut to a few lines with "…" · tech used.
+  // Shows one view of the project; allRoles lists the roles from all its views, for when no tab or role narrows it down.
+  const cardHTML = (i, v, allRoles) => {
+    const p = viewOf(PROJECTS[i], v);
+    const roles = allRoles ? [...new Set(p.views.flatMap((view) => view.roles))] : p.roles;
+    return `
+      <button class="project__card" data-index="${i}" data-view="${v}" aria-label="Open project ${p.title}">
         <div class="project__media">${mediaHTML(p)}</div>
         <div class="project__info">
           <h3 class="project__title">${p.title}<span class="project__sep" aria-hidden="true">|</span><span class="project__type">${p.label}</span></h3>
-          <p class="project__meta"><span>${p.roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
+          <p class="project__meta"><span>${roles.join(" & ")}</span><span class="project__year">${p.year}</span></p>
           <p class="project__desc">${p.desc}</p>
           <ul class="project__tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
         </div>
-      </button>
-    </article>`).join("");
+      </button>`;
+  };
+  grid.innerHTML = list.map(({ p, i }) => `
+    <article class="project" data-year="${p.year}" data-title="${p.title}" data-order="${i}" data-shows="0|all">${cardHTML(i, 0, true)}</article>`).join("");
 
   // filters exist only on projects.html: one type tab, plus any number of ticked roles (none ticked = every role)
   const roleBox = $("#roleFilters");
@@ -625,7 +638,6 @@ function projects() {
   const empty = $("#projectsEmpty");
   const count = $("#projectsCount");
   const badge = $("#roleDrop .drop__badge");
-  const ofType = (card, type) => type === "all" || card.dataset.types.split(" ").includes(type);
 
   const applyFilter = () => {
     const tab = $(".filter.is-active");
@@ -633,23 +645,33 @@ function projects() {
     const type = tab.dataset.filter;
     const picked = $$(".role[aria-pressed='true']").map((b) => b.dataset.role);
     const cards = $$(".project");
-    // roles from another tab don't narrow this one
-    const hasRole = (card, tabType) => {
+    // the first view of a card's project that fits a tab and the roles picked, or -1 if none does.
+    // Roles from another tab don't narrow this one
+    const pickView = (card, tabType) => {
       const roles = picked.filter((r) => tabType === "all" || TAB_ROLES[tabType].includes(r));
-      return !roles.length || roles.some((r) => card.dataset.roles.split("|").includes(r));
+      return PROJECTS[card.dataset.order].views.findIndex((view) =>
+        (tabType === "all" || view.types.includes(tabType)) && (!roles.length || roles.some((r) => rolesOf(view).includes(r))));
     };
     $$(".role").forEach((b) => { b.hidden = type !== "all" && !TAB_ROLES[type].includes(b.dataset.role); });
     // each tab shows how many projects it would list with the roles picked now
     $$(".filter").forEach((b) => {
-      const n = cards.filter((c) => ofType(c, b.dataset.filter) && hasRole(c, b.dataset.filter)).length;
+      const n = cards.filter((c) => pickView(c, b.dataset.filter) >= 0).length;
       let el = $(".filter__n", b);
       if (!el) b.append(el = Object.assign(document.createElement("span"), { className: "filter__n" }));
       el.textContent = n;
     });
     let shown = 0;
     cards.forEach((card) => {
-      const show = ofType(card, type) && hasRole(card, type);
+      const v = pickView(card, type);
+      const show = v >= 0;
       shown += show;
+      // redraw only when the card has to change, so its picture doesn't reload
+      const allRoles = type === "all" && !picked.length;
+      const shows = `${v}|${allRoles ? "all" : "view"}`;
+      if (show && card.dataset.shows !== shows) {
+        card.dataset.shows = shows;
+        card.innerHTML = cardHTML(+card.dataset.order, v, allRoles);
+      }
       card.classList.toggle("is-hidden", !show);
       card.classList.remove("is-entering");
       if (show) {
@@ -730,9 +752,11 @@ function projects() {
   // Screenshots that fail to load are dropped, so missing files never show as broken.
   // set by the open project's gallery; swiping the picture steps through its shots
   let galleryStep = null;
+  let galleryRun = 0; // screenshots still loading for a view that was switched away from are ignored
   onSwipe($("#modalMedia"), (step) => { if (galleryStep) galleryStep(step); });
 
   const gallery = (p) => {
+    const run = ++galleryRun;
     const box = $("#modalMedia");
     const capEl = $("#modalShot");
     const shots = [[p.image, p.imageCap || p.title], ...(p.gallery || [])].filter(([src]) => src);
@@ -798,6 +822,7 @@ function projects() {
       img.src = src;
     });
     const finish = () => {
+      if (run !== galleryRun) return;
       loaded.push(...results.filter(Boolean));
       if (loaded.length && modal.classList.contains("is-open")) render();
     };
@@ -835,9 +860,12 @@ function projects() {
   new ResizeObserver(() => { if (modal.classList.contains("is-open")) buildPager(); }).observe(body);
   if (document.fonts) document.fonts.ready.then(() => { if (modal.classList.contains("is-open")) buildPager(); });
 
-  const open = (i) => {
-    const p = PROJECTS[i];
+  const open = (i, v = 0) => {
+    const p = viewOf(PROJECTS[i], v);
     gallery(p);
+    // switcher for a project with several views, one tab per kind of work
+    $("#modalViews").innerHTML = p.views.length < 2 ? "" : p.views.map((view, k) =>
+      `<button class="modal__view${k === v ? " is-active" : ""}" type="button" role="tab" aria-selected="${k === v}" data-index="${i}" data-view="${k}">${CATS[view.cat][1]}</button>`).join("");
     // same icons as the About cards
     const [service, catName] = CATS[p.cat];
     const catIcon = SERVICES.find(([t]) => t === service)[2];
@@ -860,7 +888,7 @@ function projects() {
     live.innerHTML = `<span class="btn__logo${p.logoPlain ? " btn__logo--plain" : ""}">${p.logo ? `<img src="${p.logo}" alt="" />` : ""}</span>${p.liveLabel || "Live demo"} <span class="btn__arrow">↗</span>`;
     code.href = p.code || "#";
     code.innerHTML = (p.codeIcon === "figma" ? `<img class="btn__icon" src="${ICON_URL.dev("figma/figma-original")}" width="15" height="15" alt="" />` : githubIcon) + (p.codeLabel || "Source code");
-    if (!modal.classList.contains("is-open")) lastFocus = document.activeElement; // keep the card when switching project from a link
+    if (!modal.classList.contains("is-open")) lastFocus = document.activeElement; // keep the card when switching view
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -876,14 +904,14 @@ function projects() {
   };
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".project__card");
-    if (card) open(+card.dataset.index);
+    if (card) open(+card.dataset.index, +card.dataset.view);
   });
-  // links in a project's details open the related project in the same pop-up
-  $("#modalDesc").addEventListener("click", (e) => {
-    const link = e.target.closest(".modal__link");
-    if (!link) return;
-    e.preventDefault();
-    open(PROJECTS.findIndex((p) => p.id === link.dataset.project));
+  $("#modalViews").addEventListener("click", (e) => {
+    const tab = e.target.closest(".modal__view");
+    if (!tab) return;
+    open(+tab.dataset.index, +tab.dataset.view);
+    $(".modal__view.is-active").focus({ preventScroll: true });
+    $(".modal__panel", modal).scrollTop = 0; // phones stack the pop-up: go back up to the new view's screenshots
   });
   $$("[data-close]", modal).forEach((el) => el.addEventListener("click", close));
   addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
