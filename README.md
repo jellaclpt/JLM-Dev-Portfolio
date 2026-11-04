@@ -2,7 +2,7 @@
 
 Personal portfolio of **Jella Mae Calupit**, a web and mobile developer and QA tester.
 
-🔗 **Live site:** https://jlm-dev-portfolio.vercel.app
+🔗 **Live site:** https://jlm-dev-portfolio.pages.dev
 
 ## What's inside
 
