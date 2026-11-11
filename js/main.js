@@ -63,7 +63,7 @@ const PROJECTS = [
           { h: "My role", p: "I am developing it with Laravel, Blade, Tailwind CSS, Alpine.js and MySQL, testing it manually across all user roles with 122 documented test cases, also checked by automated feature tests (PHPUnit), and deploying it on Railway with Docker." },
         ],
         tags: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Docker", "Railway"],
-        live: "https://sorsupport-production.up.railway.app",
+        live: "https://sorsupport.up.railway.app",
         code: "https://github.com/jellacalupit/SorSUpport",
       },
     ],
