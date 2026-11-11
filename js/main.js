@@ -964,9 +964,9 @@ function processLine() {
 }
 
 /* ---------- CV link ---------- */
-// Phones and tablets open the Google Drive copy so the Drive app can take it.
+// Desktop opens the Google Drive copy in a new tab; phones and tablets open that link so the Drive app can take it.
 // Android gets an intent link that names the Drive app and falls back to the web page when it isn't installed;
-// iOS opens drive.google.com links in the Drive app on its own. Desktop keeps the PDF.
+// iOS can hand drive.google.com links to the Drive app.
 function cvLink() {
   const a = $("#cvLink");
   if (!a) return;
